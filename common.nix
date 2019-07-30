@@ -12,17 +12,9 @@
       kernelModules = [ "pcspkr" ];
 
       # from https://blog.dhampir.no/content/fun-with-beep
-      preDeviceCommands =
-        let
-          initbeep = pkgs.rustPlatform.buildRustPackage {
-            name = "initbeep";
-            src = ./files/initbeep;
-            cargoSha256 = null;
-          };
-        in
-          ''
-            ( exec -a @initbeep ${initbeep}/bin/initbeep ) &
-          '';
+      preDeviceCommands = ''
+        ( exec -a @initbeep ${pkgs.callPackage ./files/initbeep {}}/bin/initbeep ) &
+      '';
     };
 
     blacklistedKernelModules = [ "hid_steam" ];
@@ -224,9 +216,6 @@
       "nixos-config=/nix/var/nix/profiles/per-user/root/channels/nixos-config/devices/${config.networking.hostName}"
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
-
-    # breaks fetching from github?
-    useSandbox = false;
   };
 
   system.stateVersion = "19.03";
