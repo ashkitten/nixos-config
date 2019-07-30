@@ -1,0 +1,32 @@
+#! /usr/bin/env zsh
+
+local PIDFILE=/tmp/screencast.pid
+
+case $1 in
+    all)
+        if [[ ! -f $PIDFILE ]]; then
+            ffmpeg -y -video_size $(xrandr | head -n1 | sed 's/.*current \([0-9]\+\) x \([0-9]\+\).*/\1x\2/') -framerate 30 -f x11grab -i $DISPLAY -c:v libx264 -qp 0 -preset ultrafast ~/screencast.mkv &
+            printf '%s' $! > $PIDFILE
+        fi
+        ;;
+
+    selection)
+        if [[ ! -f $PIDFILE ]]; then
+            local region=($(slop -b 1 -c 1,0,0,1 -f '%x %y %w %h'))
+            xhighlight -r ${region[*]}
+            ffmpeg -y -video_size "${region[3]}x${region[4]}" -framerate 30 -f x11grab -i "$DISPLAY+${region[1]},${region[2]}" -c:v libx264 -qp 0 -preset ultrafast ~/screencast.mkv &
+            printf '%s' $! > $PIDFILE
+        fi
+        ;;
+
+    stop)
+        if [[ -f $PIDFILE ]]; then
+            pkill -SIGINT -F $PIDFILE
+            rm $PIDFILE
+            xhighlight -c
+            notify-send "Screencast saved as screencast.mkv"
+            ffmpeg -y -i ~/screencast.mkv -c:v libvpx-vp9 -lossless 1 ~/screencast.webm
+            notify-send "Screencast saved as screencast.webm"
+        fi
+        ;;
+esac
