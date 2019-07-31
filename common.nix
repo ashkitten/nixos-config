@@ -190,7 +190,7 @@
       ash = {
         isNormalUser = true;
         uid = 1000;
-        extraGroups = [ "wheel" "disk" "systemd-journal" "dialout" "networkmanager" "video" "vboxusers" ];
+        extraGroups = [ "wheel" "disk" "systemd-journal" "dialout" "networkmanager" "video" ];
         createHome = false;
         shell = pkgs.zsh;
       };

@@ -17,14 +17,14 @@
       ({
         name = "ryzen 3xxx device ids";
         patch = pkgs.fetchpatch {
-          url = "https://patchwork.kernel.org/patch/11043277/mbox";
+          url = "https://patchwork.kernel.org/patch/11043277/mbox/";
           sha256 = "16b74z3wa8aq8f637daw8nj74d9sx5flapja94xj22n4ig7zmsbl";
         };
       })
       ({
         name = "k10temp ryzen 3xxx";
         patch = pkgs.fetchpatch {
-          url = "https://patchwork.kernel.org/patch/11043271/mbox";
+          url = "https://patchwork.kernel.org/patch/11043271/mbox/";
           sha256 = "02gsyv14hff3i7v77dhhhgi6x2xyl0dg3jn80j4aynb4dz3aqjcm";
         };
       })
@@ -61,9 +61,43 @@
     };
   };
 
+  power.ups = {
+    enable = true;
+    ups = {
+      tripplite = {
+        driver = "usbhid-ups";
+        port = "/dev/ttyS0";
+      };
+    };
+  };
+
+  virtualisation.libvirtd.enable = true;
+
+  users = {
+    groups.nut.gid = 84;
+
+    users.nut = {
+      isSystemUser = true;
+      uid = 84;
+      home = "/var/lib/nut";
+      group = "nut";
+    };
+
+    users.ash.extraGroups = [ "libvirtd" ];
+  };
+
   nixpkgs.overlays = [
     (self: super: {
       blender = super.blender.override { cudaSupport = true; };
+
+      systemd = super.systemd.overrideAttrs (oldAttrs: {
+          src = self.fetchFromGitHub {
+            owner = "ashkitten";
+            repo = "systemd";
+            rev = "f023ef47168429e5535d6048a14b899d70cf9f6e";
+            sha256 = "0z681qia46nzymz7aq9l0bg7mian9c9i26mzx7vi0yp4i9fssmbb";
+          };
+        });
     })
   ];
 }
