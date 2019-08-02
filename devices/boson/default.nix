@@ -91,13 +91,13 @@
       blender = super.blender.override { cudaSupport = true; };
 
       systemd = super.systemd.overrideAttrs (oldAttrs: {
-          src = self.fetchFromGitHub {
-            owner = "ashkitten";
-            repo = "systemd";
-            rev = "f023ef47168429e5535d6048a14b899d70cf9f6e";
-            sha256 = "0z681qia46nzymz7aq9l0bg7mian9c9i26mzx7vi0yp4i9fssmbb";
-          };
-        });
+        src = self.fetchFromGitHub {
+          owner = "ashkitten";
+          repo = "systemd";
+          rev = "f023ef47168429e5535d6048a14b899d70cf9f6e";
+          sha256 = "0z681qia46nzymz7aq9l0bg7mian9c9i26mzx7vi0yp4i9fssmbb";
+        };
+      });
     })
   ];
 }

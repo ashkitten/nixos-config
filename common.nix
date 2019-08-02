@@ -197,7 +197,7 @@
     };
   };
 
-  home-manager.users.ash = import ./home-manager;
+  home-manager.users.ash = import ./home-manager pkgs;
 
   security.sudo.extraConfig = ''
     Defaults!${pkgs.neovim}/bin/nvim env_keep+="HOME PATH"

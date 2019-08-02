@@ -1,8 +1,10 @@
-{ pkgs, ... }:
+pkgs: _:
 
-let
-  nixos = import <nixpkgs/nixos> {};
-in {
+{
+  # workaround for https://github.com/rycee/home-manager/issues/616
+  # thanks i hate it
+  _module.args.pkgs = pkgs.lib.mkForce pkgs;
+
   home = {
     packages = with pkgs; [
       (callPackage ./local-utils {})
@@ -146,6 +148,4 @@ in {
       };
     };
   };
-
-  nixpkgs.config.allowUnfree = true;
 }
