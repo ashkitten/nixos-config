@@ -105,6 +105,7 @@
 
     pulseaudio = {
       enable = true;
+      zeroconf.discovery.enable = true;
       package = pkgs.pulseaudioFull;
     };
 
