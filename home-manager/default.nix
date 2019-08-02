@@ -5,6 +5,10 @@ pkgs: _:
   # thanks i hate it
   _module.args.pkgs = pkgs.lib.mkForce pkgs;
 
+  # make sure user has the same config and overlays as system
+  xdg.configFile."nixpkgs/config.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.config'';
+  xdg.configFile."nixpkgs/overlays.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.overlays'';
+
   home = {
     packages = with pkgs; [
       (callPackage ./local-utils {})
