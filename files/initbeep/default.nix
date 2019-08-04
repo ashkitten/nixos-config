@@ -1,4 +1,4 @@
-{ lib, rustPlatform }:
+{ rustPlatform }:
 
 rustPlatform.buildRustPackage {
   name = "initbeep";

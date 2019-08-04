@@ -10,78 +10,7 @@ pkgs: _:
   xdg.configFile."nixpkgs/overlays.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.overlays'';
 
   home = {
-    packages = with pkgs; [
-      (callPackage ./local-utils {})
-
-      (pass.withExtensions (ext: with ext; [ pass-otp ]))
-      arc-theme
-      arduino
-      aria2
-      atool
-      audacity
-      bind
-      blender
-      calc
-      direnv
-      dolphinEmuMaster
-      exa
-      feh
-      ffmpeg-full
-      file
-      firefox
-      gist
-      gnome3.dconf
-      gnome3.defaultIconTheme
-      gnumake
-      gnupg
-      google-chrome
-      htop
-      hwinfo
-      imagemagick
-      inetutils
-      inkscape
-      jq
-      kitty
-      krita
-      libnotify
-      lsof
-      ltunify
-      mgba
-      mpv
-      nix-index
-      nix-prefetch-scripts
-      nix-top
-      numix-icon-theme
-      obs-studio
-      p7zip
-      pavucontrol
-      pciutils
-      pulseeffects
-      python3Packages.binwalk
-      qbittorrent
-      ranger
-      retroarchBare
-      ripgrep
-      rofi
-      sc-controller
-      steam
-      steam-run
-      toot
-      unrar
-      unzip
-      usbutils
-      vscode
-      weechat
-      wget
-      wine
-      winetricks
-      wireshark
-      xclip
-      xdotool
-      xorg.xbacklight
-      xorg.xev
-      zip
-    ];
+    packages = import ./packages.nix pkgs;
   };
 
   programs = {
@@ -151,5 +80,23 @@ pkgs: _:
         };
       };
     };
+  };
+
+  systemd.user.services = {
+    "roccat-tools" =
+      let
+        roccat-tools = pkgs.callPackage ./packages/roccat-tools {};
+      in {
+        Unit = {
+          Description = "Start roccat script";
+        };
+        Service = {
+          Environment = [
+            "DISPLAY=:0"
+            "PATH=${pkgs.xdotool}/bin:${pkgs.xorg.xprop}/bin"
+          ];
+          ExecStart = "${roccat-tools}/bin/roccat-tools run ${./files/windowmonitor.lua}";
+        };
+      };
   };
 }
