@@ -1,0 +1,272 @@
+{ config, pkgs, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+    ./its.nix
+  ];
+
+  boot = {
+    zfs.enableUnstable = assert pkgs.zfsUnstable.name == "zfs-user-0.8.1"; true;
+
+    kernelParams = [ "console=tty0" "console=ttyS0,9600n8" ];
+
+    kernel.sysctl = {
+      "net.ipv4.ip_forward" = 1;
+      "vm.overcommit_memory" = 1;
+      "vm.max_map_count" = 262144;
+    };
+
+    loader.grub = {
+      enable = true;
+      device = "/dev/sda";
+      extraConfig = ''
+        serial --unit=0 --speed=9600
+        terminal_input serial
+        terminal_output serial
+      '';
+    };
+  };
+
+  networking = {
+    hostName = "steve";
+    hostId = "bf2fecf0";
+
+    firewall = {
+      allowedTCPPorts = [ 80 443 ];
+      allowedUDPPorts = [ 51820 ];
+      trustedInterfaces = [ "wg0" ];
+
+      extraCommands = ''
+        iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
+
+        # kiwifarms ip range
+        iptables -A INPUT -s 103.114.191.0/24 -j DROP
+      '';
+    };
+
+    nat = {
+      enable = true;
+      externalInterface = "enp1s0";
+      internalInterfaces = [ "wg0" ];
+    };
+
+    # ref: https://nixos.wiki/wiki/Wireguard
+    wireguard.interfaces = {
+      wg0 = {
+        ips = [ "10.100.0.1/24" ];
+        listenPort = 51820;
+        privateKeyFile = "/root/wireguard-keys/private";
+        peers = [
+          { # boson
+            publicKey = "D1iFPGEU9wKJdVZx5zqvpF6kwWMHikGw8HnwZ9S11XY=";
+            allowedIPs = [ "10.100.0.2/32" ];
+          }
+          { # fucko
+            publicKey = "WdBWpIPArhXenahamPNUV2iDzM5t6uBdRus5aCPfXn0=";
+            allowedIPs = [ "10.100.0.3/32" ];
+          }
+          { # electron
+            publicKey = "aBgWHULMX6gfNfQ6fXmVIB0dCeOn9Tse8vDtDVX1WVA=";
+            allowedIPs = [ "10.100.0.4/32" ];
+          }
+        ];
+      };
+    };
+  };
+
+  time.timeZone = "America/Los_Angeles";
+
+  environment.systemPackages = with pkgs; [
+    dialog
+    docker-compose
+    git
+    gptfdisk
+    htop
+    jq
+    lsof
+    m4 # needed by pleroma script
+    neovim
+    ripgrep
+    tmux
+    weechat
+  ];
+
+  services = {
+    openssh.enable = true;
+
+    zfs = {
+      autoSnapshot = {
+        enable = true;
+        flags = "-k -p --utc";
+      };
+      autoScrub.enable = true;
+    };
+
+    grafana = {
+      enable = true;
+      port = 6000;
+    };
+
+    prometheus.exporters = {
+      node = {
+        enable = true;
+        enabledCollectors = [ "zfs" ];
+      };
+    };
+
+    prometheus2 = {
+      enable = true;
+
+      scrapeConfigs = [
+        {
+          job_name = "node-exporter";
+          static_configs = [
+            { targets = [ "127.0.0.1:9100" "10.100.0.2:9100" ]; }
+          ];
+        }
+        {
+          job_name = "prometheus";
+          static_configs = [
+            { targets = [ "127.0.0.1:9090" ]; }
+          ];
+        }
+        {
+          job_name = "pleroma";
+          metrics_path = "/api/pleroma/app_metrics";
+          scheme = "https";
+          static_configs = [
+            { targets = [ "pleroma.kity.wtf" ]; }
+          ];
+        }
+      ];
+    };
+
+    nginx = {
+      enable = true;
+
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+
+      virtualHosts = {
+        "kity.wtf" = {
+          forceSSL = true;
+          useACMEHost = "kity.wtf";
+
+          extraConfig = ''
+            error_page 500 501 502 503 504 /500.html;
+          '';
+
+          locations = {
+            "/" = {
+              root = "/opt/mastodon/public";
+              tryFiles = "$uri @proxy";
+            };
+
+            "@proxy" = {
+              proxyPass = "http://127.0.0.1:3000";
+            };
+
+            "/sw.js" = {
+              tryFiles = "$uri @proxy";
+              extraConfig = ''
+                add_header Cache-Control "public, max-age=0";
+              '';
+            };
+
+            "~ ^/(emoji|packs|system/accounts/avatars|system/media_attachments/files)" = {
+              tryFiles = "$uri @proxy";
+              extraConfig = ''
+                add_header Cache-Control "public, max-age=31536000, immutable";
+              '';
+            };
+
+            "/api/v1/streaming" = {
+              proxyPass = "http://127.0.0.1:4000";
+              proxyWebsockets = true;
+            };
+
+            "~ /api/v[12]/search" = {
+              tryFiles = "$uri @proxy";
+              extraConfig = ''
+                access_log off;
+              '';
+            };
+
+            "/about".extraConfig = ''
+              return 301 https://$host/@kity;
+            '';
+
+            "/weechat" = {
+              proxyPass = "http://127.0.0.1:5230";
+              proxyWebsockets = true;
+            };
+          };
+        };
+
+        "grafana.kity.wtf" = {
+          forceSSL = true;
+          useACMEHost = "kity.wtf";
+
+          locations = {
+            "/" = {
+              proxyPass = "http://127.0.0.1:6000";
+            };
+          };
+        };
+
+        "pleroma.kity.wtf" = {
+          forceSSL = true;
+          useACMEHost = "kity.wtf";
+
+          locations = {
+            "/" = {
+              proxyPass = "http://127.0.0.1:7000";
+              proxyWebsockets = true;
+            };
+          };
+        };
+      };
+    };
+  };
+
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "zfs";
+  };
+
+  security.acme.certs = {
+    "kity.wtf" = {
+      webroot = "/var/lib/acme/acme-challenge";
+      email = "example@thisismyactual.email";
+      extraDomains = {
+        "grafana.kity.wtf" = null;
+        "pleroma.kity.wtf" = null;
+      };
+    };
+  };
+
+  users.users.kity = {
+    isNormalUser = true;
+    createHome = false;
+    uid = 1000;
+    extraGroups = [ "wheel" "docker" "systemd-journal" ];
+    shell = pkgs.zsh;
+  };
+
+  nix = {
+    gc.automatic = true;
+    nixPath = [
+      "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+      "nixos-config=/nix/var/nix/profiles/per-user/root/channels/nixos-config/devices/${config.networking.hostName}"
+      "/nix/var/nix/profiles/per-user/root/channels"
+    ];
+  };
+
+  system = {
+    stateVersion = "19.03";
+    autoUpgrade.enable = true;
+  };
+}

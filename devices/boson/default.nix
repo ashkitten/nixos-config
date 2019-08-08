@@ -52,13 +52,6 @@
         Option "metamodes" "DP-4: 1920x1080_75 +0+0, DP-2: 1920x1080_75 +1920+0"
       '';
     };
-
-    prometheus.exporters = {
-      node = {
-        enable = true;
-        enabledCollectors = [ "zfs" ];
-      };
-    };
   };
 
   power.ups = {

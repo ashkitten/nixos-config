@@ -164,6 +164,13 @@
       autoScrub.enable = true;
     };
 
+    prometheus.exporters = {
+      node = {
+        enable = true;
+        enabledCollectors = [ "zfs" ];
+      };
+    };
+
     physlock = {
       enable = true;
       allowAnyUser = true;
@@ -186,16 +193,12 @@
     };
   };
 
-  users = {
-    users = {
-      ash = {
-        isNormalUser = true;
-        uid = 1000;
-        extraGroups = [ "wheel" "disk" "systemd-journal" "dialout" "networkmanager" "video" ];
-        createHome = false;
-        shell = pkgs.zsh;
-      };
-    };
+  users.users.ash = {
+    isNormalUser = true;
+    createHome = false;
+    uid = 1000;
+    extraGroups = [ "wheel" "disk" "systemd-journal" "dialout" "networkmanager" "video" ];
+    shell = pkgs.zsh;
   };
 
   home-manager.users.ash = import ./home-manager pkgs;
@@ -212,6 +215,7 @@
 
   nix = {
     buildCores = 0;
+    gc.automatic = true;
     nixPath = [
       "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
       "nixos-config=/nix/var/nix/profiles/per-user/root/channels/nixos-config/devices/${config.networking.hostName}"
@@ -219,5 +223,8 @@
     ];
   };
 
-  system.stateVersion = "19.03";
+  system = {
+    stateVersion = "19.03";
+    autoUpgrade.enable = true;
+  };
 }
