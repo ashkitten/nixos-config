@@ -30,6 +30,28 @@ let
       rm -d $out/bin/flushed
     '';
   };
+
+  supdup = with pkgs; stdenv.mkDerivation {
+    name = "supdup";
+    src = fetchFromGitHub {
+      owner = "PDP-10";
+      repo = "supdup";
+      rev = "bf801b9cc7194c78fb765a7fd01fc9326527b7dd";
+      sha256 = "02wqii9c6xwp2i9ydarr00mx71m52m2nrgxsq8wbn1s3pc141lcg";
+    };
+
+    buildInputs = [ ncurses ];
+
+    preInstall = ''
+      mkdir -p $out/bin
+      export PREFIX=$out
+    '';
+  };
+
+  its-supdup = pkgs.writeScriptBin "its-supdup" ''
+    #!${pkgs.runtimeShell}
+    exec ${supdup}/bin/supdup 192.168.1.100
+  '' // { shellPath = "/bin/its-supdup"; };
 in
   {
     systemd.services = {
@@ -44,5 +66,11 @@ in
           ./kn10-ks-its dskdmp.ini
         '';
       };
+    };
+
+    networking.firewall.trustedInterfaces = [ "tun0" ];
+
+    users.users.its = {
+      shell = its-supdup;
     };
   }
