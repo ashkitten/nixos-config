@@ -36,8 +36,8 @@ let
     src = fetchFromGitHub {
       owner = "PDP-10";
       repo = "supdup";
-      rev = "bf801b9cc7194c78fb765a7fd01fc9326527b7dd";
-      sha256 = "02wqii9c6xwp2i9ydarr00mx71m52m2nrgxsq8wbn1s3pc141lcg";
+      rev = "a327b4229c6fddcf39120b60521c78db9d18c152";
+      sha256 = "0fsz02m4kl4lbvl5pp3i1wm1555prgmkwzci3p7a6r6y97x0cv98";
     };
 
     buildInputs = [ ncurses ];
@@ -60,12 +60,22 @@ in
       its = {
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
+          Type = "forking";
           WorkingDirectory = "/opt/its";
         };
-        path = with pkgs; [ sudo ];
+        path = with pkgs; [ tmux nettools ];
         script = ''
           find ${klh10}/bin -type f -executable -exec ln -sf {} ./ \;
-          ./kn10-ks-its dskdmp.ini
+
+          tmux new-session -d -s its ./kn10-ks-its dskdmp.ini
+          sleep 1
+
+          tmux send-keys -t its -l "go"
+          tmux send-keys -t its Enter
+          sleep 1
+
+          tmux send-keys -t its -l "its"
+          tmux send-keys -t its Enter Escape g
         '';
       };
     };
