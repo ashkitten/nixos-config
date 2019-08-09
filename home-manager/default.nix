@@ -87,8 +87,8 @@ pkgs: _:
       let
         roccat-tools = pkgs.callPackage ./packages/roccat-tools {};
       in {
-        Unit = {
-          Description = "Start roccat script";
+        Install = {
+          WantedBy = [ "default.target" ];
         };
         Service = {
           Environment = [
