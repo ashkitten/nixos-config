@@ -50,6 +50,8 @@ let
 
   its-supdup = pkgs.writeScriptBin "its-supdup" ''
     #!${pkgs.runtimeShell}
+    # disable automatic conversion of things to unicode
+    export LC_CTYPE=C
     exec ${supdup}/bin/supdup 192.168.1.100
   '' // { shellPath = "/bin/its-supdup"; };
 in
