@@ -62,8 +62,10 @@ in
         serviceConfig = {
           Type = "forking";
           WorkingDirectory = "/opt/its";
+          TimeoutStopSec = "6min";
         };
-        path = with pkgs; [ tmux nettools ];
+        path = with pkgs; [ tmux nettools expect telnet ];
+
         script = ''
           find ${klh10}/bin -type f -executable -exec ln -sf {} ./ \;
 
@@ -76,6 +78,33 @@ in
 
           tmux send-keys -t its -l "its"
           tmux send-keys -t its Enter Escape g
+        '';
+
+        preStop = ''
+          expect - <<EOF
+          spawn telnet 192.168.1.100
+
+          expect "Happy hacking!"
+          send ":LOCK\r"
+
+          expect -ex "_"
+          send "5down"
+
+          expect "DO YOU REALLY WANT THE SYSTEM TO GO DOWN?"
+          send "y"
+
+          expect "PLEASE ENTER A BRIEF MESSAGE TO USERS, ENDED BY ^C"
+          send "\x03"
+
+          expect eof
+          EOF
+
+          until [[ "YOU ARE NOW IN DDT." = $(tmux capture-pane -p -t its | tail -n2 | head -n1) ]]; do sleep 1; done
+          tmux send-keys -t its '^\'
+          sleep 0.2
+          tmux send-keys q Enter
+          sleep 0.2
+          tmux send-keys y Enter
         '';
       };
     };
