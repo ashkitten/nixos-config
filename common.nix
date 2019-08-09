@@ -24,6 +24,16 @@
         enable = true;
         efiSupport = true;
         device = "nodev";
+
+        extraFiles = {
+          "memtest86.efi" = "${pkgs.memtest86-efi}/BOOTX64.efi";
+        };
+
+        extraEntries = ''
+          menuentry "Memtest86" {
+            chainloader /memtest86.efi
+          }
+        '';
       };
       efi.canTouchEfiVariables = true;
     };
