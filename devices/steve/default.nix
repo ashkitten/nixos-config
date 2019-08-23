@@ -45,6 +45,9 @@
       '';
     };
 
+    defaultGateway6 = { address = "2607:5300:60:3bff:ff:ff:ff:ff"; interface = "enp1s0"; };
+    interfaces.enp1s0.ipv6.addresses = [ { address = "2607:5300:60:3b7e::1"; prefixLength = 64; } ];
+
     nat = {
       enable = true;
       externalInterface = "enp1s0";
