@@ -245,8 +245,5 @@
     ];
   };
 
-  system = {
-    stateVersion = "19.03";
-    autoUpgrade.enable = true;
-  };
+  system.stateVersion = "19.03";
 }
