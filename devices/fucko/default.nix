@@ -11,7 +11,7 @@
     hostName = "fucko";
     hostId = "e008702e";
 
-    wireguard.interfaces.wg0.ips = [ "10.100.0.3/24" ];
+    interfaces."tinc.t0".ipv4.addresses = [ { address = "10.100.0.3"; prefixLength = 24; } ];
   };
 
   hardware.trackpoint = {

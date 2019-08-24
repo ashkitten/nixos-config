@@ -1,9 +1,12 @@
+# TODO: generify with other devices
+
 { config, pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./its.nix
+    ../../auto-rollback.nix
   ];
 
   boot = {
@@ -33,13 +36,11 @@
     hostId = "bf2fecf0";
 
     firewall = {
-      allowedTCPPorts = [ 80 443 ];
-      allowedUDPPorts = [ 51820 ];
-      trustedInterfaces = [ "wg0" ];
+      allowedTCPPorts = [ 80 443 655 ];
+      allowedUDPPorts = [ 655 ];
+      trustedInterfaces = [ "tinc.t0" ];
 
       extraCommands = ''
-        iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
-
         # kiwifarms ip range
         iptables -A INPUT -s 103.114.191.0/24 -j DROP
       '';
@@ -47,35 +48,7 @@
 
     defaultGateway6 = { address = "2607:5300:60:3bff:ff:ff:ff:ff"; interface = "enp1s0"; };
     interfaces.enp1s0.ipv6.addresses = [ { address = "2607:5300:60:3b7e::1"; prefixLength = 64; } ];
-
-    nat = {
-      enable = true;
-      externalInterface = "enp1s0";
-      internalInterfaces = [ "wg0" ];
-    };
-
-    # ref: https://nixos.wiki/wiki/Wireguard
-    wireguard.interfaces = {
-      wg0 = {
-        ips = [ "10.100.0.1/24" ];
-        listenPort = 51820;
-        privateKeyFile = "/root/wireguard-keys/private";
-        peers = [
-          { # boson
-            publicKey = "D1iFPGEU9wKJdVZx5zqvpF6kwWMHikGw8HnwZ9S11XY=";
-            allowedIPs = [ "10.100.0.2/32" ];
-          }
-          { # fucko
-            publicKey = "WdBWpIPArhXenahamPNUV2iDzM5t6uBdRus5aCPfXn0=";
-            allowedIPs = [ "10.100.0.3/32" ];
-          }
-          { # electron
-            publicKey = "aBgWHULMX6gfNfQ6fXmVIB0dCeOn9Tse8vDtDVX1WVA=";
-            allowedIPs = [ "10.100.0.4/32" ];
-          }
-        ];
-      };
-    };
+    interfaces."tinc.t0".ipv4.addresses = [ { address = "10.100.0.1"; prefixLength = 24; } ];
   };
 
   time.timeZone = "America/Los_Angeles";
@@ -233,6 +206,29 @@
         };
       };
     };
+
+    tinc.networks.t0 = {
+      hosts = {
+        steve = ''
+          Address = 192.99.10.126
+          Ed25519PublicKey = Ra66u8aLrlVnoO5ZPKzngIzPOsYLILOGJWy49Bje1fI
+          Subnet = 10.100.0.1/32
+        '';
+        boson = ''
+          Ed25519PublicKey = X4MR570GYD3rff4cMv8x/2OTDZrcCrobf8chG890WuK
+          Subnet = 10.100.0.2/32
+        '';
+        fucko = ''
+          Ed25519PublicKey = 6EneoCfLtLJ1nBG+oLtYsDQcmYNNkuHLS3fY3IZVxFJ
+          Subnet = 10.100.0.3/32
+        '';
+      };
+    };
+  };
+
+  systemd.services = {
+    "network-link-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
+    "network-addresses-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
   };
 
   virtualisation.docker = {

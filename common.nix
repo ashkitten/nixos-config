@@ -49,41 +49,9 @@
     };
 
     firewall = {
-      allowedUDPPorts = [ 51820 ];
-      trustedInterfaces = [ "wg0" ];
-    };
-
-    interfaces.wg0.ipv4.routes = [
-      { address = "10.100.0.0"; prefixLength = 24; via = "10.100.0.1"; }
-    ];
-
-    wireguard.interfaces = {
-      wg0 = {
-        # ips defined in device-specific configuration
-        listenPort = 51820;
-        privateKeyFile = "/root/wireguard-keys/private";
-        peers = [
-          { # steve
-            publicKey = "9VebGMpVY5c2t5p3OQpUaZWSxDGTeSp22T0Qe4Ibulw=";
-            allowedIPs = [ "10.100.0.0/24" ];
-            endpoint = "kity.wtf:51820";
-            persistentKeepalive = 25;
-          }
-          { # boson
-            publicKey = "D1iFPGEU9wKJdVZx5zqvpF6kwWMHikGw8HnwZ9S11XY=";
-            allowedIPs = [ "10.100.0.2/32" ];
-            endpoint = "2601:600:8980:e61:95ac:21d4:6f12:c4ca:51820";
-          }
-          { # fucko
-            publicKey = "WdBWpIPArhXenahamPNUV2iDzM5t6uBdRus5aCPfXn0=";
-            allowedIPs = [ "10.100.0.3/32" ];
-          }
-          { # electron
-            publicKey = "aBgWHULMX6gfNfQ6fXmVIB0dCeOn9Tse8vDtDVX1WVA=";
-            allowedIPs = [ "10.100.0.4/32" ];
-          }
-        ];
-      };
+      allowedTCPPorts = [ 655 ];
+      allowedUDPPorts = [ 655 ];
+      trustedInterfaces = [ "tinc.t0" ];
     };
   };
 
@@ -208,18 +176,43 @@
         hibernate = false;
       };
     };
-  };
 
-  systemd = {
-    services = {
-      lock = {
-        before = [ "sleep.target" ];
-        wantedBy = [ "sleep.target" ];
-        script = ''
-          loginctl lock-sessions
+    tinc.networks.t0 = {
+      extraConfig = ''
+        ConnectTo = steve
+        Autoconnect = yes
+        LocalDiscovery = yes
+      '';
+
+      hosts = {
+        steve = ''
+          Address = 192.99.10.126
+          Ed25519PublicKey = Ra66u8aLrlVnoO5ZPKzngIzPOsYLILOGJWy49Bje1fI
+          Subnet = 10.100.0.1/32
+        '';
+        boson = ''
+          Ed25519PublicKey = X4MR570GYD3rff4cMv8x/2OTDZrcCrobf8chG890WuK
+          Subnet = 10.100.0.2/32
+        '';
+        fucko = ''
+          Ed25519PublicKey = 6EneoCfLtLJ1nBG+oLtYsDQcmYNNkuHLS3fY3IZVxFJ
+          Subnet = 10.100.0.3/32
         '';
       };
     };
+  };
+
+  systemd.services = {
+    lock = {
+      before = [ "sleep.target" ];
+      wantedBy = [ "sleep.target" ];
+      script = ''
+        loginctl lock-sessions
+      '';
+    };
+
+    "network-link-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
+    "network-addresses-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
   };
 
   users.users.ash = {
