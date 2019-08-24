@@ -198,6 +198,10 @@
           Ed25519PublicKey = 6EneoCfLtLJ1nBG+oLtYsDQcmYNNkuHLS3fY3IZVxFJ
           Subnet = 10.100.0.3/32
         '';
+        electron = ''
+          Ed25519PublicKey = YvrM+BgYWG3g5YN/oe2D+yZDzM19roOAYceYAz+mJNA
+          Subnet = 10.100.0.4/32
+        '';
       };
     };
   };
