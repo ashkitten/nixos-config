@@ -102,7 +102,9 @@
     ssh.startAgent = true;
     zsh = {
       enable = true;
-      promptInit = "";
+      promptInit = "
+        ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
+      ";
     };
   };
 
