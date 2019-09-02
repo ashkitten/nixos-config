@@ -17,15 +17,15 @@
       ({
         name = "ryzen 3xxx device ids";
         patch = pkgs.fetchpatch {
-          url = "https://patchwork.kernel.org/patch/11043277/mbox/";
-          sha256 = "16b74z3wa8aq8f637daw8nj74d9sx5flapja94xj22n4ig7zmsbl";
+          url = "https://patchwork.kernel.org/patch/11043277/raw/";
+          sha256 = "0xjps6sdjk9gjjmzydl443crv707ww2f00jz52znim0lq2ihy2vw";
         };
       })
       ({
         name = "k10temp ryzen 3xxx";
         patch = pkgs.fetchpatch {
-          url = "https://patchwork.kernel.org/patch/11043271/mbox/";
-          sha256 = "02gsyv14hff3i7v77dhhhgi6x2xyl0dg3jn80j4aynb4dz3aqjcm";
+          url = "https://patchwork.kernel.org/patch/11043271/raw/";
+          sha256 = "062n1j3ccipwc9cxpji74bf538qbr19dglnknk9sl8i0z715ph1m";
         };
       })
     ];
