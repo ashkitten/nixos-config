@@ -43,7 +43,8 @@ in
     systemd.timers.nixos-rollback = {
       wantedBy = [ "timers.target" ];
       timerConfig = {
-        OnActiveSec = "5 min";
+        OnActiveSec = "15 min";
+        OnUnitInactiveSec = "15 min";
       };
     };
   }
