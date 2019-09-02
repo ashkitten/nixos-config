@@ -38,6 +38,8 @@
     interfaces."tinc.t0".ipv4.addresses = [ { address = "10.100.0.2"; prefixLength = 24; } ];
   };
 
+  hardware.openrazer.enable = true;
+
   services = {
     xserver = {
       videoDrivers = [ "nvidia" ];
@@ -76,7 +78,7 @@
       group = "nut";
     };
 
-    users.ash.extraGroups = [ "libvirtd" ];
+    users.ash.extraGroups = [ "libvirtd" "plugdev" ];
   };
 
   nixpkgs.overlays = [
