@@ -74,6 +74,7 @@
       source-code-pro
       terminus_font
       twemoji-color-font
+      twitter-color-emoji
     ];
     fontconfig.ultimate.enable = true;
   };
