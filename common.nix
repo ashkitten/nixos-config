@@ -113,6 +113,8 @@
   services = {
     openssh.enable = true;
 
+    dbus.socketActivated = true;
+
     xserver = {
       enable = true;
       layout = "us";
