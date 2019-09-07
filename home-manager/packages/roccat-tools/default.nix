@@ -9,5 +9,5 @@ rustPlatform.buildRustPackage {
     sha256 = "1n1lnrkbc4gk7pf3ssr47da5n0hwnwsh329vrgkshak3wfyi7fpg";
   };
   buildInputs = [ pkgconfig libudev ];
-  cargoSha256 = "1x5jzranclcqjbmm37jm0gmjpi3s30ah6k6sjklsasy9hbjliiyp";
+  cargoSha256 = "0sajf36dymr3i8sznhpzmqzpsz27cfci8h4mn7v2rxf448pj50fg";
 }
