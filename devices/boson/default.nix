@@ -66,7 +66,17 @@
     };
   };
 
-  virtualisation.libvirtd.enable = true;
+  environment.systemPackages = with pkgs; [
+    virtmanager
+  ];
+
+  virtualisation = {
+    libvirtd.enable = true;
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
+  };
 
   users = {
     groups.nut.gid = 84;
@@ -78,7 +88,7 @@
       group = "nut";
     };
 
-    users.ash.extraGroups = [ "libvirtd" "plugdev" ];
+    users.ash.extraGroups = [ "libvirtd" "vboxusers" "plugdev" ];
   };
 
   nixpkgs.overlays = [
