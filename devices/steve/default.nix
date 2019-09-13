@@ -133,6 +133,7 @@
 
           extraConfig = ''
             error_page 500 501 502 503 504 /500.html;
+            client_max_body_size 80m;
           '';
 
           locations = {
