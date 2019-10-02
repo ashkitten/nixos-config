@@ -73,10 +73,10 @@
     fonts = with pkgs; [
       source-code-pro
       terminus_font
-      twemoji-color-font
       twitter-color-emoji
     ];
-    fontconfig.ultimate.enable = true;
+
+    fontconfig.defaultFonts.emoji = [ "Twitter Color Emoji" ];
   };
 
   programs = {
