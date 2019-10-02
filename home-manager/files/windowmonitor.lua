@@ -76,6 +76,8 @@ while true do
             set_all_profiles("tyon", 2)
         elseif win_class == "ShellShockLive.x86_64" then
             set_all_profiles("tyon", 3)
+        elseif win_class == "steam_app_39210" then
+            set_all_profiles("tyon", 4)
         else
             set_all_profiles("tyon", 1)
         end
