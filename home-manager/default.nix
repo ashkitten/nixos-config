@@ -23,15 +23,14 @@ pkgs: _:
       aliases = {
         l = "log --abbrev-commit --pretty=oneline -n 10";
       };
-      extraConfig = ''
-          [transfer]
-            fsckobjects = true
-          [core]
-            excludesfile = ~/.gitignore
-            autocrlf = input
-          [push]
-            default = simple
-      '';
+      extraConfig = {
+        transfer.fsckobjects = true;
+        core = {
+          excludesfile = "~/.gitignore";
+          autocrlf = "input";
+        };
+        push.default = "simple";
+      };
     };
 
     neovim = {
