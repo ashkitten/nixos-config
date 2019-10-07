@@ -12,6 +12,7 @@ pkgs: with pkgs; [
   bind
   blender
   calc
+  calibre
   direnv
   dolphinEmuMaster
   exa
