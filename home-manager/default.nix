@@ -81,21 +81,34 @@ pkgs: _:
     };
   };
 
-  systemd.user.services = {
-    "roccat-tools" =
-      let
-        roccat-tools = pkgs.callPackage ./packages/roccat-tools {};
-      in {
+  systemd.user = {
+    startServices = true;
+
+    services = {
+      "roccat-tools" =
+        let
+          roccat-tools = pkgs.callPackage ./packages/roccat-tools {};
+        in {
+          Install = {
+            WantedBy = [ "default.target" ];
+          };
+          Service = {
+            Environment = [
+              "DISPLAY=:0"
+              "PATH=${pkgs.xdotool}/bin:${pkgs.xorg.xprop}/bin"
+            ];
+            ExecStart = "${roccat-tools}/bin/roccat-tools run ${./files/windowmonitor.lua}";
+          };
+        };
+
+      "gmrender-resurrect" = {
         Install = {
           WantedBy = [ "default.target" ];
         };
         Service = {
-          Environment = [
-            "DISPLAY=:0"
-            "PATH=${pkgs.xdotool}/bin:${pkgs.xorg.xprop}/bin"
-          ];
-          ExecStart = "${roccat-tools}/bin/roccat-tools run ${./files/windowmonitor.lua}";
+          ExecStart = "${pkgs.gmrender-resurrect}/bin/gmediarender -f %H --gstout-videosink fakesink";
         };
       };
+    };
   };
 }
