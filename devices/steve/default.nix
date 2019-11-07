@@ -178,7 +178,7 @@
               '';
             };
 
-            "/about".extraConfig = ''
+            "= /about".extraConfig = ''
               return 301 https://$host/@kity;
             '';
 
