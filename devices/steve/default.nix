@@ -6,6 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     ./its.nix
+    ./overlays.nix
     ../../auto-rollback.nix
   ];
 
@@ -118,6 +119,11 @@
       ];
     };
 
+    aria2 = {
+      enable = true;
+      downloadDir = "/var/lib/stuff";
+    };
+
     nginx = {
       enable = true;
 
@@ -205,6 +211,26 @@
             };
           };
         };
+
+        "stuff.kity.wtf" = {
+          forceSSL = true;
+          useACMEHost = "kity.wtf";
+
+          root = "/var/lib/stuff";
+        };
+
+        "aria2" = {
+          listen = [ { addr = "10.100.0.1"; port = 6800; } ];
+
+          root = pkgs.ariang.out;
+
+          locations = {
+            "~ ^/(jsonrpc|rpc)" = {
+              proxyPass = "http://127.0.0.1:6800";
+              proxyWebsockets = true;
+            };
+          };
+        };
       };
     };
 
@@ -255,6 +281,7 @@
       extraDomains = {
         "grafana.kity.wtf" = null;
         "pleroma.kity.wtf" = null;
+        "stuff.kity.wtf" = null;
       };
     };
   };
