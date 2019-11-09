@@ -40,13 +40,7 @@
   };
 
   networking = {
-    networkmanager = {
-      enable = true;
-      extraConfig = ''
-        [main]
-        rc-manager=resolvconf
-      '';
-    };
+    networkmanager.enable = true;
 
     firewall = {
       allowedTCPPorts = [ 655 ];
