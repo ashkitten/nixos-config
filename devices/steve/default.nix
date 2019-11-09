@@ -6,7 +6,6 @@
   imports = [
     ./hardware-configuration.nix
     ./its.nix
-    ./overlays.nix
     ../../auto-rollback.nix
   ];
 
@@ -119,9 +118,14 @@
       ];
     };
 
-    aria2 = {
+    nextcloud = {
       enable = true;
-      downloadDir = "/var/lib/stuff";
+      nginx.enable = true;
+      hostName = "cloud.kity.wtf";
+      maxUploadSize = "50G";
+      config = {
+        adminpassFile = "/root/nextcloud-secrets/adminpass";
+      };
     };
 
     nginx = {
@@ -212,24 +216,9 @@
           };
         };
 
-        "stuff.kity.wtf" = {
+        "cloud.kity.wtf" = {
           forceSSL = true;
           useACMEHost = "kity.wtf";
-
-          root = "/var/lib/stuff";
-        };
-
-        "aria2" = {
-          listen = [ { addr = "10.100.0.1"; port = 6800; } ];
-
-          root = pkgs.ariang.out;
-
-          locations = {
-            "~ ^/(jsonrpc|rpc)" = {
-              proxyPass = "http://127.0.0.1:6800";
-              proxyWebsockets = true;
-            };
-          };
         };
       };
     };
@@ -260,6 +249,30 @@
   systemd.services = {
     "network-link-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
     "network-addresses-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
+
+    "nextcloud-aria2" =
+      let
+        sessionFile = "/var/lib/nextcloud/aria2.session";
+      in
+        {
+          description = "aria2 service for nextcloud";
+          after = [ "network.target" ];
+          wantedBy = [ "multi-user.target" ];
+          preStart = ''
+            if [[ ! -e "${sessionFile}" ]]
+            then
+              touch "${sessionFile}"
+            fi
+          '';
+
+          serviceConfig = {
+            Restart = "on-abort";
+            ExecStart = "${pkgs.aria2}/bin/aria2c --enable-rpc --save-session=${sessionFile}";
+            ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
+            User = "nextcloud";
+            Group = "nginx";
+          };
+        };
   };
 
   programs.zsh = {
@@ -281,7 +294,7 @@
       extraDomains = {
         "grafana.kity.wtf" = null;
         "pleroma.kity.wtf" = null;
-        "stuff.kity.wtf" = null;
+        "cloud.kity.wtf" = null;
       };
     };
   };
