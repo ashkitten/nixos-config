@@ -11,8 +11,6 @@
   ];
 
   boot = {
-    zfs.enableUnstable = assert pkgs.zfsUnstable.name == "zfs-user-0.8.1"; true;
-
     kernelParams = [ "console=tty0" "console=ttyS0,9600n8" ];
 
     kernel.sysctl = {
