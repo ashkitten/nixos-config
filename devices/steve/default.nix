@@ -6,6 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     ./its.nix
+    ./nextcloud.nix
     ../../auto-rollback.nix
   ];
 
@@ -118,16 +119,6 @@
       ];
     };
 
-    nextcloud = {
-      enable = true;
-      nginx.enable = true;
-      hostName = "cloud.kity.wtf";
-      maxUploadSize = "50G";
-      config = {
-        adminpassFile = "/root/nextcloud-secrets/adminpass";
-      };
-    };
-
     nginx = {
       enable = true;
 
@@ -215,11 +206,6 @@
             };
           };
         };
-
-        "cloud.kity.wtf" = {
-          forceSSL = true;
-          useACMEHost = "kity.wtf";
-        };
       };
     };
 
@@ -249,30 +235,6 @@
   systemd.services = {
     "network-link-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
     "network-addresses-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
-
-    "nextcloud-aria2" =
-      let
-        sessionFile = "/var/lib/nextcloud/aria2.session";
-      in
-        {
-          description = "aria2 service for nextcloud";
-          after = [ "network.target" ];
-          wantedBy = [ "multi-user.target" ];
-          preStart = ''
-            if [[ ! -e "${sessionFile}" ]]
-            then
-              touch "${sessionFile}"
-            fi
-          '';
-
-          serviceConfig = {
-            Restart = "on-abort";
-            ExecStart = "${pkgs.aria2}/bin/aria2c --enable-rpc --save-session=${sessionFile}";
-            ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
-            User = "nextcloud";
-            Group = "nginx";
-          };
-        };
   };
 
   programs.zsh = {
@@ -294,7 +256,6 @@
       extraDomains = {
         "grafana.kity.wtf" = null;
         "pleroma.kity.wtf" = null;
-        "cloud.kity.wtf" = null;
       };
     };
   };
@@ -306,6 +267,8 @@
     extraGroups = [ "wheel" "docker" "systemd-journal" ];
     shell = pkgs.zsh;
   };
+
+  nixpkgs.config.allowUnfree = true;
 
   nix = {
     gc.automatic = true;
