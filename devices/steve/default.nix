@@ -231,6 +231,9 @@
   };
 
   systemd.services = {
+    # restart in one step so the connection doesn't drop
+    "tinc.t0".stopIfChanged = false;
+
     "network-link-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
     "network-addresses-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
   };
