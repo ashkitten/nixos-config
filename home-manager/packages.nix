@@ -21,6 +21,7 @@ pkgs: with pkgs; [
   file
   firefox
   gist
+  glimpse
   gnome3.dconf
   gnome3.defaultIconTheme
   gnumake
