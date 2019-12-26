@@ -76,7 +76,10 @@
   programs = {
     adb.enable = true;
     ccache.enable = true;
-    gnupg.agent.enable = true;
+    gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "qt";
+    };
     light.enable = true;
     mosh.enable = true;
     ssh.startAgent = true;
