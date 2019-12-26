@@ -64,6 +64,10 @@
       enable = true;
       enableExtensionPack = true;
     };
+    docker = {
+      enable = true;
+      storageDriver = "zfs";
+    };
   };
 
   users = {
@@ -76,7 +80,7 @@
       group = "nut";
     };
 
-    users.ash.extraGroups = [ "libvirtd" "vboxusers" ];
+    users.ash.extraGroups = [ "libvirtd" "vboxusers" "docker" ];
   };
 
   nixpkgs.overlays = [
