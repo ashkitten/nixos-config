@@ -19,7 +19,7 @@ pkgs: _:
     git = {
       enable = true;
       userName = "ash lea";
-      userEmail = "ashlea@protonmail.com";
+      userEmail = "example@thisismyactual.email";
       aliases = {
         l = "log --abbrev-commit --pretty=oneline -n 10";
       };
