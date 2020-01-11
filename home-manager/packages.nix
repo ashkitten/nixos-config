@@ -40,6 +40,7 @@ pkgs: with pkgs; [
   ltunify
   mgba
   mpv
+  nextcloud-client
   nix-index
   nix-prefetch-scripts
   nix-top
