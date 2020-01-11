@@ -19,7 +19,7 @@ pkgs: with pkgs; [
   feh
   ffmpeg-full
   file
-  firefox
+  firefox-bin
   gist
   glimpse
   gnome3.dconf
