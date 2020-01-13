@@ -15,7 +15,6 @@
   fileSystems."/var/lib/docker" = { device = "tank/docker"; fsType = "zfs"; };
 
   fileSystems."/opt/mastodon" = { device = "tank/mastodon"; fsType = "zfs"; };
-  fileSystems."/opt/pleroma" = { device = "tank/pleroma"; fsType = "zfs"; };
 
   swapDevices = [
     { device = "/dev/disk/by-uuid/2169589d-c25e-4675-9077-9df5ccb490fa"; }

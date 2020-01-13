@@ -60,7 +60,6 @@
     htop
     jq
     lsof
-    m4 # needed by pleroma script
     neovim
     ripgrep
     tmux
@@ -104,14 +103,6 @@
           job_name = "prometheus";
           static_configs = [
             { targets = [ "127.0.0.1:9090" ]; }
-          ];
-        }
-        {
-          job_name = "pleroma";
-          metrics_path = "/api/pleroma/app_metrics";
-          scheme = "https";
-          static_configs = [
-            { targets = [ "pleroma.kity.wtf" ]; }
           ];
         }
       ];
@@ -192,18 +183,6 @@
             };
           };
         };
-
-        "pleroma.kity.wtf" = {
-          forceSSL = true;
-          useACMEHost = "kity.wtf";
-
-          locations = {
-            "/" = {
-              proxyPass = "http://127.0.0.1:7000";
-              proxyWebsockets = true;
-            };
-          };
-        };
       };
     };
 
@@ -256,7 +235,6 @@
       email = "example@thisismyactual.email";
       extraDomains = {
         "grafana.kity.wtf" = null;
-        "pleroma.kity.wtf" = null;
       };
     };
   };
