@@ -82,15 +82,15 @@
       port = 6000;
     };
 
-    prometheus.exporters = {
-      node = {
-        enable = true;
-        enabledCollectors = [ "zfs" ];
-      };
-    };
-
-    prometheus2 = {
+    prometheus = {
       enable = true;
+
+      exporters = {
+        node = {
+          enable = true;
+          enabledCollectors = [ "zfs" ];
+        };
+      };
 
       scrapeConfigs = [
         {
