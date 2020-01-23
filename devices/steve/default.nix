@@ -236,6 +236,8 @@
       extraDomains = {
         "grafana.kity.wtf" = null;
       };
+      group = "nginx";
+      allowKeysForGroup = true;
     };
   };
 
