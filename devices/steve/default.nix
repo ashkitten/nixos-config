@@ -183,6 +183,18 @@
             };
           };
         };
+
+        "stuff.kity.wtf" = {
+          forceSSL = true;
+          useACMEHost = "kity.wtf";
+
+          locations = {
+            "/" = {
+              root = "/var/lib/stuff";
+              tryFiles = "$uri =404";
+            };
+          };
+        };
       };
     };
 
@@ -235,6 +247,7 @@
       email = "example@thisismyactual.email";
       extraDomains = {
         "grafana.kity.wtf" = null;
+        "stuff.kity.wtf" = null;
       };
       group = "nginx";
       allowKeysForGroup = true;
