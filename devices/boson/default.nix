@@ -16,7 +16,7 @@
       "zfs.zfs_vdev_scheduler=none"
     ];
 
-    kernelPackages = pkgs.linuxPackages_5_3;
+    kernelPackages = pkgs.linuxPackages_5_4;
   };
 
   networking = {
