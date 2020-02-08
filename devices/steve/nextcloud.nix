@@ -12,11 +12,6 @@
         adminpassFile = "/root/nextcloud-secrets/adminpass";
       };
     };
-
-    elasticsearch = {
-      enable = true;
-      plugins = with pkgs.elasticsearchPlugins; [ ingest-attachment ];
-    };
   };
 
   systemd.services = {
@@ -45,21 +40,6 @@
             Restart = "on-abort";
           };
         };
-
-    "nextcloud-fulltext-elasticsearch-worker" = {
-      description = "Elasticsearch Worker for Nextcloud Fulltext Search";
-
-      after = [ "network.target" "elasticsearch.service" ];
-      wantedBy = [ "multi-user.target" ];
-
-      script = "/run/current-system/sw/bin/nextcloud-occ fulltextsearch:live -q";
-      preStop = "/run/current-system/sw/bin/nextcloud-occ fulltextsearch:stop";
-
-      serviceConfig = {
-        Nice = "19";
-        Restart = "always";
-      };
-    };
   };
 
   services.nginx.virtualHosts."cloud.kity.wtf" = {
