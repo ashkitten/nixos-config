@@ -27,6 +27,7 @@ pkgs: with pkgs; [
   gnumake
   gnupg
   google-chrome
+  hexd
   htop
   hwinfo
   imagemagick
@@ -59,6 +60,7 @@ pkgs: with pkgs; [
   sc-controller
   steam
   steam-run
+  tokei
   toot
   unrar
   unzip
