@@ -7,6 +7,7 @@
     ./hardware-configuration.nix
     ./its.nix
     ./nextcloud.nix
+    ./znapzend.nix
     ../../auto-rollback.nix
   ];
 

@@ -80,6 +80,14 @@
       group = "nut";
     };
 
+    users.znapzend = {
+      isSystemUser = true;
+      useDefaultShell = true;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIANROgXWkBhhJc4VjmbyIabhpQEb/zzqqcOXJQgt7qIY"
+      ];
+    };
+
     users.ash.extraGroups = [ "libvirtd" "vboxusers" "docker" ];
   };
 
