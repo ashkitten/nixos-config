@@ -30,4 +30,9 @@
       tapping = false;
     };
   };
+
+  # sdr stuff
+  services.udev.packages = with pkgs; [ rtl-sdr ];
+  home-manager.users.ash.home.packages = with pkgs; [ gqrx ];
+  boot.blacklistedKernelModules = [ "dvb_usb_rtl28xxu" ];
 }
