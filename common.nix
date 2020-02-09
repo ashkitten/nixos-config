@@ -67,11 +67,14 @@
   fonts = {
     fonts = with pkgs; [
       source-code-pro
-      terminus_font
+      terminus_font_ttf
       twitter-color-emoji
     ];
 
-    fontconfig.defaultFonts.emoji = [ "Twitter Color Emoji" ];
+    fontconfig = {
+      defaultFonts.emoji = [ "Twitter Color Emoji" ];
+      useEmbeddedBitmaps = true;
+    };
   };
 
   programs = {
