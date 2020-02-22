@@ -187,13 +187,6 @@
     "network-addresses-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
   };
 
-  programs.zsh = {
-    enable = true;
-    promptInit = "
-      ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
-    ";
-  };
-
   virtualisation.docker = {
     enable = true;
     storageDriver = "zfs";
@@ -216,7 +209,6 @@
     createHome = false;
     uid = 1000;
     extraGroups = [ "wheel" "docker" "systemd-journal" ];
-    shell = pkgs.zsh;
   };
 
   nixpkgs.config.allowUnfree = true;
