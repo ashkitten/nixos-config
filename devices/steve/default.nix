@@ -86,6 +86,24 @@
       recommendedTlsSettings = true;
 
       virtualHosts = {
+        "glowing-bear" = {
+          default = true;
+          listen = [ { addr = "10.100.0.1"; port = 80; } ];
+
+          locations = {
+            "/" = {
+              root = pkgs.fetchFromGitHub {
+                owner = "glowing-bear";
+                repo = "glowing-bear";
+                rev = "c803bfb3889d537980ed801eeef983edcf91fde1";
+                sha256 = "14a3fqsmi28g7j3lzk4l4m47p2iml1aaf3514wazn2clw48lnqhw";
+              };
+
+              tryFiles = "$uri $uri/index.html =404";
+            };
+          };
+        };
+
         "kity.wtf" = {
           forceSSL = true;
           useACMEHost = "kity.wtf";
@@ -134,11 +152,6 @@
             "= /about".extraConfig = ''
               return 301 https://$host/@kity;
             '';
-
-            "/weechat" = {
-              proxyPass = "http://127.0.0.1:5230";
-              proxyWebsockets = true;
-            };
           };
         };
 
