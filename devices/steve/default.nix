@@ -1,9 +1,8 @@
-# TODO: generify with other devices
-
 { config, pkgs, ... }:
 
 {
   imports = [
+    ./grafana.nix
     ./hardware-configuration.nix
     ./its.nix
     ./nextcloud.nix
@@ -78,37 +77,6 @@
       autoScrub.enable = true;
     };
 
-    grafana = {
-      enable = true;
-      port = 6000;
-    };
-
-    prometheus = {
-      enable = true;
-
-      exporters = {
-        node = {
-          enable = true;
-          enabledCollectors = [ "zfs" ];
-        };
-      };
-
-      scrapeConfigs = [
-        {
-          job_name = "node-exporter";
-          static_configs = [
-            { targets = [ "127.0.0.1:9100" "10.100.0.2:9100" "10.100.0.3:9100" ]; }
-          ];
-        }
-        {
-          job_name = "prometheus";
-          static_configs = [
-            { targets = [ "127.0.0.1:9090" ]; }
-          ];
-        }
-      ];
-    };
-
     nginx = {
       enable = true;
 
@@ -170,17 +138,6 @@
             "/weechat" = {
               proxyPass = "http://127.0.0.1:5230";
               proxyWebsockets = true;
-            };
-          };
-        };
-
-        "grafana.kity.wtf" = {
-          forceSSL = true;
-          useACMEHost = "kity.wtf";
-
-          locations = {
-            "/" = {
-              proxyPass = "http://127.0.0.1:6000";
             };
           };
         };
@@ -247,7 +204,6 @@
       webroot = "/var/lib/acme/acme-challenge";
       email = "example@thisismyactual.email";
       extraDomains = {
-        "grafana.kity.wtf" = null;
         "stuff.kity.wtf" = null;
       };
       group = "nginx";
