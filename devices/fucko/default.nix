@@ -14,6 +14,8 @@
     interfaces."tinc.t0".ipv4.addresses = [ { address = "10.100.0.3"; prefixLength = 24; } ];
   };
 
+  zramSwap.enable = true;
+
   services.xserver = {
     xkbVariant = "dvorak";
     dpi = 110;
