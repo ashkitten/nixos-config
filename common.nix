@@ -3,6 +3,7 @@
 {
   imports = [
     <home-manager/nixos>
+    ./gnome-keyring.nix
   ];
 
   boot = {
@@ -58,10 +59,8 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  environment = {
-    variables = {
-      LC_TIME = "en_DK.UTF-8";
-    };
+  environment.variables = {
+    LC_TIME = "en_DK.UTF-8";
   };
 
   fonts = {
