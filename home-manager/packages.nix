@@ -3,7 +3,9 @@ pkgs: with pkgs; [
   (callPackage ./packages/roccat-tools {})
   (callPackage ./packages/g933-utils {})
 
+  (import ./vscode.nix pkgs)
   (pass.withExtensions (ext: with ext; [ pass-otp ]))
+
   arc-theme
   arduino
   aria2
@@ -65,7 +67,6 @@ pkgs: with pkgs; [
   unrar
   unzip
   usbutils
-  vscode
   weechat
   wget
   wine
