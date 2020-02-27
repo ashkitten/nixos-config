@@ -127,7 +127,7 @@
       };
     };
 
-    compton = {
+    picom = {
       enable = true;
       backend = "glx";
       vSync = true;
