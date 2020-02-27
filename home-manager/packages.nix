@@ -59,6 +59,7 @@ pkgs: with pkgs; [
   retroarchBare
   ripgrep
   rofi
+  rustup
   sc-controller
   steam
   steam-run
