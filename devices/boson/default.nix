@@ -42,6 +42,8 @@
         Option "metamodes" "DP-4: 1920x1080_60 +0+0, DP-2: 1920x1080_60 +1920+0"
       '';
     };
+
+    ratbagd.enable = true;
   };
 
   power.ups = {
