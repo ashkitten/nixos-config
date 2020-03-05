@@ -205,15 +205,18 @@
     storageDriver = "zfs";
   };
 
-  security.acme.certs = {
-    "kity.wtf" = {
-      webroot = "/var/lib/acme/acme-challenge";
-      email = "example@thisismyactual.email";
-      extraDomains = {
-        "stuff.kity.wtf" = null;
+  security.acme = {
+    acceptTerms = true;
+    certs = {
+      "kity.wtf" = {
+        webroot = "/var/lib/acme/acme-challenge";
+        email = "example@thisismyactual.email";
+        extraDomains = {
+          "stuff.kity.wtf" = null;
+        };
+        group = "nginx";
+        allowKeysForGroup = true;
       };
-      group = "nginx";
-      allowKeysForGroup = true;
     };
   };
 
