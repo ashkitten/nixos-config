@@ -233,7 +233,10 @@
     shell = pkgs.zsh;
   };
 
-  home-manager.users.ash = import ./home-manager pkgs;
+  home-manager = {
+    useGlobalPkgs = true;
+    users.ash = ./home-manager;
+  };
 
   security.sudo.extraConfig = ''
     Defaults!${pkgs.neovim}/bin/nvim env_keep+="HOME PATH"
