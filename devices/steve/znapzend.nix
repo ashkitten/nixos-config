@@ -18,7 +18,7 @@ in
 
     zetup = {
       "tank/mastodon" = mkZetup "mastodon" {
-        presnap = "nixos-container run mastodon -- sudo -u postgres psql -U postgres -c 'CHECKPOINT'";
+        presnap = "${pkgs.nixos-container}/bin/nixos-container run mastodon -- sudo -u postgres psql -U postgres -c 'CHECKPOINT'";
       };
 
       "tank/nextcloud" = mkZetup "nextcloud" {};
