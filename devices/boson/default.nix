@@ -25,6 +25,14 @@
 
     firewall.enable = false;
 
+    # nat for containers
+    nat = {
+      enable = true;
+      internalInterfaces = [ "ve-+" ];
+      externalInterface = "enp4s0";
+    };
+    networkmanager.unmanaged = [ "interface-name:ve-*" ];
+
     interfaces."tinc.t0".ipv4.addresses = [ { address = "10.100.0.2"; prefixLength = 24; } ];
   };
 
