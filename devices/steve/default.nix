@@ -7,6 +7,7 @@
     ./its.nix
     ./nextcloud.nix
     ./znapzend.nix
+    ./mastodon
     ../../auto-rollback.nix
   ];
 
@@ -33,6 +34,13 @@
   networking = {
     hostName = "steve";
     hostId = "bf2fecf0";
+
+    # nat for containers
+    nat = {
+      enable = true;
+      internalInterfaces = [ "ve-+" ];
+      externalInterface = "enp1s0";
+    };
 
     firewall = {
       allowedTCPPorts = [ 80 443 655 ];
@@ -101,57 +109,6 @@
 
               tryFiles = "$uri $uri/index.html =404";
             };
-          };
-        };
-
-        "kity.wtf" = {
-          forceSSL = true;
-          useACMEHost = "kity.wtf";
-
-          extraConfig = ''
-            error_page 500 501 502 503 504 /500.html;
-            client_max_body_size 80m;
-          '';
-
-          locations = {
-            "/" = {
-              root = "/opt/mastodon/public";
-              tryFiles = "$uri @proxy";
-            };
-
-            "@proxy" = {
-              proxyPass = "http://127.0.0.1:3000";
-            };
-
-            "/sw.js" = {
-              tryFiles = "$uri @proxy";
-              extraConfig = ''
-                add_header Cache-Control "public, max-age=0";
-              '';
-            };
-
-            "~ ^/(emoji|packs|system/accounts/avatars|system/media_attachments/files)" = {
-              tryFiles = "$uri @proxy";
-              extraConfig = ''
-                add_header Cache-Control "public, max-age=31536000, immutable";
-              '';
-            };
-
-            "/api/v1/streaming" = {
-              proxyPass = "http://127.0.0.1:4000";
-              proxyWebsockets = true;
-            };
-
-            "~ /api/v[12]/search" = {
-              tryFiles = "$uri @proxy";
-              extraConfig = ''
-                access_log off;
-              '';
-            };
-
-            "= /about".extraConfig = ''
-              return 301 https://$host/@kity;
-            '';
           };
         };
 
