@@ -14,12 +14,6 @@
   boot = {
     kernelParams = [ "console=tty0" "console=ttyS0,9600n8" ];
 
-    kernel.sysctl = {
-      "net.ipv4.ip_forward" = 1;
-      "vm.overcommit_memory" = 1;
-      "vm.max_map_count" = 262144;
-    };
-
     loader.grub = {
       enable = true;
       device = "/dev/sda";

@@ -21,29 +21,38 @@ in
       config = {
         networking.firewall.allowedTCPPorts = [ cfg.webPort cfg.streamingPort ];
 
-        services.mastodon = {
-          enable = true;
-          inherit package;
+        # for elasticsearch
+        nixpkgs.config.allowUnfree = true;
 
-          localDomain = "kity.wtf";
+        services = {
+          mastodon = {
+            enable = true;
+            inherit package;
 
-          smtp = {
-            createLocally = false;
-            host = "smtp.mailgun.org";
-            port = 465;
-            user = "notifications@kity.wtf";
-            fromAddress = "Mastodon <notifications@kity.wtf>";
+            localDomain = "kity.wtf";
+
+            smtp = {
+              createLocally = false;
+              host = "smtp.mailgun.org";
+              port = 465;
+              user = "notifications@kity.wtf";
+              fromAddress = "Mastodon <notifications@kity.wtf>";
+            };
+
+            elasticsearch.host = "127.0.0.1";
+
+            extraConfig = {
+              BIND = "0.0.0.0";
+
+              MAX_TOOT_CHARS = "65535";
+              MAX_DISPLAY_NAME_CHARS = "69";
+              MAX_PROFILE_FIELDS = "32";
+              MAX_BIO_CHARS = "65535";
+              MAX_SEARCH_RESULTS = "100";
+            };
           };
 
-          extraConfig = {
-            BIND = "0.0.0.0";
-
-            MAX_TOOT_CHARS = "65535";
-            MAX_DISPLAY_NAME_CHARS = "69";
-            MAX_PROFILE_FIELDS = "32";
-            MAX_BIO_CHARS = "65535";
-            MAX_SEARCH_RESULTS = "100";
-          };
+          elasticsearch.enable = true;
         };
       };
     };
