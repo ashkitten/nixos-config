@@ -87,6 +87,8 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
 
+      enableReload = true;
+
       virtualHosts = {
         "glowing-bear" = {
           default = true;
