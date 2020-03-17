@@ -2,13 +2,14 @@
 
 {
   imports = [
+    ../../auto-rollback.nix
     ./grafana.nix
     ./hardware-configuration.nix
     ./its.nix
-    ./nextcloud.nix
-    ./znapzend.nix
     ./mastodon
-    ../../auto-rollback.nix
+    ./nextcloud.nix
+    ./synapse.nix
+    ./znapzend.nix
   ];
 
   boot = {
