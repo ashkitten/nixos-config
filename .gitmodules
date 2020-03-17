@@ -1,0 +1,15 @@
+[submodule "external/nixpkgs"]
+	path = external/nixpkgs
+	url = git@github.com:ashkitten/nixpkgs.git
+[submodule "external/nixoses"]
+	path = external/nixoses
+	url = https://github.com/Infinisil/nixoses.git
+[submodule "external/secrets"]
+	path = external/secrets
+	url = root@steve:secrets
+[submodule "external/home-manager"]
+	path = external/home-manager
+	url = https://github.com/rycee/home-manager.git
+[submodule "external/nixos-hardware"]
+	path = external/nixos-hardware
+	url = https://github.com/NixOS/nixos-hardware.git

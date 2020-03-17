@@ -40,6 +40,11 @@
       enable = true;
       extraConfig = builtins.readFile ./dotfiles/.tmux.conf;
     };
+
+    rofi = {
+      enable = true;
+      theme = "android_notification";
+    };
   };
 
   systemd.user = {

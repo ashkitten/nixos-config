@@ -2,9 +2,9 @@
 
 {
   imports = [
+    ../../desktop.nix
+    ../../external/nixos-hardware/lenovo/thinkpad/t450s
     ./hardware-configuration.nix
-    ../../common.nix
-    <nixos-hardware/lenovo/thinkpad/t450s>
   ];
 
   networking = {
@@ -40,4 +40,6 @@
   services.udev.packages = with pkgs; [ rtl-sdr ];
   home-manager.users.ash.home.packages = with pkgs; [ gqrx ];
   boot.blacklistedKernelModules = [ "dvb_usb_rtl28xxu" ];
+
+  system.stateVersion = "19.09";
 }

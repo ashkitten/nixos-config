@@ -10,13 +10,6 @@
     prometheus = {
       enable = true;
 
-      exporters = {
-        node = {
-          enable = true;
-          enabledCollectors = [ "zfs" ];
-        };
-      };
-
       scrapeConfigs = [
         {
           job_name = "node-exporter";

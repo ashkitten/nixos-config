@@ -2,17 +2,14 @@
 
 {
   imports = [
+    ../../desktop.nix
     ./hardware-configuration.nix
-    ../../common.nix
   ];
 
   boot = {
     kernelModules = [ "nct6775" ];
 
     kernelParams = [
-      "nospectre_v1"
-      "nospectre_v2"
-      "nospec_store_bypass_disable"
       "zfs.zfs_vdev_scheduler=none"
     ];
 
@@ -106,4 +103,6 @@
       blender = super.blender.override { cudaSupport = true; };
     })
   ];
+
+  system.stateVersion = "19.09";
 }
