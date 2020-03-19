@@ -33,33 +33,18 @@
     interfaces."tinc.t0".ipv4.addresses = [ { address = "10.100.0.2"; prefixLength = 24; } ];
   };
 
-  services = {
-    xserver = {
-      videoDrivers = [ "nvidia" ];
+  services.ratbagd.enable = true;
 
-      xrandrHeads = [
-        { output = "DP-4"; primary = true; }
-        { output = "DP-2"; }
-      ];
-
-      screenSection = ''
-        Option "Coolbits" "12"
-        Option "metamodes" "DP-4: 1920x1080_60 +0+0, DP-2: 1920x1080_60 +1920+0"
-      '';
-    };
-
-    ratbagd.enable = true;
-  };
-
-  power.ups = {
-    enable = true;
-    ups = {
-      tripplite = {
-        driver = "usbhid-ups";
-        port = "/dev/ttyS0";
-      };
-    };
-  };
+  # TODO: debug why this is broken
+  #power.ups = {
+  #  enable = true;
+  #  ups = {
+  #    tripplite = {
+  #      driver = "usbhid-ups";
+  #      port = "/dev/ttyS0";
+  #    };
+  #  };
+  #};
 
   environment.systemPackages = with pkgs; [
     virtmanager
@@ -96,6 +81,17 @@
     };
 
     users.ash.extraGroups = [ "libvirtd" "vboxusers" "docker" ];
+  };
+
+  home-manager.users.ash.wayland.windowManager.sway = {
+    config.output = {
+      DP-2 = { pos = "0 0"; mode = "2560x1440@144Hz"; };
+      DP-3 = { pos = "2560 180"; mode = "1920x1080@75Hz"; };
+    };
+
+    extraConfig = ''
+      workspace 1 output DP-3
+    '';
   };
 
   nixpkgs.overlays = [

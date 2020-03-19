@@ -2,13 +2,26 @@
 
 {
   imports = [
-    ./packages.nix
     ./dunst.nix
+    ./packages.nix
+    ./sway.nix
   ];
 
   # make sure user has the same config and overlays as system
   xdg.configFile."nixpkgs/config.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.config'';
   xdg.configFile."nixpkgs/overlays.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.overlays'';
+
+  gtk = {
+    enable = true;
+    theme = {
+      package = pkgs.arc-theme;
+      name = "Arc-Dark";
+    };
+    iconTheme = {
+      package = pkgs.numix-icon-theme;
+      name = "Numix";
+    };
+  };
 
   programs = {
     browserpass.enable = true;
@@ -44,6 +57,11 @@
     rofi = {
       enable = true;
       theme = "android_notification";
+    };
+
+    obs-studio = {
+      enable = true;
+      plugins = [ pkgs.obs-linuxbrowser pkgs.obs-wlrobs ];
     };
   };
 

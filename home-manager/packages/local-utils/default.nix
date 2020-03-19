@@ -6,19 +6,13 @@ stdenv.mkDerivation rec {
   buildInputs = [ makeWrapper ];
   wrapperPath = with pkgs; stdenv.lib.makeBinPath [
     ffmpeg
+    grim
     libnotify
-    maim
-    pass
-    (python3.withPackages (p: with p; [
-      requests
-      beautifulsoup4
-      lxml
-    ]))
+    pass-wayland
+    python3
     rofi
-    slop
-    xdotool
-    xorg.xprop
-    xorg.xrandr
+    slurp
+    wl-clipboard
     xscreensaver
     xsecurelock
     zsh

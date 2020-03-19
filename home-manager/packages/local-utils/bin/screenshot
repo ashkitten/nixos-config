@@ -7,19 +7,15 @@ function {
 
     case $choice in
         monitor)
-            local dimensions=($(xdotool getdisplaygeometry))
-            local mouse=($(xdotool getmouselocation | sed -E 's/x:([0-9]+) y:([0-9]+) .*/\1 \2/'))
-            local monitor=($((${mouse[1]} / ${dimensions[1]})) $((${mouse[2]} / ${dimensions[2]})))
-            local offset=($((${monitor[1]} * ${dimensions[1]})) $((${monitor[2]} * ${dimensions[2]})))
-            maim -u -g "${dimensions[1]}x${dimensions[2]}+${offset[1]}+${offset[2]}" $tmpfile
+            grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" - | wl-copy
             ;;
 
         window)
-            maim -u -i $(xdotool getactivewindow) $tmpfile
+            grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy
             ;;
 
         selection)
-            maim -u -s -b 1 -c 1,0,0,1 -u $tmpfile
+            grim -g "$(slurp)" - | wl-copy
             ;;
         *)
             false
@@ -27,10 +23,6 @@ function {
     esac
 
     if [[ $? -eq 0 ]]; then
-        if xclip -selection clip -t image/png -i $tmpfile; then
-            notify-send -a maim "Screenshot copied to clipboard"
-        else
-            notify-send -a maim "Screenshot failed..."
-        fi
+        notify-send "Screenshot copied to clipboard"
     fi
 } =()

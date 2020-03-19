@@ -70,6 +70,7 @@
         ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
       ";
     };
+    sway.enable = true;
   };
 
   sound.enable = true;
@@ -88,22 +89,9 @@
   services = {
     dbus.socketActivated = true;
 
-    xserver = {
-      enable = true;
-      layout = "us";
-      xkbOptions = "compose:menu";
+    # needed for display manager
+    xserver.enable = true;
 
-      windowManager.i3 = {
-        enable = true;
-        package = pkgs.i3-gaps;
-      };
-    };
-
-    picom = {
-      enable = true;
-      backend = "glx";
-      vSync = true;
-    };
 
     udev.extraRules = ''
       # Trinket M0

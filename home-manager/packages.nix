@@ -9,9 +9,8 @@
     (callPackage ./packages/local-utils {})
     (callPackage ./packages/g933-utils {})
 
-    (pass.withExtensions (ext: with ext; [ pass-otp ]))
+    (pass-wayland.withExtensions (ext: with ext; [ pass-otp ]))
 
-    arc-theme
     arduino
     aria2
     atool
@@ -26,7 +25,7 @@
     feh
     ffmpeg-full
     file
-    firefox-bin
+    firefox-wayland
     gist
     glimpse
     gnome3.dconf
@@ -52,8 +51,6 @@
     nix-index
     nix-prefetch-scripts
     nix-top
-    numix-icon-theme
-    obs-studio
     p7zip
     pavucontrol
     pciutils
@@ -78,10 +75,7 @@
     wine
     winetricks
     wireshark
-    xclip
-    xdotool
-    xorg.xbacklight
-    xorg.xev
+    wl-clipboard
     zip
   ];
 }
