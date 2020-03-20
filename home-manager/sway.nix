@@ -114,5 +114,9 @@ in
           }
         ];
       };
+
+      extraConfig = ''
+        titlebar_padding 3 1
+      '';
     };
   }
