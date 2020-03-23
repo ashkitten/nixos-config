@@ -94,11 +94,5 @@
     '';
   };
 
-  nixpkgs.overlays = [
-    (self: super: {
-      blender = super.blender.override { cudaSupport = true; };
-    })
-  ];
-
   system.stateVersion = "19.09";
 }
