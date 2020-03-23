@@ -3,9 +3,9 @@ diff -Naur --label a/package.json --label b/package.json a/package.json b/packag
 +++ b/package.json
 @@ -189,5 +189,6 @@
      "sass-lint": "^1.13.1",
-     "webpack-dev-server": "^3.10.1",
+     "webpack-dev-server": "^3.10.3",
      "yargs": "^15.1.0"
 -  }
 +  },
-+  "version": "5.0.0"
++  "version": "0.0.0"
  }
