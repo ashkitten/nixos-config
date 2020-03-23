@@ -70,7 +70,10 @@
         ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
       ";
     };
-    sway.enable = true;
+    sway = {
+      enable = true;
+      extraPackages = with pkgs; [ swaylock swayidle xwayland ];
+    };
   };
 
   sound.enable = true;
