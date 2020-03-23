@@ -58,6 +58,8 @@
   ];
 
   services = {
+    postgresql.enable = true;
+
     nginx = {
       enable = true;
 
