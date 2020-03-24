@@ -18,6 +18,7 @@ in
 
       successTimeout = 120;
       switchTimeout = 240;
+      ignoreFailingSystemdUnits = true;
 
       configuration = {
         imports = [
