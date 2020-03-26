@@ -16,24 +16,9 @@
 
   zramSwap.enable = true;
 
-  services.xserver = {
-    xkbVariant = "dvorak";
-    dpi = 110;
-
-    inputClassSections = [
-      ''
-        Identifier "Trackpoint Settings"
-        MatchProduct "AlpsPS/2 ALPS DualPoint Stick"
-        Driver "libinput"
-        Option "AccelSpeed" "-0.3"
-      ''
-    ];
-
-    libinput = {
-      enable = true;
-      clickMethod = "clickfinger";
-      tapping = false;
-    };
+  services.xserver.xkbVariant = "dvorak";
+  home-manager.users.ash.wayland.windowManager.sway.config.input = {
+    "*" = { xkb_layout = "dvorak"; };
   };
 
   # sdr stuff
