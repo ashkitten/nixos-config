@@ -29,7 +29,7 @@
         Subnet = 10.100.0.3/32
       '';
       electron = ''
-        Ed25519PublicKey = YvrM+BgYWG3g5YN/oe2D+yZDzM19roOAYceYAz+mJNA
+        Ed25519PublicKey = K3pjyj0S2CEmPiCSp/8phTT9JvZ781D6Z3jDDOss3KJ
         Subnet = 10.100.0.4/32
       '';
     };
