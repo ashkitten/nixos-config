@@ -155,6 +155,8 @@
     users.ash = ./home-manager;
   };
 
+  nix.trustedUsers = [ "ash" ];
+
   security.sudo.extraConfig = ''
     Defaults!${pkgs.neovim}/bin/nvim env_keep+="HOME PATH"
     Defaults!${pkgs.git}/bin/git env_keep+="HOME"
