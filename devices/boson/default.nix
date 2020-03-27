@@ -12,8 +12,6 @@
     kernelParams = [
       "zfs.zfs_vdev_scheduler=none"
     ];
-
-    kernelPackages = pkgs.linuxPackages_5_5;
   };
 
   networking = {
