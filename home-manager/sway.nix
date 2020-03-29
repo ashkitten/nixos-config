@@ -113,6 +113,15 @@ in
             '';
           }
         ];
+
+        window.commands = [
+          # steam non-main windows
+          { criteria = { class = "^Steam$"; title = "^(?!Steam$)"; }; command = "floating enable"; }
+          # blender user preferences
+          { criteria = { class = "^Blender$"; title = "^Blender Preferences$"; }; command = "floating enable"; }
+          # open-in-browser extension
+          { criteria = { app_id = "^firefox$"; title = "^Extension: \\(Open in Browser\\)"; }; command = "floating enable"; }
+        ];
       };
 
       extraConfig = ''
