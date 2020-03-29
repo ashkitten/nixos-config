@@ -59,7 +59,7 @@
     ccache.enable = true;
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "qt";
+      pinentryFlavor = "gnome3";
     };
     light.enable = true;
     mosh.enable = true;
