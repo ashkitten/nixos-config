@@ -11,6 +11,8 @@ let
   localAddress = "10.200.0.2";
 
   cfg = config.containers.mastodon.config.services.mastodon;
+
+  secret = name: toString config.secrets."mastodon_${name}".file;
 in
   {
     containers.mastodon = {
@@ -37,9 +39,15 @@ in
               port = 465;
               user = "notifications@kity.wtf";
               fromAddress = "Mastodon <notifications@kity.wtf>";
+              passwordFile = secret "smtpPassword";
             };
 
             elasticsearch.host = "127.0.0.1";
+
+            otpSecretFile = secret "otpSecret";
+            secretKeyBaseFile = secret "secretKeyBase";
+            vapidPrivateKeyFile = secret "vapidPrivateKey";
+            vapidPublicKeyFile = secret "vapidPublicKey";
 
             extraConfig = {
               BIND = "0.0.0.0";

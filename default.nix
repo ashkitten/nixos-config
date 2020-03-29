@@ -7,10 +7,6 @@ let
   '';
 in
   import ./external/nixoses {
-    imports = [
-      ./external/secrets
-    ];
-
     defaults = { name, lib, ... }: {
       enabled = if nodes == [] then true else lib.elem name nodes;
 
@@ -30,6 +26,8 @@ in
           "nixos-config=${nixosConfig}"
           "nixpkgs=${./external/nixpkgs}"
         ];
+
+        secrets = import ./external/secrets;
       };
     };
 
