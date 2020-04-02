@@ -60,6 +60,13 @@ in
           "Print" = "exec --no-startup-id screenshot monitor";
           "Shift+Print" = "exec --no-startup-id screenshot window";
           "Ctrl+Print" = "exec --no-startup-id screenshot selection";
+
+          "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%";
+          "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%";
+          "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
+
+          "XF86MonBrightnessUp" =  "exec --no-startup-id light -A 2";
+          "XF86MonBrightnessDown" = "exec --no-startup-id light -U 2";
         };
 
         gaps.smartBorders = "on";
