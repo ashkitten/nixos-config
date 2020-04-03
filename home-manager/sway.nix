@@ -102,23 +102,16 @@ in
         ];
 
         startup = [
-          {
-            command = let
-              lockCommand = "'swaylock -f -c 000000'";
-            in ''
-              swayidle -w \
-                lock         ${lockCommand} \
-                timeout 300  ${lockCommand} \
-                timeout 600  'swaymsg "output * dpms off"' \
-                resume       'swaymsg "output * dpms on"' \
-                before-sleep ${lockCommand}
-            '';
-          }
+          # run lock command on sleep or loginctl lock-session
           {
             command = ''
-              swaybg -i "$(find ~/.wallpapers/ -type f | shuf -n1)"
+              swayidle -w \
+                lock         'lock' \
+                before-sleep 'lock'
             '';
           }
+          # set wallpaper
+          { command = ''swaybg -i "$(find ~/.wallpapers/ -type f | shuf -n1)"''; }
         ];
 
         window.commands = [
