@@ -105,7 +105,7 @@ in
           # run lock command on sleep or loginctl lock-session
           {
             command = ''
-              swayidle -w \
+              swayidle \
                 lock         'lock' \
                 before-sleep 'lock'
             '';
