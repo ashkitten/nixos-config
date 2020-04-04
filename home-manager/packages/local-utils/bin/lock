@@ -31,12 +31,11 @@ physlock -l
 systemctl --user kill -s SIGUSR1 dunst.service
 
 # enable dpms (background task but don't disown)
-swayidle -w \
+swayidle \
     timeout 20 'swaymsg "output * dpms off"' \
     resume     'swaymsg "output * dpms on"' &
-
 SWAYIDLE_PID=$!
 
-swaylock -f -c 000000
+swaylock -c 000000
 
 revert
