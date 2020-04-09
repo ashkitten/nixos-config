@@ -44,15 +44,9 @@
   #  };
   #};
 
-  environment = {
-    systemPackages = with pkgs; [
-      virtmanager
-    ];
-
-    variables = {
-      VK_ICD_FILENAMES = "${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json";
-    };
-  };
+  environment.systemPackages = with pkgs; [
+    virtmanager
+  ];
 
   virtualisation = {
     libvirtd.enable = true;
