@@ -87,6 +87,9 @@
 
     opengl.driSupport32Bit = true;
     bluetooth.enable = true;
+
+    # udev rules for steam hardware
+    steam-hardware.enable = true;
   };
 
   services = {
@@ -117,9 +120,6 @@
 
       # Allow access to gamecube adapter
       SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
-
-      # Extra rules for steam stuff
-      ${builtins.readFile ./files/steam-udev.rules}
     '';
 
     physlock = {
