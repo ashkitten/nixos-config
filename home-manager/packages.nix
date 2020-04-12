@@ -65,6 +65,7 @@
     sc-controller
     steam
     steam-run
+    syncplay
     tokei
     toot
     unrar
