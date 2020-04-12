@@ -61,7 +61,6 @@
     retroarchBare
     ripgrep
     rofi
-    rustup
     sc-controller
     steam
     steam-run
