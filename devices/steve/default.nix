@@ -8,6 +8,7 @@
     ./mastodon
     ./nextcloud.nix
     ./synapse.nix
+    ./syncplay.nix
     ./znapzend.nix
   ];
 
