@@ -39,6 +39,10 @@
     };
   };
 
+  environment.variables = {
+    MOZ_ENABLE_WAYLAND = "1";
+  };
+
   networking.networkmanager.enable = true;
 
   fonts = {
