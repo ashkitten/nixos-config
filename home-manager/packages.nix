@@ -25,7 +25,7 @@
     feh
     ffmpeg-full
     file
-    firefox-wayland
+    firefox-bin
     gist
     glimpse
     gnome3.dconf
