@@ -168,6 +168,8 @@
   };
 
   nixpkgs.overlays = [
+    (import ./external/nixpkgs-wayland)
+
     (self: super: rec {
       vulkan-headers = super.vulkan-headers.overrideAttrs (oldAttrs: rec {
         version = "1.2.135";
