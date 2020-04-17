@@ -83,7 +83,7 @@
 
   home-manager.users.ash.wayland.windowManager.sway = {
     config.output = {
-      DP-2 = { pos = "0 0"; mode = "2560x1440@144Hz"; };
+      DP-2 = { pos = "0 0"; mode = "2560x1440@143.912Hz"; };
       DP-3 = { pos = "2560 180"; mode = "1920x1080@75Hz"; };
     };
 
