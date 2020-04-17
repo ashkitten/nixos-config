@@ -13,3 +13,6 @@
 [submodule "external/nixos-hardware"]
 	path = external/nixos-hardware
 	url = https://github.com/NixOS/nixos-hardware.git
+[submodule "external/nixpkgs-wayland"]
+	path = external/nixpkgs-wayland
+	url = https://github.com/colemickens/nixpkgs-wayland.git
