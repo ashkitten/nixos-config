@@ -61,7 +61,7 @@
 
     obs-studio = {
       enable = true;
-      plugins = [ pkgs.obs-linuxbrowser pkgs.obs-wlrobs ];
+      plugins = [ pkgs.obs-wlrobs ];
     };
   };
 
