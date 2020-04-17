@@ -47,6 +47,7 @@
     ltunify
     mgba
     mpv
+    mumble
     nextcloud-client
     nix-index
     nix-prefetch-scripts
