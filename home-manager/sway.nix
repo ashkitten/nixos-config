@@ -97,6 +97,8 @@ in
           { criteria = { class = "^Blender$"; title = "^Blender Preferences$"; }; command = "floating enable"; }
           # open-in-browser extension
           { criteria = { app_id = "^firefox$"; title = "^Extension: \\(Open in Browser\\)"; }; command = "floating enable"; }
+          # firefox picture-in-picture
+          { criteria = { app_id = "^firefox$"; title = "^Picture-in-Picture$"; }; command = "floating enable"; }
         ];
       };
 
