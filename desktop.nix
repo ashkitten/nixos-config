@@ -102,6 +102,14 @@
     # needed for display manager
     xserver.enable = true;
 
+    tor = {
+      enable = true;
+      client = {
+        enable = true;
+        dns.enable = true;
+      };
+      torsocks.enable = true;
+    };
 
     udev.extraRules = ''
       # Trinket M0
