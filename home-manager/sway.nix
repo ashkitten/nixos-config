@@ -1,36 +1,10 @@
 { lib, pkgs, ... }:
 
 let
-  wlroots = pkgs.wlroots.overrideAttrs (oldAttrs: rec {
-    version = "b614ded3fcb022c4567bbee932a6df3e83acaff6";
-    src = pkgs.fetchFromGitHub {
-      owner = "swaywm";
-      repo = "wlroots";
-      rev = version;
-      sha256 = "0a7rc2sv7c2axghkbql0sy02ynw8kb94spmy8hx22vph7my2gynl";
-    };
-  });
-
-  sway-unwrapped = (pkgs.sway-unwrapped.override {
-    inherit wlroots;
-  }).overrideAttrs (oldAttrs: rec {
-    version = "fcd524bb0d6f3c6cd4f2ddc180520bc56a89aa4a";
-    src = pkgs.fetchFromGitHub {
-      owner = "swaywm";
-      repo = "sway";
-      rev = version;
-      sha256 = "0x8dwznzi5km8jyyavvsx91amggkndqx98zb2z4fhmmv8npfa4al";
-    };
-  });
-
-  package = pkgs.sway.override { inherit sway-unwrapped; };
-
   mod = "Mod4";
 in
   {
     wayland.windowManager.sway = {
-      inherit package;
-
       enable = true;
       wrapperFeatures.gtk = true;
       config = {
