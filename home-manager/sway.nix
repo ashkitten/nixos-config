@@ -27,6 +27,8 @@ in
 
           "${mod}+p" = "mode resize";
 
+          "${mod}+s" = "sticky toggle";
+
           "${mod}+Mod1+l" = "exec --no-startup-id loginctl lock-session";
 
           "${mod}+i" = "exec --no-startup-id rofinsert";
