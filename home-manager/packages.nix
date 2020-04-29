@@ -55,7 +55,6 @@
     p7zip
     pavucontrol
     pciutils
-    pulseeffects
     python3Packages.binwalk
     qbittorrent
     ranger
