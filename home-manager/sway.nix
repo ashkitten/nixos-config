@@ -11,7 +11,7 @@ in
         modifier = mod;
 
         terminal = "kitty";
-        menu = "rofi -show drun";
+        menu = "rofi -show drun -normal-window";
 
         fonts = [ "Terminus (TTF) 10.5" ];
 
@@ -99,6 +99,8 @@ in
           { criteria = { app_id = "^firefox$"; title = "^Extension: \\(Open in Browser\\)"; }; command = "floating enable"; }
           # firefox picture-in-picture
           { criteria = { app_id = "^firefox$"; title = "^Picture-in-Picture$"; }; command = "floating enable"; }
+          # rofi normal window
+          { criteria = { class = "^Rofi$"; }; command = "floating enable"; }
         ];
       };
 
