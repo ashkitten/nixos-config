@@ -1,9 +1,6 @@
 [submodule "external/nixpkgs"]
 	path = external/nixpkgs
 	url = git@github.com:ashkitten/nixpkgs.git
-[submodule "external/nixoses"]
-	path = external/nixoses
-	url = https://github.com/Infinisil/nixoses.git
 [submodule "external/secrets"]
 	path = external/secrets
 	url = root@steve:secrets
@@ -16,3 +13,6 @@
 [submodule "external/nixpkgs-wayland"]
 	path = external/nixpkgs-wayland
 	url = https://github.com/colemickens/nixpkgs-wayland.git
+[submodule "external/nixus"]
+	path = external/nixus
+	url = https://github.com/Infinisil/nixus.git
