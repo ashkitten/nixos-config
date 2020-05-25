@@ -53,7 +53,6 @@
     nix-index
     nix-prefetch-scripts
     nix-top
-    p7zip
     pavucontrol
     pciutils
     python3Packages.binwalk
