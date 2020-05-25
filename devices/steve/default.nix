@@ -59,6 +59,8 @@
   ];
 
   services = {
+    openssh.passwordAuthentication = false;
+
     postgresql.enable = true;
 
     nginx = {
