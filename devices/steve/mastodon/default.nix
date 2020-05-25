@@ -20,6 +20,10 @@ in
       inherit hostAddress localAddress;
       autoStart = true;
 
+      # steve's disks are slow, it takes a while to start services on a cold boot,
+      # so mastodon consistently times out when starting with default timeout
+      timeoutStartSec = "5m";
+
       config = {
         networking.firewall.allowedTCPPorts = [ cfg.webPort cfg.streamingPort ];
 
