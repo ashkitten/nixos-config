@@ -61,7 +61,7 @@
 
     obs-studio = {
       enable = true;
-      plugins = [ pkgs.obs-wlrobs ];
+      plugins = with pkgs; [ obs-wlrobs obs-v4l2sink ];
     };
   };
 
