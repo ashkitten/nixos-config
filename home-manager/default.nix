@@ -63,6 +63,14 @@
       enable = true;
       plugins = with pkgs; [ obs-wlrobs obs-v4l2sink ];
     };
+
+    beets = {
+      enable = true;
+      settings = {
+        directory = "~/nextcloud/music";
+        library = "~/nextcloud/music/library.db";
+      };
+    };
   };
 
   systemd.user = {
