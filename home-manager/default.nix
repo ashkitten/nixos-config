@@ -66,9 +66,15 @@
 
     beets = {
       enable = true;
+      package = pkgs.beets.override {
+        # lastgenre plugin
+        enableLastfm = true;
+        enableBandcamp = true;
+      };
       settings = {
         directory = "~/nextcloud/music";
         library = "~/nextcloud/music/library.db";
+        plugins = "lastgenre bandcamp";
       };
     };
   };
