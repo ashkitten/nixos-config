@@ -6,6 +6,7 @@ in
   {
     wayland.windowManager.sway = {
       enable = true;
+      package = (import <nixpkgs> {}).sway;
       wrapperFeatures.gtk = true;
       config = {
         modifier = mod;
