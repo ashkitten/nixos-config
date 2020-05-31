@@ -20,6 +20,9 @@ in
       inherit hostAddress localAddress;
       autoStart = true;
 
+      # nixus doesn't automatically copy keys to containers
+      bindMounts."/var/keys" = { hostPath = "/var/keys"; };
+
       # steve's disks are slow, it takes a while to start services on a cold boot,
       # so mastodon consistently times out when starting with default timeout
       timeoutStartSec = "5m";
@@ -36,6 +39,8 @@ in
             inherit package;
 
             localDomain = "kity.wtf";
+
+            database.passwordFile = secret "databasePassword";
 
             smtp = {
               createLocally = false;
