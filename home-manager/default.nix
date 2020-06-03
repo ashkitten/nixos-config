@@ -72,7 +72,7 @@
         enableBandcamp = true;
       };
       settings = {
-        directory = "~/nextcloud/music";
+        directory = "~/nextcloud/music/library";
         library = "~/nextcloud/music/library.db";
         plugins = "lastgenre bandcamp";
       };
