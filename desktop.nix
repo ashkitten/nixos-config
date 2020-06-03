@@ -91,11 +91,7 @@
   sound.enable = true;
 
   hardware = {
-    pulseaudio = {
-      enable = true;
-      zeroconf.discovery.enable = true;
-      package = pkgs.pulseaudioFull;
-    };
+    pulseaudio.enable = true;
 
     opengl.driSupport32Bit = true;
     bluetooth.enable = true;
