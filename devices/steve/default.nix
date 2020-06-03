@@ -6,6 +6,7 @@
     ./hardware-configuration.nix
     ./its.nix
     ./mastodon
+    ./mopidy.nix
     ./nextcloud.nix
     ./synapse.nix
     ./syncplay.nix
