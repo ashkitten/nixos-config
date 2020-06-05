@@ -1,6 +1,16 @@
 { config, pkgs, ... }:
 
 {
+  hardware.pulseaudio = {
+    enable = true;
+    systemWide = true;
+
+    extraConfig = ''
+      load-module module-null-sink sink_name=icecast
+    '';
+  };
+
+
   # bind-mount music dir so it's readable for mopidy
   system.fsPackages = [ pkgs.bindfs ];
   fileSystems."/opt/mopidy-music" = {
@@ -28,7 +38,24 @@
       hostname = 10.100.0.1
 
       [audio]
-      output = lamemp3enc quality=0 ! shout2send async=false mount=mopidy ip=10.100.0.1 port=8000 password=hackme
+      output = pulsesink device=icecast
+    '';
+  };
+
+  systemd.services."mopidy".serviceConfig.Group = "audio";
+
+  systemd.services."icecast-stream" = {
+    enable = true;
+    wantedBy = [ "multi-user.target" ];
+    after = [ "icecast.service" "pulseaudio.service" ];
+    wants = [ "pulseaudio.service" ];
+    serviceConfig.User = "nobody";
+    serviceConfig.Group = "audio";
+
+    environment.GST_PLUGIN_SYSTEM_PATH = with pkgs.gst_all_1; "${gst-plugins-base}/lib/gstreamer-1.0:${gst-plugins-good}/lib/gstreamer-1.0";
+
+    script = ''
+     ${pkgs.gst_all_1.gstreamer.dev}/bin/gst-launch-1.0 pulsesrc device=icecast.monitor ! audioconvert ! opusenc bitrate=192000 ! oggmux ! shout2send mount=mopidy ip=10.100.0.1 port=8000 password=hackme
     '';
   };
 
@@ -38,26 +65,10 @@
     hostname = "10.100.0.1";
     listen.address = "10.100.0.1";
 
-    extraConf = let
-      sox = pkgs.sox.override { enableLame = true; };
-      webroot = pkgs.runCommandNoCC "webroot" {} ''
-        mkdir $out
-        cp ${pkgs.icecast}/share/icecast/web/* $out
-
-        # 1 second of silence
-        ${sox}/bin/sox -n -r 44100 -c 2 -L $out/silence.mp3 trim 0.0 1.0
-      '';
-    in ''
-      <paths>
-        <webroot>${webroot}</webroot>
-      </paths>
-
-      <mount>
-        <mount-name>/mopidy</mount-name>
-        <password>hackme</password>
-        <fallback-mount>/silence.mp3</fallback-mount>
-        <fallback-override>1</fallback-override>
-      </mount>
+    extraConf = ''
+      <authentication>
+        <source-password>hackme</source-password>
+      </authentication>
     '';
   };
 
