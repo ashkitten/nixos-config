@@ -5,7 +5,8 @@
     enable = true;
     systemWide = true;
 
-    extraConfig = ''
+    configFile = pkgs.writeText "default.pa" ''
+      load-module module-native-protocol-unix
       load-module module-null-sink sink_name=icecast
     '';
   };
