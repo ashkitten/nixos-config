@@ -12,7 +12,7 @@ let
 
   cfg = config.containers.mastodon.config.services.mastodon;
 
-  secret = name: toString config.secrets."mastodon_${name}".file;
+  secret = name: toString config.secrets.files."mastodon_${name}".file;
 in
   {
     containers.mastodon = {
@@ -21,7 +21,7 @@ in
       autoStart = true;
 
       # nixus doesn't automatically copy keys to containers
-      bindMounts."/var/keys" = { hostPath = "/var/keys"; };
+      bindMounts."/var/lib/nixus-secrets" = { hostPath = "/var/lib/nixus-secrets"; };
 
       # steve's disks are slow, it takes a while to start services on a cold boot,
       # so mastodon consistently times out when starting with default timeout

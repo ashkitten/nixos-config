@@ -27,7 +27,7 @@ in
           "nixpkgs=${./external/nixpkgs}"
         ];
 
-        secrets = import ./external/secrets;
+        secrets.files = import ./external/secrets;
       };
     };
 
