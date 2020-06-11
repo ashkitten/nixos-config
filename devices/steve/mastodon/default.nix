@@ -1,7 +1,14 @@
 { pkgs, lib, config, ... }:
 
 let
-  package = pkgs.mastodon.override {
+  pkgs-pinned = import (pkgs.fetchFromGitHub {
+    owner = "ashkitten";
+    repo = "nixpkgs";
+    rev = "b46bef8c0e4ccd2c69cf7873afcbdef555df705b";
+    sha256 = "1lxqmgr1qw74bvags5441q76b88imv4qxw398gii0qi9wdvx8zvg";
+  }) {};
+
+  package = pkgs-pinned.mastodon.override {
     version = import ./version.nix;
     srcOverride = pkgs.callPackage ./source.nix {};
     dependenciesDir = ./.;
