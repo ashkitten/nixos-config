@@ -26,14 +26,15 @@
     extensionPackages = with pkgs.mopidyPackages; [
       mopidy-iris
       mopidy-local
+      mopidy-youtube
     ];
 
     configuration = ''
-      [file]
-      enable = false
-
       [local]
       media_dir = /opt/mopidy-music
+
+      [youtube]
+      enabled = true
 
       [http]
       hostname = 10.100.0.1
