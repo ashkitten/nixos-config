@@ -30,9 +30,9 @@
     glimpse
     gnome3.dconf
     gnome3.defaultIconTheme
-    gnumake
     gnupg
     google-chrome
+    gptfdisk
     hexd
     htop
     hwinfo
@@ -43,6 +43,7 @@
     kitty
     krita
     libnotify
+    lm_sensors
     lollypop
     lsof
     ltunify
@@ -62,11 +63,11 @@
     ripgrep
     rofi
     sc-controller
+    ssb-patchwork
     steam
     steam-run
     syncplay
     tokei
-    toot
     unrar
     unzip
     usbutils
@@ -76,6 +77,8 @@
     winetricks
     wireshark
     wl-clipboard
+    youtube-dl
     zip
+    zstd
   ];
 }
