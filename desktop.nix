@@ -183,31 +183,10 @@
   nixpkgs.config = {
     android_sdk.accept_license = true;
     wine.build = "wineWow";
+    permittedInsecurePackages = [ "p7zip-16.02" ];
   };
 
   nixpkgs.overlays = [
     (import ./external/nixpkgs-wayland)
-
-    (self: super: rec {
-      vulkan-headers = super.vulkan-headers.overrideAttrs (oldAttrs: rec {
-        version = "1.2.135";
-        src = super.fetchFromGitHub {
-          owner = "KhronosGroup";
-          repo = "Vulkan-Headers";
-          rev = "v${version}";
-          sha256 = "17vmdl476gg6vvffafwkjqm2cimgz3d8xymli99dsqf4whiv27av";
-        };
-      });
-
-      vulkan-loader = (super.vulkan-loader.override { inherit vulkan-headers; }).overrideAttrs (oldAttrs: rec {
-        version = "1.2.135";
-        src = super.fetchFromGitHub {
-          owner = "KhronosGroup";
-          repo = "Vulkan-Loader";
-          rev = "v${version}";
-          sha256 = "1sk00zmx6x7w8m3i79jzk9b44v5vpjayjba6g0j5wn76ai7nbhq4";
-        };
-      });
-    })
   ];
 }
