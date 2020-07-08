@@ -91,7 +91,15 @@
   sound.enable = true;
 
   hardware = {
-    pulseaudio.enable = true;
+    pulseaudio = {
+      enable = true;
+
+      daemon.config = {
+        default-fragments = 2;
+        default-fragment-size-msec = 1;
+        avoid-resampling = true;
+      };
+    };
 
     opengl.driSupport32Bit = true;
     bluetooth.enable = true;
