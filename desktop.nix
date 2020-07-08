@@ -122,6 +122,8 @@
       };
       torsocks.enable = true;
     };
+    # steamvr doesn't work in wayland yet
+    xserver.desktopManager.xfce.enable = true;
 
     udev.extraRules = ''
       # Trinket M0
