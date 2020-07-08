@@ -58,6 +58,8 @@
       source-code-pro
       terminus_font_ttf
       twitter-color-emoji
+      corefonts
+      aileron
     ];
 
     fontconfig = {
