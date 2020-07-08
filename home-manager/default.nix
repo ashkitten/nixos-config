@@ -70,11 +70,12 @@
         # lastgenre plugin
         enableLastfm = true;
         enableBandcamp = true;
+        enableReplaygain = true;
       };
       settings = {
         directory = "~/nextcloud/music/library";
         library = "~/nextcloud/music/library.db";
-        plugins = "lastgenre bandcamp";
+        plugins = "lastgenre bandcamp replaygain";
       };
     };
   };
