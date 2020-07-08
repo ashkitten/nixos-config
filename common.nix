@@ -45,8 +45,5 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nix = {
-    buildCores = 0;
-    gc.automatic = true;
-  };
+  nix.buildCores = 0;
 }

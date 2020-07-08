@@ -135,5 +135,7 @@
     extraGroups = [ "wheel" "docker" "systemd-journal" ];
   };
 
+  nix.gc.automatic = true;
+
   system.stateVersion = "19.09";
 }
