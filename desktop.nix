@@ -114,14 +114,6 @@
     # needed for display manager
     xserver.enable = true;
 
-    tor = {
-      enable = true;
-      client = {
-        enable = true;
-        dns.enable = true;
-      };
-      torsocks.enable = true;
-    };
     # steamvr doesn't work in wayland yet
     xserver.desktopManager.xfce.enable = true;
 
