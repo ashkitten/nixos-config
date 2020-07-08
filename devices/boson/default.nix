@@ -20,6 +20,10 @@
 
     firewall.enable = false;
 
+    hosts = {
+      "127.0.0.1" = [ "boson.kity.wtf" ];
+    };
+
     # nat for containers
     nat = {
       enable = true;
@@ -32,6 +36,29 @@
   };
 
   services.ratbagd.enable = true;
+
+  services.nginx = {
+    enable = true;
+
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+
+    virtualHosts = {
+      "boson.kity.wtf" = {
+        forceSSL = true;
+        enableACME = true;
+
+        locations = {
+          "/" = {
+            root = "/var/lib/stuff";
+            tryFiles = "$uri =404";
+          };
+        };
+      };
+    };
+  };
 
   # TODO: debug why this is broken
   #power.ups = {

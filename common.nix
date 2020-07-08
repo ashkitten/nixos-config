@@ -43,6 +43,11 @@
     };
   };
 
+  security.acme = {
+    acceptTerms = true;
+    email = "example@thisismyactual.email";
+  };
+
   nixpkgs.config.allowUnfree = true;
 
   nix.buildCores = 0;

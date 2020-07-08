@@ -114,11 +114,9 @@
   };
 
   security.acme = {
-    acceptTerms = true;
     certs = {
       "kity.wtf" = {
         webroot = "/var/lib/acme/acme-challenge";
-        email = "example@thisismyactual.email";
         extraDomains = {
           "stuff.kity.wtf" = null;
         };

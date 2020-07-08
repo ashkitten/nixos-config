@@ -11,6 +11,9 @@
 
   fileSystems = {
     "/" = { device = "tank/root"; fsType = "zfs"; };
+
+    "/var/lib/stuff" = { device = "tank/stuff"; fsType = "zfs"; };
+
     "/home" = { device = "tank/home"; fsType = "zfs"; };
     "/home/ash" = { device = "tank/home/ash"; fsType = "zfs"; };
     "/home/ash/tmp" = { device = "tank/home/ash/tmp"; fsType = "zfs"; };
