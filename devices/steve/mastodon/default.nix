@@ -101,5 +101,9 @@ in
         proxyPass = "http://${localAddress}:${toString(cfg.streamingPort)}/";
         proxyWebsockets = true;
       };
+
+      extraConfig = ''
+        client_max_body_size 80m;
+      '';
     };
   }
