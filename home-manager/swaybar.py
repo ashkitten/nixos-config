@@ -29,7 +29,7 @@ def mem_loop():
         time.sleep(1.0)
 
 def cpu_loop():
-    global cpu_percent, cpu_temp, cpu_temp_max
+    global cpu_percent, cpu_temp
 
     last_idle = 0
     last_total = 0
@@ -49,8 +49,14 @@ def cpu_loop():
 
         cpu_percent = int(100.0 * (1.0 - idle_delta / total_delta))
 
-        cpu_temp = int(int(open("/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_input", "r").readline().strip()) / 1000)
-        cpu_temp_max = int(int(open("/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp1_max", "r").readline().strip()) / 1000)
+        cpu_temp = int(int(open("/sys/class/hwmon/hwmon1/temp1_input", "r").readline().strip()) / 1000)
+        time.sleep(1.0)
+
+def gpu_loop():
+    global gpu_temp
+
+    while True:
+        gpu_temp = int(int(open("/sys/class/hwmon/hwmon2/temp2_input", "r").readline().strip()) / 1000)
         time.sleep(1.0)
 
 def headset_loop():
@@ -85,14 +91,12 @@ def date_loop():
         time.sleep(1.0)
 
 if __name__ == "__main__":
-    global win_title, ram_percent, swap_percent, cpu_temp, cpu_temp_max, headset_percent, headset_text, date
-
     win_title = ""
     ram_percent = 0
     swap_percent = 0
     cpu_percent = 0
     cpu_temp = 0
-    cpu_temp_max = 0
+    gpu_temp = 0
     headset_percent = 100
     headset_text = "Headset: ???"
     date = ""
@@ -103,6 +107,7 @@ if __name__ == "__main__":
     threading.Thread(target=win_title_loop).start()
     threading.Thread(target=mem_loop).start()
     threading.Thread(target=cpu_loop).start()
+    threading.Thread(target=gpu_loop).start()
     threading.Thread(target=headset_loop).start()
     threading.Thread(target=date_loop).start()
 
@@ -135,7 +140,13 @@ if __name__ == "__main__":
                 "full_text": "CPU Temp: {}°C".format(cpu_temp),
                 "color": "#ffffff",
                 "background": "#222222",
-                "urgent": cpu_temp > cpu_temp_max,
+                "urgent": cpu_temp > 80,
+            },
+            {
+                "full_text": "GPU Temp: {}°C".format(gpu_temp),
+                "color": "#ffffff",
+                "background": "#222222",
+                "urgent": gpu_temp > 80,
             },
             {
                 "full_text": headset_text,
