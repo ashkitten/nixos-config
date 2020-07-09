@@ -70,6 +70,7 @@
 
   environment.variables = {
     MOZ_ENABLE_WAYLAND = "1";
+    RADV_PERFTEST = "aco";
   };
 
   networking.networkmanager.enable = true;
