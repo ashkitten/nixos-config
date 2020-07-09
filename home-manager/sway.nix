@@ -2,6 +2,26 @@
 
 let
   mod = "Mod4";
+
+  movementKeys = m: a: {
+    "${m}+k" = "${a} up";
+    "${m}+j" = "${a} down";
+    "${m}+h" = "${a} left";
+    "${m}+l" = "${a} right";
+  };
+
+  numberKeys = m: a: {
+    "${m}+1" = "${a} 1";
+    "${m}+2" = "${a} 2";
+    "${m}+3" = "${a} 3";
+    "${m}+4" = "${a} 4";
+    "${m}+5" = "${a} 5";
+    "${m}+6" = "${a} 6";
+    "${m}+7" = "${a} 7";
+    "${m}+8" = "${a} 8";
+    "${m}+9" = "${a} 9";
+    "${m}+0" = "${a} 10";
+  };
 in
   {
     wayland.windowManager.sway = {
@@ -15,7 +35,7 @@ in
 
         fonts = [ "Terminus (TTF) 10.5" ];
 
-        keybindings = lib.mkOptionDefault {
+        keybindings = {
           "${mod}+r" = "reload";
 
           "${mod}+apostrophe" = "layout stacking";
@@ -25,25 +45,40 @@ in
           "${mod}+m" = "split h";
           "${mod}+w" = "split v";
 
-          "${mod}+p" = "mode resize";
+          "${mod}+a" = "focus parent";
+          "${mod}+Shift+a" = "focus child";
 
+          "${mod}+space" = "focus mode_toggle";
+          "${mod}+Shift+space" = "floating toggle";
+
+          "${mod}+f" = "fullscreen toggle";
           "${mod}+s" = "sticky toggle";
 
-          "${mod}+Mod1+l" = "exec --no-startup-id loginctl lock-session";
+          "${mod}+Shift+q" = "kill";
 
-          "${mod}+i" = "exec --no-startup-id rofinsert";
+          "${mod}+Mod1+l" = "exec loginctl lock-session";
 
-          "Print" = "exec --no-startup-id screenshot monitor";
-          "Shift+Print" = "exec --no-startup-id screenshot window";
-          "Ctrl+Print" = "exec --no-startup-id screenshot selection";
+          "${mod}+Return" = "exec kitty";
+          "${mod}+d" = "exec rofi -show drun";
+          "${mod}+i" = "exec rofinsert";
 
-          "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%";
-          "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%";
-          "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          "Print" = "exec screenshot monitor";
+          "Shift+Print" = "exec screenshot window";
+          "Ctrl+Print" = "exec screenshot selection";
 
-          "XF86MonBrightnessUp" =  "exec --no-startup-id light -A 2";
-          "XF86MonBrightnessDown" = "exec --no-startup-id light -U 2";
-        };
+          "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +2%";
+          "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -2%";
+          "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+
+          "XF86MonBrightnessUp" =  "exec light -A 2";
+          "XF86MonBrightnessDown" = "exec light -U 2";
+        }
+
+        // movementKeys "${mod}" "focus"
+        // movementKeys "${mod}+Shift" "move"
+
+        // numberKeys "${mod}" "workspace number"
+        // numberKeys "${mod}+Shift" "move container to workspace number";
 
         gaps.smartBorders = "on";
 
