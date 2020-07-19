@@ -6,8 +6,10 @@
   ];
 
   home.packages = with pkgs; [
-    (callPackage ./packages/local-utils {})
-    (callPackage ./packages/g933-utils {})
+    (callPackage ./local-utils {})
+    (callPackage ../packages/g933-utils {})
+    (callPackage ../packages/BeatSyncConsole {})
+    (callPackage ../packages/QBeat {})
 
     (pass-wayland.withExtensions (ext: with ext; [ pass-otp ]))
 
