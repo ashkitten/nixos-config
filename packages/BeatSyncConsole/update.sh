@@ -6,7 +6,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 deps_file="$(realpath "./deps.nix")"
 
 store_src="$(nix-build -E 'with import <nixpkgs> {}; (callPackage ./. {}).src' --no-out-link)"
-src="$(mktemp -d /tmp/osu-src.XXX)"
+src="$(mktemp -d /tmp/BeatSyncConsole-src.XXX)"
 echo "Temp src dir: $src"
 cp -rT "$store_src" "$src"
 chmod -R +w "$src"

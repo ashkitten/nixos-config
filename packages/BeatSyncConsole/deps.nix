@@ -1,8 +1,13 @@
 { fetchNuGet }: [
   (fetchNuGet {
     name = "BeatSaberModdingTools.Tasks";
-    version = "1.1.6";
-    sha256 = "07yd9gvsm74ln34ba5lzpvwlinb76bmd8f1vlmjninw612442i26";
+    version = "1.2.1";
+    sha256 = "1jszkf7g6pa333c5c735nyyvjz78qrb6a3ayk9m2r9sj21977cg5";
+  })
+  (fetchNuGet {
+    name = "CommandLineParser";
+    version = "2.8.0";
+    sha256 = "1m32xyilv2b7k55jy8ddg08c20glbcj2yi545kxs9hj2ahanhrbb";
   })
   (fetchNuGet {
     name = "Microsoft.AspNetCore.App.Runtime.linux-x64";

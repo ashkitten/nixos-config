@@ -16,8 +16,8 @@ in
 
     src = fetchgit {
       url = "https://github.com/Zingabopp/BeatSync";
-      rev = "75ed9e2ebe22ad516f7dd0e36e5a14e5af7fd637";
-      sha256 = "1d37hm0jivd33i917rs9jjav2jjs50zcxvz2zsqpj2d5br5whrwd";
+      rev = "af5507547a80534916b0dde576f2ff02e4e5487d";
+      sha256 = "1y5cxj727axq0pngwwm24qmd7w6pvklm9cw6ngmmfy1194m831nl";
       fetchSubmodules = true;
     };
 
@@ -45,7 +45,7 @@ in
       mkdir -p $HOME/.nuget/NuGet
       cp $HOME/.config/NuGet/NuGet.Config $HOME/.nuget/NuGet
 
-      dotnet restore --source nixos -r --runtime linux-x64 BeatSyncConsole/BeatSyncConsole.csproj
+      dotnet restore --source nixos --runtime linux-x64 BeatSyncConsole/BeatSyncConsole.csproj
 
       runHook postConfigure
     '';
@@ -69,12 +69,14 @@ in
         --no-build \
         --configuration Release \
         --self-contained \
+        --runtime linux-x64 \
         --output $out/lib/beatsync \
         -p:PublishProfile=linux-x64
 
       makeWrapper $out/lib/beatsync/BeatSyncConsole $out/bin/BeatSyncConsole \
         --set DOTNET_ROOT "${dotnetCorePackages.netcore_3_1}" \
-        --suffix LD_LIBRARY_PATH : "${lib.makeLibraryPath runtimeDeps}"
+        --suffix LD_LIBRARY_PATH : "${lib.makeLibraryPath runtimeDeps}" \
+        --add-flags "-c ~/.config/BeatSyncConsole/configs -L ~/.config/BeatSyncConsole/logs"
 
       runHook postInstall
     '';
