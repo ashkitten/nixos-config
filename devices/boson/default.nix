@@ -3,6 +3,7 @@
 {
   imports = [
     ../../desktop.nix
+    ../../guest.nix
     ./hardware-configuration.nix
   ];
 
