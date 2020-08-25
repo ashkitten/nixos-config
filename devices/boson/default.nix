@@ -135,6 +135,7 @@
 
     extraConfig = ''
       workspace 1 output DP-3
+      workspace 2 output DP-2
     '';
   };
 
