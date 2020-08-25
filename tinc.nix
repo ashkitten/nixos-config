@@ -38,7 +38,7 @@
         Ed25519PublicKey = 6EneoCfLtLJ1nBG+oLtYsDQcmYNNkuHLS3fY3IZVxFJ
         Subnet = 10.100.0.3/32
       '';
-      electron = ''
+      mclargehuge = ''
         Ed25519PublicKey = K3pjyj0S2CEmPiCSp/8phTT9JvZ781D6Z3jDDOss3KJ
         Subnet = 10.100.0.4/32
       '';
