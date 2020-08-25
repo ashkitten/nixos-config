@@ -4,7 +4,6 @@
   imports = [
     ./grafana.nix
     ./hardware-configuration.nix
-    ./its.nix
     ./mopidy.nix
     ./nextcloud.nix
     ./synapse.nix
