@@ -139,6 +139,9 @@
 
       # Allow access to gamecube adapter
       SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
+
+      # Qanba Drone
+      KERNEL=="hidraw*", ATTRS{idVendor}=="2c22", ATTRS{idProduct}=="2000", MODE="0660", TAG+="uaccess"
     '';
 
     physlock = {
