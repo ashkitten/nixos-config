@@ -3,27 +3,6 @@
 {
   imports = [
     ./gnome-keyring.nix
-
-    (let mkDrivers = pkgs: (pkgs.mesa.overrideAttrs (oldAttrs: rec {
-        branch = "20.1";
-        version = "${branch}.3";
-        src = pkgs.fetchurl {
-          urls = [
-            "https://mesa.freedesktop.org/archive/mesa-${version}.tar.xz"
-            "ftp://ftp.freedesktop.org/pub/mesa/mesa-${version}.tar.xz"
-            "ftp://ftp.freedesktop.org/pub/mesa/${version}/mesa-${version}.tar.xz"
-            "ftp://ftp.freedesktop.org/pub/mesa/older-versions/${branch}.x/${version}/mesa-${version}.tar.xz"
-          ];
-          sha256 = "1w9b6sl82a3birmpgzn1xx6biggpvynr4hmyzxvj30pfdgabhwlq";
-        };
-        nativeBuildInputs = [ pkgs.patchelf_0_9 ] ++ oldAttrs.nativeBuildInputs or [];
-      })).drivers;
-    in { pkgs, ... }: {
-      hardware.opengl = {
-        package = mkDrivers pkgs;
-        package32 = mkDrivers pkgs.pkgsi686Linux;
-      };
-    })
   ];
 
   boot = {
