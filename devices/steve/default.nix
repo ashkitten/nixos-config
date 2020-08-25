@@ -45,7 +45,6 @@
 
   environment.systemPackages = with pkgs; [
     dialog
-    docker-compose
     git
     gptfdisk
     htop
@@ -110,11 +109,6 @@
     };
   };
 
-  virtualisation.docker = {
-    enable = true;
-    storageDriver = "zfs";
-  };
-
   security.acme = {
     certs = {
       "kity.wtf" = {
@@ -132,7 +126,7 @@
     isNormalUser = true;
     createHome = false;
     uid = 1000;
-    extraGroups = [ "wheel" "docker" "systemd-journal" ];
+    extraGroups = [ "wheel" "systemd-journal" ];
   };
 
   nix.gc.automatic = true;
