@@ -23,14 +23,14 @@
     firewall.enable = false;
 
     hosts = {
-      "127.0.0.1" = [ "boson.kity.wtf" ];
+      "127.0.0.1" = [ "home.kity.wtf" ];
     };
 
     # nat for containers
     nat = {
       enable = true;
       internalInterfaces = [ "ve-+" ];
-      externalInterface = "enp4s0";
+      externalInterface = "enp3s0f0";
     };
     networkmanager.unmanaged = [ "interface-name:ve-*" ];
 
@@ -48,7 +48,7 @@
     recommendedTlsSettings = true;
 
     virtualHosts = {
-      "boson.kity.wtf" = {
+      "home.kity.wtf" = {
         forceSSL = true;
         enableACME = true;
 
@@ -60,6 +60,23 @@
         };
       };
     };
+
+    appendConfig = ''
+      rtmp {
+        server {
+          listen 1935;
+          chunk_size 4096;
+
+          allow publish 127.0.0.1;
+          deny publish all;
+
+          application kity {
+            live on;
+            record off;
+          }
+        }
+      }
+    '';
   };
 
   # TODO: debug why this is broken
