@@ -89,6 +89,16 @@
     };
   };
 
+  home.file = {
+    ".mozilla/native-messaging-hosts/radical.native.json".text = builtins.toJSON {
+      name = "radical.native";
+      description = "Radical Native";
+      path = "${pkgs.callPackage ../packages/radical-native {}}/bin/radical-native";
+      type = "stdio";
+      allowed_extensions = [ "@radical-native" "@riot-webext" ];
+    };
+  };
+
   systemd.user = {
     startServices = true;
 
