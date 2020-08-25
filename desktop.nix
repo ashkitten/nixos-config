@@ -27,8 +27,6 @@
   ];
 
   boot = {
-    cleanTmpDir = true;
-
     initrd = {
       kernelModules = [ "pcspkr" ];
 

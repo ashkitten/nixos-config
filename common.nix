@@ -5,6 +5,11 @@
     ./tinc.nix
   ];
 
+  boot = {
+    cleanTmpDir = true;
+    tmpOnTmpfs = true;
+  };
+
   console = {
     font = "Lat2-Terminus12";
     useXkbConfig = true;
