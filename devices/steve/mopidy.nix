@@ -50,6 +50,7 @@
     enable = true;
     wantedBy = [ "multi-user.target" ];
     after = [ "icecast.service" "pulseaudio.service" ];
+    bindsTo = [ "icecast.service" ];
     wants = [ "pulseaudio.service" ];
     serviceConfig.User = "nobody";
     serviceConfig.Group = "audio";
