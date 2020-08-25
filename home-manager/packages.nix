@@ -47,7 +47,6 @@
     krita
     libnotify
     lm_sensors
-    lollypop
     lsof
     ltunify
     mgba
@@ -59,13 +58,13 @@
     nix-top
     pavucontrol
     pciutils
+    prusa-slicer
     python3Packages.binwalk
     qbittorrent
     ranger
     retroarchBare
     ripgrep
     rofi
-    sc-controller
     ssb-patchwork
     steam
     steam-run
