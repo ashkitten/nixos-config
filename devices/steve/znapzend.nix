@@ -17,10 +17,6 @@ in
     autoCreation = true;
 
     zetup = {
-      "tank/mastodon" = mkZetup "mastodon" {
-        presnap = "${pkgs.nixos-container}/bin/nixos-container run mastodon -- sudo -u postgres psql -c 'CHECKPOINT'";
-      };
-
       "tank/postgresql" = mkZetup "postgresql" {
         presnap = "${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql -c 'CHECKPOINT'";
       };

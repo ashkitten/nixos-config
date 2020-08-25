@@ -5,7 +5,6 @@
     ./grafana.nix
     ./hardware-configuration.nix
     ./its.nix
-    ./mastodon
     ./mopidy.nix
     ./nextcloud.nix
     ./synapse.nix
@@ -89,6 +88,12 @@
               tryFiles = "$uri $uri/index.html =404";
             };
           };
+        };
+
+        # need this for /.well-known
+        "kity.wtf" = {
+          forceSSL = true;
+          useACMEHost = "kity.wtf";
         };
 
         "stuff.kity.wtf" = {
