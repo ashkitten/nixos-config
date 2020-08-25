@@ -7,7 +7,7 @@ def win_title_loop():
 
     while True:
         win_title = subprocess.check_output("swaymsg -t get_tree | jq -r '.. | select(.focused?) | .name'", shell=True).strip().decode("utf-8")
-        win_title = (win_title[:50] + "...") if len(win_title) > 50 else win_title
+        win_title = (win_title[:100] + "...") if len(win_title) > 50 else win_title
         win_title = " {} ".format(win_title) if win_title else ""
         time.sleep(0.2)
 
@@ -59,30 +59,6 @@ def gpu_loop():
         gpu_temp = int(int(open("/sys/class/hwmon/hwmon2/temp2_input", "r").readline().strip()) / 1000)
         time.sleep(1.0)
 
-def headset_loop():
-    global headset_percent, headset_text
-
-    while True:
-        try:
-            output = subprocess.check_output(["g933-utils", "get", "battery"]).strip().decode("utf-8")
-
-            headset_percent = int(re.search(r"Status: ([\d]+)", output).group(1))
-
-            state = re.search(r"\[(\w+)", output).group(1)
-            if state == "discharging":
-                state = "D"
-            elif state == "charging":
-                state = "C"
-            else:
-                state = "?"
-
-            headset_text = "Headset: {}% ({})".format(headset_percent, state)
-        except subprocess.CalledProcessError:
-            headset_percent = 100
-            headset_text = "Headset: disconnected"
-
-        time.sleep(2.0)
-
 def date_loop():
     global date
 
@@ -97,8 +73,6 @@ if __name__ == "__main__":
     cpu_percent = 0
     cpu_temp = 0
     gpu_temp = 0
-    headset_percent = 100
-    headset_text = "Headset: ???"
     date = ""
 
     print("{\"version\":1}")
@@ -108,7 +82,6 @@ if __name__ == "__main__":
     threading.Thread(target=mem_loop).start()
     threading.Thread(target=cpu_loop).start()
     threading.Thread(target=gpu_loop).start()
-    threading.Thread(target=headset_loop).start()
     threading.Thread(target=date_loop).start()
 
     while True:
@@ -147,12 +120,6 @@ if __name__ == "__main__":
                 "color": "#ffffff",
                 "background": "#222222",
                 "urgent": gpu_temp > 80,
-            },
-            {
-                "full_text": headset_text,
-                "color": "#ffffff",
-                "background": "#222222",
-                "urgent": headset_percent < 10,
             },
             {
                 "full_text": date,
