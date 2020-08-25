@@ -8,10 +8,20 @@
   };
 
   services.tinc.networks.t0 = {
+    package = pkgs.tinc_pre.overrideAttrs (old: {
+      buildInputs = old.buildInputs ++ [
+        pkgs.miniupnpc
+      ];
+      configureFlags = old.configureFlags ++ [
+        "--enable-miniupnpc"
+      ];
+    });
+
     extraConfig = ''
       ConnectTo = steve
       Autoconnect = yes
       LocalDiscovery = yes
+      UPnP = yes
     '';
 
     hosts = {
