@@ -42,6 +42,10 @@
         Ed25519PublicKey = K3pjyj0S2CEmPiCSp/8phTT9JvZ781D6Z3jDDOss3KJ
         Subnet = 10.100.0.4/32
       '';
+      bugreport = ''
+        Ed25519PublicKey = jENRzbhuxaKceJ/Ez+oiBd8C8X1FKZzmumMMg71MtsC
+        Subnet = 10.100.0.5/32
+      '';
     };
   };
 
