@@ -6,7 +6,7 @@ let
     { nixpkgs.config.allowUnfree = true; }
   '';
 in
-  import ./external/nixus {
+  import ./external/nixus {} {
     defaults = { name, lib, ... }: {
       enabled = if nodes == [] then true else lib.elem name nodes;
 
