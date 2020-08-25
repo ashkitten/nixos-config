@@ -5,7 +5,6 @@
     nextcloud = {
       enable = true;
       package = pkgs.nextcloud19;
-      nginx.enable = true;
       hostName = "cloud.kity.wtf";
       maxUploadSize = "50G";
       https = true;
