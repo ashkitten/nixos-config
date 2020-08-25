@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+# TODO: allow device specific info
+
 import json, subprocess, time, threading, re
 
 def win_title_loop():
