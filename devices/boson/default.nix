@@ -100,10 +100,6 @@
       enable = true;
       enableExtensionPack = true;
     };
-    docker = {
-      enable = true;
-      storageDriver = "zfs";
-    };
   };
 
   users = {
