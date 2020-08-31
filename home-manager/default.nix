@@ -3,6 +3,7 @@
 {
   imports = [
     ./dunst.nix
+    ./neovim
     ./packages.nix
     ./sway.nix
   ];
@@ -41,12 +42,6 @@
         };
         push.default = "simple";
       };
-    };
-
-    neovim = {
-      enable = true;
-      withPython = true;
-      withPython3 = true;
     };
 
     tmux = {

@@ -14,6 +14,20 @@
 
     (pass-wayland.withExtensions (ext: with ext; [ pass-otp ]))
 
+    (let
+      firefox-bin-patched = firefox-bin-unwrapped.overrideAttrs (old: {
+        postFixup = ''
+          sed -i 's/reserved="true"/               /g' $out/lib/firefox-bin-*/browser/omni.ja
+        '';
+      });
+    in
+      wrapFirefox firefox-bin-patched {
+        browserName = "firefox";
+        pname = "firefox-bin-patched";
+        desktopName = "Firefox";
+      }
+    )
+
     arduino
     aria2
     atool
@@ -28,7 +42,6 @@
     feh
     ffmpeg-full
     file
-    firefox-bin
     gist
     glimpse
     gnome3.dconf
