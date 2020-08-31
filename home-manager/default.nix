@@ -78,7 +78,6 @@
     mpv = {
       enable = true;
       config = {
-        sub-auto = "all";
         ytdl-raw-options = "write-auto-sub=,sub-lang=en";
         sid = 1;
       };
