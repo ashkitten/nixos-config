@@ -6,6 +6,7 @@
     ./neovim
     ./packages.nix
     ./sway.nix
+    ./zsh
   ];
 
   # make sure user has the same config and overlays as system
@@ -81,6 +82,11 @@
         ytdl-raw-options = "write-auto-sub=,sub-lang=en";
         sid = 1;
       };
+    };
+
+    direnv = {
+      enable = true;
+      enableNixDirenvIntegration = true;
     };
   };
 
