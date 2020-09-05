@@ -1,13 +1,14 @@
 { stdenv, fetchFromGitHub, cmake, qt5, minizip }:
 
-stdenv.mkDerivation {
-  name = "qbeat";
+stdenv.mkDerivation rec {
+  pname = "qbeat";
+  version = "0.5.2";
 
   src = fetchFromGitHub {
     owner = "geefr";
     repo = "beatsaber-linux-goodies";
-    rev = "a82ac3694ef2addb9f4c133a28ead9fac6a0b156";
-    sha256 = "15ybc9phxca9y5v25dpx4mdhr91v02gbqsspvjf65dycj67b2vyz";
+    rev = version;
+    sha256 = "0asw03r82ws1ngmjz9fa2da6mmpq0hvw738cin6c60k2mjlya6i4";
   };
 
   cmakeDir = "../QBeat";
