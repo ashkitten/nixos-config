@@ -17,10 +17,11 @@
     "/home" = { device = "tank/home"; fsType = "zfs"; };
 
     "/home/ash" = { device = "tank/home/ash"; fsType = "zfs"; };
-    "/home/ash/tmp" = { device = "tank/home/ash/tmp"; fsType = "zfs"; };
-    "/home/ash/Projects" = { device = "tank/home/ash/projects"; fsType = "zfs"; };
-    "/home/ash/nextcloud" = { device = "tank/home/ash/nextcloud"; fsType = "zfs"; };
     "/home/ash/.local/share/Steam" = { device = "tank/home/ash/steam"; fsType = "zfs"; };
+    "/home/ash/Projects" = { device = "tank/home/ash/projects"; fsType = "zfs"; };
+    "/home/ash/games" = { device = "tank/home/ash/games"; fsType = "zfs"; };
+    "/home/ash/nextcloud" = { device = "tank/home/ash/nextcloud"; fsType = "zfs"; };
+    "/home/ash/tmp" = { device = "tank/home/ash/tmp"; fsType = "zfs"; };
 
     "/home/guest" = { device = "tank/home/guest"; fsType = "zfs"; };
     "/home/guest/.local/share/Steam" = { device = "tank/home/guest/steam"; fsType = "zfs"; };
