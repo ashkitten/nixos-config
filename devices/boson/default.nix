@@ -8,8 +8,6 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-
     kernelModules = [ "nct6775" ];
 
     kernelParams = [

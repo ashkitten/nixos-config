@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -14,6 +14,8 @@
         ( exec -a @initbeep ${pkgs.callPackage ./files/initbeep {}}/bin/initbeep ) &
       '';
     };
+
+    kernelPackages = pkgs.linuxPackages_zen;
 
     kernelModules = [ "v4l2loopback" ];
 
@@ -44,6 +46,8 @@
       efi.canTouchEfiVariables = true;
     };
   };
+
+  powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
 
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
