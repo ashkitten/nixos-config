@@ -79,9 +79,11 @@
     retroarchBare
     ripgrep
     rofi
+    rsync
     ssb-patchwork
     steam
     steam-run
+    strace
     syncplay
     tokei
     unrar
