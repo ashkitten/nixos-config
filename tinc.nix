@@ -39,7 +39,7 @@
         Subnet = 10.100.0.3/32
       '';
       mclargehuge = ''
-        Ed25519PublicKey = K3pjyj0S2CEmPiCSp/8phTT9JvZ781D6Z3jDDOss3KJ
+        Ed25519PublicKey = uPXwJS7rSM0fqdnlnnPd4ZsBA/Vk4P5pjtuP9TgdkmP
         Subnet = 10.100.0.4/32
       '';
       bugreport = ''
