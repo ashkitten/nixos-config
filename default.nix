@@ -28,6 +28,10 @@ in
         ];
 
         secrets.files = import ./external/secrets;
+
+        users.users.root.openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGfEjFxICM8XxLy46DBGKFpb8qGelsGpNWBV8e0R0CpD"
+        ];
       };
     };
 
