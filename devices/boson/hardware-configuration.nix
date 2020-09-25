@@ -11,7 +11,7 @@
   };
 
   fileSystems = {
-    "/" = { device = "/dev/disk/by-uuid/12ce6f08-182b-47de-95df-8bf73565d1c6"; fsType = "f2fs"; options = [ "compress_algorithm=zstd" ]; };
+    "/" = { device = "/dev/disk/by-uuid/b68651fb-9d82-43fc-b6e9-020ff5d4981d"; fsType = "xfs"; };
     "/boot" = { device = "/dev/disk/by-uuid/D097-E4BD"; fsType = "vfat"; };
 
     "/home/ash/.local/share/Steam" = { device = "/bind/users/ash/steam"; options = [ "bind" ]; };
