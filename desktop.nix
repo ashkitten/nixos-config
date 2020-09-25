@@ -154,6 +154,8 @@
         hibernate = false;
       };
     };
+
+    fwupd.enable = true;
   };
 
   systemd.services = {
@@ -185,6 +187,13 @@
     Defaults!${pkgs.neovim}/bin/nvim env_keep+="HOME PATH"
     Defaults!${pkgs.git}/bin/git env_keep+="HOME"
   '';
+
+  security.wrappers = {
+    "wine64" = {
+      source = "${pkgs.wine}/bin/wine64";
+      capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
+    };
+  };
 
   nixpkgs.config = {
     android_sdk.accept_license = true;
