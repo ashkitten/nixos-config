@@ -47,8 +47,6 @@
     };
   };
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
-
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
     RADV_PERFTEST = "aco";
