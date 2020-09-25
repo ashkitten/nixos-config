@@ -63,7 +63,7 @@
     lm_sensors
     lsof
     ltunify
-    lutris
+    lutris-unwrapped
     mgba
     mpv
     mumble
