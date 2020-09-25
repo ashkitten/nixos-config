@@ -15,8 +15,6 @@
       '';
     };
 
-    kernelPackages = pkgs.linuxPackages_zen;
-
     kernelModules = [ "v4l2loopback" ];
 
     blacklistedKernelModules = [ "hid_steam" ];
