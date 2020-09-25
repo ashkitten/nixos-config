@@ -47,5 +47,5 @@
     useACMEHost = "kity.wtf";
   };
 
-  security.acme.certs."kity.wtf".extraDomains."cloud.kity.wtf" = null;
+  security.acme.certs."kity.wtf".extraDomainNames = [ "cloud.kity.wtf" ];
 }

@@ -38,5 +38,5 @@
     };
   };
 
-  security.acme.certs."kity.wtf".extraDomains."grafana.kity.wtf" = null;
+  security.acme.certs."kity.wtf".extraDomainNames = [ "grafana.kity.wtf" ];
 }

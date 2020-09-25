@@ -113,11 +113,10 @@
     certs = {
       "kity.wtf" = {
         webroot = "/var/lib/acme/acme-challenge";
-        extraDomains = {
-          "stuff.kity.wtf" = null;
-        };
+        extraDomainNames = [
+          "stuff.kity.wtf"
+        ];
         group = "nginx";
-        allowKeysForGroup = true;
       };
     };
   };

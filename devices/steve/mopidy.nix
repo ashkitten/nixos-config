@@ -89,5 +89,5 @@
     };
   };
 
-  security.acme.certs."kity.wtf".extraDomains."np.kity.wtf" = null;
+  security.acme.certs."kity.wtf".extraDomainNames = [ "np.kity.wtf" ];
 }

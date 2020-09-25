@@ -82,5 +82,5 @@
     };
   };
 
-  security.acme.certs."kity.wtf".extraDomains."matrix.kity.wtf" = null;
+  security.acme.certs."kity.wtf".extraDomainNames = [ "matrix.kity.wtf" ];
 }
