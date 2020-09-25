@@ -11,6 +11,7 @@
     (callPackage ../packages/QBeat { qt5 = qt514; })
     (callPackage ../packages/ffmt {})
     (callPackage ../packages/g933-utils {})
+    (callPackage ../packages/imgoverlay {})
 
     (pass-wayland.withExtensions (ext: with ext; [ pass-otp ]))
 
