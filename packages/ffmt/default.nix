@@ -1,12 +1,13 @@
 { stdenv, lib, fetchgit, fetchurl, makeWrapper, linkFarmFromDrvs
 , dotnet-sdk_3, dotnetCorePackages, dotnetPackages
-, icu, zlib
+, icu, zlib, openssl
 }:
 
 let
   runtimeDeps = [
     icu
     zlib
+    openssl
   ];
 in
   stdenv.mkDerivation rec {
