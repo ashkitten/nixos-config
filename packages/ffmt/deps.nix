@@ -1,5 +1,10 @@
 { fetchNuGet }: [
   (fetchNuGet {
+    name = "DotNetZip";
+    version = "1.13.8";
+    sha256 = "1nf18bwvn0n6l6m0kl4ls87lw5hlkqjl3lwd353pphdgfgk072v6";
+  })
+  (fetchNuGet {
     name = "EntityFramework";
     version = "6.3.0";
     sha256 = "09jdhvhzz6i6s3skly2a1d2r4i1kx5132k4sl92xkr20a435q7xf";
@@ -46,8 +51,18 @@
   })
   (fetchNuGet {
     name = "Microsoft.NETCore.Platforms";
+    version = "2.0.0";
+    sha256 = "1fk2fk2639i7nzy58m9dvpdnzql4vb8yl8vr19r2fp8lmj9w2jr0";
+  })
+  (fetchNuGet {
+    name = "Microsoft.NETCore.Platforms";
     version = "3.0.0";
     sha256 = "1bk8r4r3ihmi6322jmcag14jmw11mjqys202azqjzglcx59pxh51";
+  })
+  (fetchNuGet {
+    name = "Microsoft.NETCore.Targets";
+    version = "1.1.0";
+    sha256 = "193xwf33fbm0ni3idxzbr5fdq3i2dlfgihsac9jj7whj0gd902nh";
   })
   (fetchNuGet {
     name = "Microsoft.Win32.Registry";
@@ -70,9 +85,34 @@
     sha256 = "17dzl305d835mzign8r15vkmav2hq8l6g7942dfjpnzr17wwl89x";
   })
   (fetchNuGet {
+    name = "runtime.any.System.Runtime";
+    version = "4.3.0";
+    sha256 = "1cqh1sv3h5j7ixyb7axxbdkqx6cxy00p4np4j91kpm492rf4s25b";
+  })
+  (fetchNuGet {
+    name = "runtime.any.System.Text.Encoding";
+    version = "4.3.0";
+    sha256 = "0aqqi1v4wx51h51mk956y783wzags13wa7mgqyclacmsmpv02ps3";
+  })
+  (fetchNuGet {
+    name = "runtime.any.System.Text.Encoding.Extensions";
+    version = "4.3.0";
+    sha256 = "0lqhgqi0i8194ryqq6v2gqx0fb86db2gqknbm0aq31wb378j7ip8";
+  })
+  (fetchNuGet {
+    name = "runtime.native.System";
+    version = "4.3.0";
+    sha256 = "15hgf6zaq9b8br2wi1i3x0zvmk410nlmsmva9p0bbg73v6hml5k4";
+  })
+  (fetchNuGet {
     name = "runtime.native.System.Data.SqlClient.sni";
     version = "4.6.0";
     sha256 = "13z3nzjxdmch8d5wg8n2f8z0bgbfgmv179fq2qqnz2m0vddcbsad";
+  })
+  (fetchNuGet {
+    name = "runtime.unix.System.Private.Uri";
+    version = "4.3.0";
+    sha256 = "1jx02q6kiwlvfksq1q9qr17fj78y5v6mwsszav4qcz9z25d5g6vk";
   })
   (fetchNuGet {
     name = "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni";
@@ -170,9 +210,29 @@
     sha256 = "1kzrj37yzawf1b19jq0253rcs8hsq1l2q8g69d7ipnhzb0h97m59";
   })
   (fetchNuGet {
+    name = "System.Private.Uri";
+    version = "4.3.0";
+    sha256 = "04r1lkdnsznin0fj4ya1zikxiqr0h6r6a1ww2dsm60gqhdrf0mvx";
+  })
+  (fetchNuGet {
+    name = "System.Runtime";
+    version = "4.3.0";
+    sha256 = "066ixvgbf2c929kgknshcxqj6539ax7b9m570cp8n179cpfkapz7";
+  })
+  (fetchNuGet {
+    name = "System.Runtime.CompilerServices.Unsafe";
+    version = "4.5.0";
+    sha256 = "17labczwqk3jng3kkky73m0jhi8wc21vbl7cz5c0hj2p1dswin43";
+  })
+  (fetchNuGet {
     name = "System.Runtime.CompilerServices.Unsafe";
     version = "4.5.1";
     sha256 = "1xcrjx5fwg284qdnxyi2d0lzdm5q4frlpkp0nf6vvkx1kdz2prrf";
+  })
+  (fetchNuGet {
+    name = "System.Security.AccessControl";
+    version = "4.5.0";
+    sha256 = "1wvwanz33fzzbnd2jalar0p0z3x0ba53vzx1kazlskp7pwyhlnq0";
   })
   (fetchNuGet {
     name = "System.Security.AccessControl";
@@ -186,13 +246,38 @@
   })
   (fetchNuGet {
     name = "System.Security.Permissions";
+    version = "4.5.0";
+    sha256 = "192ww5rm3c9mirxgl1nzyrwd18am3izqls0hzm0fvcdjl5grvbhm";
+  })
+  (fetchNuGet {
+    name = "System.Security.Permissions";
     version = "4.6.0";
     sha256 = "085carmipwqpkyds436pd7ap9ws0z3mmllzq4qpvsa5ifin8w700";
   })
   (fetchNuGet {
     name = "System.Security.Principal.Windows";
+    version = "4.5.0";
+    sha256 = "0rmj89wsl5yzwh0kqjgx45vzf694v9p92r4x4q6yxldk1cv1hi86";
+  })
+  (fetchNuGet {
+    name = "System.Security.Principal.Windows";
     version = "4.6.0";
     sha256 = "1jmfzfz1n8hp63s5lja5xxpzkinbp6g59l3km9h8avjiisdrg5wm";
+  })
+  (fetchNuGet {
+    name = "System.Text.Encoding";
+    version = "4.3.0";
+    sha256 = "1f04lkir4iladpp51sdgmis9dj4y8v08cka0mbmsy0frc9a4gjqr";
+  })
+  (fetchNuGet {
+    name = "System.Text.Encoding.CodePages";
+    version = "4.5.0";
+    sha256 = "19x38911pawq4mrxrm04l2bnxwxxlzq8v8rj4cbxnfjj8pnd3vj3";
+  })
+  (fetchNuGet {
+    name = "System.Text.Encoding.Extensions";
+    version = "4.3.0";
+    sha256 = "11q1y8hh5hrp5a3kw25cb6l00v5l5dvirkz8jr3sq00h1xgcgrxy";
   })
   (fetchNuGet {
     name = "System.Windows.Extensions";
