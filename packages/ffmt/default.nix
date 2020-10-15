@@ -45,8 +45,8 @@ in
       mkdir -p $HOME/.nuget/NuGet
       cp $HOME/.config/NuGet/NuGet.Config $HOME/.nuget/NuGet
 
-      dotnet restore --source nixos --runtime linux-x64 xivModdingFramework/xivModdingFramework/xivModdingFramework.csproj
-      dotnet restore --source nixos --runtime linux-x64 FFXIV_Modding_Tool/FFXIV_Modding_Tool.csproj
+      dotnet restore --source "$PWD/nixos" --runtime linux-x64 xivModdingFramework/xivModdingFramework/xivModdingFramework.csproj
+      dotnet restore --source "$PWD/nixos" --runtime linux-x64 FFXIV_Modding_Tool/FFXIV_Modding_Tool.csproj
 
       runHook postConfigure
     '';
