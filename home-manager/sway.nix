@@ -123,6 +123,8 @@ in
           }
           # set wallpaper
           { command = ''swaybg -i "$(find ~/.wallpapers/ -type f | shuf -n1)"''; }
+          # start nextcloud sync client
+          { command = "nextcloud --background"; }
         ];
 
         window.commands = [
