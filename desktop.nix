@@ -33,6 +33,8 @@
         efiSupport = true;
         device = "nodev";
 
+        useOSProber = true;
+
         extraFiles = {
           "memtest86.efi" = "${pkgs.memtest86-efi}/BOOTX64.efi";
         };
