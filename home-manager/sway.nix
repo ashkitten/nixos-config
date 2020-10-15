@@ -136,6 +136,8 @@ in
           { criteria = { app_id = "^firefox$"; title = "^Extension: \\(Open in Browser\\)"; }; command = "floating enable"; }
           # firefox picture-in-picture
           { criteria = { app_id = "^firefox$"; title = "^Picture-in-Picture$"; }; command = "floating enable"; }
+          # ffxiv should not float
+          { criteria = { class = "^ffxiv_dx11.exe$"; }; command = "floating disable"; }
         ];
       };
 
