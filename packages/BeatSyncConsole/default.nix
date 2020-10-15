@@ -45,7 +45,7 @@ in
       mkdir -p $HOME/.nuget/NuGet
       cp $HOME/.config/NuGet/NuGet.Config $HOME/.nuget/NuGet
 
-      dotnet restore --source nixos --runtime linux-x64 BeatSyncConsole/BeatSyncConsole.csproj
+      dotnet restore --source "$PWD/nixos" --runtime linux-x64 BeatSyncConsole/BeatSyncConsole.csproj
 
       runHook postConfigure
     '';
