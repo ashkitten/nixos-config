@@ -114,8 +114,6 @@
   };
 
   services = {
-    dbus.socketActivated = true;
-
     # needed for display manager
     xserver.enable = true;
 
