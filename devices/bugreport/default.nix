@@ -20,6 +20,9 @@
     desktopManager.gnome3.enable = true;
   };
 
+  # automatically enabled with gnome3
+  hardware.pulseaudio.enable = false;
+
   hardware.sensor.iio.enable = true;
 
   system.stateVersion = "20.09";
