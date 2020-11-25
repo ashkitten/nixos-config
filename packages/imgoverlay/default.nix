@@ -3,14 +3,13 @@
 
 qt5.mkDerivation rec {
   pname = "imgoverlay";
-  version = "0.2";
+  version = "0.3";
 
   src = fetchFromGitHub {
     owner = "nowrep";
     repo = "imgoverlay";
-    #rev = "v${version}";
-    rev = "80ce31692c6ec99ca79d4965cb2eea19a61fc443";
-    sha256 = "19axqzqxqlblskz9xhchgbi7d6s324q9vxjlf6v11jxccdchkda8";
+    rev = "v${version}";
+    sha256 = "1qxylc44jdnl170qwi870qfs59z21jiga0s77p1hx17h2kls84yn";
   };
 
   strictDeps = true;
