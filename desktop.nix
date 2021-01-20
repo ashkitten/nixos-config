@@ -105,31 +105,40 @@
     # steamvr doesn't work in wayland yet
     xserver.desktopManager.xfce.enable = true;
 
-    udev.extraRules = ''
-      # Trinket M0
-      SUBSYSTEM=="usb", ATTRS{idVendor}=="239a", ATTRS{idProduct}=="001e", MODE="0666"
+    udev = {
+      packages = [ pkgs.yubikey-personalization ];
+      extraRules = ''
+        # Trinket M0
+          SUBSYSTEM=="usb", ATTRS{idVendor}=="239a", ATTRS{idProduct}=="001e", MODE="0666"
 
-      # Keyboardio Model 01
-      SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2300", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0"
-      SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2301", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0"
+        # Keyboardio Model 01
+          SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2300", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0"
+          SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2301", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0"
 
-      # Logitech devices
-      SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", MODE="0666"
-      SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", MODE="0666"
+        # Logitech devices
+          SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", MODE="0666"
+          SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", MODE="0666"
 
-      # Roccat devices
-      SUBSYSTEM=="usb", ATTRS{idVendor}=="1e7d", MODE="0666"
-      SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1e7d", MODE="0666"
+        # Roccat devices
+          SUBSYSTEM=="usb", ATTRS{idVendor}=="1e7d", MODE="0666"
+          SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1e7d", MODE="0666"
 
-      # Unbind Tyon joystick driver
-      SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e4a|2e4b", RUN+="${pkgs.bash}/bin/sh -c '${pkgs.coreutils}/bin/echo -n %k >/sys$${DEVPATH}/driver/unbind'"
+        # Unbind Tyon joystick driver
+          SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e4a|2e4b", RUN+="${pkgs.bash}/bin/sh -c '${pkgs.coreutils}/bin/echo -n %k >/sys$${DEVPATH}/driver/unbind'"
 
-      # Allow access to gamecube adapter
-      SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
+        # Allow access to gamecube adapter
+          SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
 
-      # Qanba Drone
-      KERNEL=="hidraw*", ATTRS{idVendor}=="2c22", ATTRS{idProduct}=="2000", MODE="0660", TAG+="uaccess"
-    '';
+        # Qanba Drone
+          KERNEL=="hidraw*", ATTRS{idVendor}=="2c22", ATTRS{idProduct}=="2000", MODE="0660", TAG+="uaccess"
+
+        # Sony DualSense (USB)
+          KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="0ce6", MODE="0666"
+
+        # Sony DualSense (Bluetooth)
+          KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0005:054C:0CE6.*", MODE="0666"
+      '';
+    };
 
     physlock = {
       enable = true;
