@@ -1,23 +1,9 @@
 { pkgs, ... }:
 
 let
-  vscodeExtUniqueId = "vadimcn.vscode-lldb";
-  version = "1.5.0";
-  vscode-lldb = pkgs.vscode-utils.buildVscodeExtension {
-    name = "${vscodeExtUniqueId}-${version}";
-    inherit vscodeExtUniqueId;
-    src = pkgs.fetchurl {
-      name = "${vscodeExtUniqueId}.zip";
-      url = "https://github.com/vadimcn/vscode-lldb/releases/download/v${version}/codelldb-${pkgs.system}.vsix";
-      sha256 = "0751s41sglc553nfjfpxa4g65a855k3mqw1ydmq11zxl3l0pr8x6";
-    };
-    buildInputs = with pkgs; [ python35 autoPatchelfHook ];
-  };
-
   vscode = pkgs.vscode-with-extensions.override {
     vscodeExtensions = with pkgs.vscode-extensions; [
-      vscode-lldb
-
+      vadimcn.vscode-lldb
       vscodevim.vim
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
