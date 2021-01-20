@@ -30,6 +30,8 @@
       }
     )
 
+    (mumble.override { jackSupport = true; })
+
     arduino
     aria2
     atool
@@ -67,7 +69,6 @@
     lutris-unwrapped
     mgba
     mpv
-    mumble
     nextcloud-client
     nix-index
     nix-prefetch-scripts
