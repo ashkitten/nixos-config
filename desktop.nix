@@ -210,9 +210,7 @@
   };
 
   nixpkgs.config = {
-    android_sdk.accept_license = true;
     wine.build = "wineWow";
-    permittedInsecurePackages = [ "p7zip-16.02" ];
   };
 
   nixpkgs.overlays = [
