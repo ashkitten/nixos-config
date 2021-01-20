@@ -15,6 +15,7 @@ in
     enable = true;
     pure = true;
     autoCreation = true;
+    features.oracleMode = true;
 
     zetup = {
       "tank/postgresql" = mkZetup "postgresql" {
