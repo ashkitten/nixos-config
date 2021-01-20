@@ -69,6 +69,8 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
 
+      clientMaxBodySize = "100m";
+
       virtualHosts = {
         "glowing-bear" = {
           default = true;
