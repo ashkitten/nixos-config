@@ -8,6 +8,8 @@
     enable_metrics = true;
     url_preview_enabled = true;
 
+    max_upload_size = "50M";
+
     listeners = [
       {
         bind_address = "localhost";
@@ -55,7 +57,6 @@
           let
             client = {
               "m.homeserver" =  { "base_url" = "https://matrix.kity.wtf"; };
-              "m.identity_server" =  { "base_url" = "https://vector.im"; };
             };
           # ACAO required to allow riot-web on any URL to request this json file
           in ''
@@ -80,7 +81,22 @@
         };
       };
     };
+
+    "element.kity.wtf" = {
+      forceSSL = true;
+      useACMEHost = "kity.wtf";
+
+      root = pkgs.element-web.override {
+        conf = {
+          default_server_config."m.homeserver" = {
+            "base_url" = "https://matrix.kity.wtf";
+            "server_name" = "kity.wtf";
+          };
+          showLabsSettings = true;
+        };
+      };
+    };
   };
 
-  security.acme.certs."kity.wtf".extraDomainNames = [ "matrix.kity.wtf" ];
+  security.acme.certs."kity.wtf".extraDomainNames = [ "matrix.kity.wtf" "element.kity.wtf" ];
 }
