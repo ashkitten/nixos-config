@@ -4,7 +4,7 @@
   imports = [
     ./grafana.nix
     ./hardware-configuration.nix
-    ./mopidy.nix
+    ./jellyfin.nix
     ./nextcloud.nix
     ./synapse.nix
     ./syncplay.nix
