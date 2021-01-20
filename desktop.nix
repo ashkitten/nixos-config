@@ -203,7 +203,7 @@
 
   security.wrappers = {
     "wine64" = {
-      source = "${pkgs.wine}/bin/wine64";
+      source = "${pkgs.wineStaging}/bin/wine64";
       capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
     };
   };
