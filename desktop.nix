@@ -49,11 +49,6 @@
     };
   };
 
-  environment.sessionVariables = {
-    MOZ_ENABLE_WAYLAND = "1";
-    RADV_PERFTEST = "aco";
-  };
-
   networking.networkmanager.enable = true;
 
   fonts = {
@@ -168,6 +163,15 @@
     };
   };
 
+  xdg.portal = {
+    enable = true;
+    gtkUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+    ];
+  };
+
   users.users.ash = {
     isNormalUser = true;
     createHome = false;
@@ -203,5 +207,20 @@
 
   nixpkgs.overlays = [
     (import ./external/nixpkgs-wayland)
+
+    (self: super: {
+      xdg-desktop-portal-wlr = super.xdg-desktop-portal-wlr.overrideAttrs (old: {
+        src = super.fetchFromGitHub {
+          owner = "columbarius";
+          repo = "xdg-desktop-portal-wlr";
+          rev = "730f3897bbbd5611a6b6ef2bb291002a804007d4";
+          sha256 = "1c2a0sl3mpy9d19y0m6x0h3rbp73dg08502f4hysx97jrz6bzywh";
+        };
+
+        buildInputs = with super; old.buildInputs ++ [
+          iniparser
+        ];
+      });
+    })
   ];
 }

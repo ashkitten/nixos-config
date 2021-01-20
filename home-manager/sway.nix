@@ -113,18 +113,24 @@ in
         ];
 
         startup = [
-          # run lock command on sleep or loginctl lock-session
-          {
-            command = ''
-              swayidle \
-                lock         'lock' \
-                before-sleep 'lock'
-            '';
-          }
           # set wallpaper
           { command = ''swaybg -i "$(find ~/.wallpapers/ -type f | shuf -n1)"''; }
-          # start nextcloud sync client
-          { command = "nextcloud --background"; }
+
+          # don't do this stuff in a nested sway
+          {
+            command = toString (pkgs.writeShellScript "sway-toplevel-startup" ''
+              if ! swaymsg -t get_outputs | jq -e 'any(.[].name; . == "WL-1")'; then
+                systemctl --user import-environment
+
+                swayidle \
+                  lock         'lock' \
+                  before-sleep 'lock' &
+
+                # start nextcloud sync client
+                nextcloud --background &
+              fi
+            '');
+          }
         ];
 
         window.commands = [
@@ -144,5 +150,19 @@ in
       extraConfig = ''
         titlebar_padding 3 1
       '';
+
+      extraSessionCommands = ''
+        export MOZ_ENABLE_WAYLAND="1";
+        export MOZ_USE_XINPUT2="1";
+        export XDG_SESSION_TYPE="wayland";
+        export XDG_CURRENT_DESKTOP="sway";
+      '';
     };
+
+    xdg.configFile."xdg-desktop-portal-wlr/config".text = ''
+      [screencast]
+      output=
+      chooser_cmd="${pkgs.slurp}/bin/slurp -f %o -o"
+      chooser_type=simple
+    '';
   }
