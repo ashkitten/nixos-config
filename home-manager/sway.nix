@@ -27,6 +27,7 @@ in
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+      systemdIntegration = false;
       config = {
         modifier = mod;
 
@@ -72,6 +73,8 @@ in
 
           "XF86MonBrightnessUp" =  "exec light -A 2";
           "XF86MonBrightnessDown" = "exec light -U 2";
+
+          "${mod}+F12" = "mode passthrough";
         }
 
         // movementKeys "${mod}" "focus"
@@ -79,6 +82,12 @@ in
 
         // numberKeys "${mod}" "workspace number"
         // numberKeys "${mod}+Shift" "move container to workspace number";
+
+        modes = {
+          passthrough = {
+            "${mod}+F12" = "mode default";
+          };
+        };
 
         gaps.smartBorders = "on";
 
@@ -165,4 +174,12 @@ in
       chooser_cmd="${pkgs.slurp}/bin/slurp -f %o -o"
       chooser_type=simple
     '';
+
+    home.packages = [
+      (pkgs.makeDesktopItem {
+        name = "sway";
+        desktopName = "Sway (nested)";
+        exec = "dbus-run-session sway";
+      })
+    ];
   }
