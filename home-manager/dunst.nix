@@ -22,16 +22,18 @@
         dmenu = "rofi -dmenu -p dunst";
         browser = "xdg-open";
       };
-      shortcuts = {
-        close = "mod4+c";
-        close_all = "mod4+mod1+c";
-        history = "mod4+shift+c";
-        context = "mod4+n";
-      };
       urgency_normal = {
         background = "#222222";
         foreground = "#ffffff";
       };
     };
   };
+
+  wayland.windowManager.sway.config.keybindings = {
+    "Mod4+c" = "exec dunstctl close-all";
+    "Mod4+Shift+c" = "exec dunstctl history-pop";
+    "Mod4+Mod1+c" = "exec dunstctl context";
+  };
+
+  home.packages = [ pkgs.dunst ];
 }
