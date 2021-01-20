@@ -151,8 +151,9 @@ in
           { criteria = { app_id = "^firefox$"; title = "^Extension: \\(Open in Browser\\)"; }; command = "floating enable"; }
           # firefox picture-in-picture
           { criteria = { app_id = "^firefox$"; title = "^Picture-in-Picture$"; }; command = "floating enable"; }
-          # ffxiv should not float
-          { criteria = { class = "^ffxiv_dx11.exe$"; }; command = "floating disable"; }
+          # nextcloud desktop popup should be floating next to the cursor
+          # this affects the regular window too but i don't know how i could differentiate them
+          { criteria = { app_id = "^com.nextcloud.desktopclient.nextcloud$"; }; command = "floating enable; move position cursor"; }
         ];
       };
 
