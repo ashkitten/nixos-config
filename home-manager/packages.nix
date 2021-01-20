@@ -16,16 +16,17 @@
     (pass-wayland.withExtensions (ext: with ext; [ pass-otp ]))
 
     (let
-      firefox-bin-patched = firefox-bin-unwrapped.overrideAttrs (old: {
+      firefox-patched-unwrapped = firefox-unwrapped.overrideAttrs (old: {
         postFixup = ''
-          sed -i 's/reserved="true"/               /g' $out/lib/firefox-bin-*/browser/omni.ja
+          sed -i 's/reserved="true"/               /g' $out/lib/firefox/browser/omni.ja
         '';
       });
     in
-      wrapFirefox firefox-bin-patched {
+      wrapFirefox firefox-patched-unwrapped {
         browserName = "firefox";
-        pname = "firefox-bin-patched";
+        pname = "firefox";
         desktopName = "Firefox";
+        forceWayland = true;
       }
     )
 
