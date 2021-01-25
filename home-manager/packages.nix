@@ -8,7 +8,7 @@
   home.packages = with pkgs; [
     (callPackage ./local-utils {})
     (callPackage ../packages/BeatSyncConsole {})
-    (callPackage ../packages/QBeat { qt5 = qt514; })
+    (callPackage ../packages/Beataroni {})
     (callPackage ../packages/ffmt {})
     (callPackage ../packages/g933-utils {})
     (callPackage ../packages/imgoverlay {})
