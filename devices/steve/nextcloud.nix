@@ -1,15 +1,16 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud20;
+      package = pkgs.nextcloud21;
       hostName = "cloud.kity.wtf";
       maxUploadSize = "50G";
       https = true;
+      autoUpdateApps.enable = true;
       config = {
-        adminpassFile = "/root/nextcloud-secrets/adminpass";
+        adminpassFile = toString config.secrets.files.nextcloud_adminpass.file;
       };
     };
   };
