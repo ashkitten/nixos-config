@@ -8,7 +8,7 @@
     enable_metrics = true;
     url_preview_enabled = true;
 
-    max_upload_size = "50M";
+    max_upload_size = "100M";
 
     listeners = [
       {
