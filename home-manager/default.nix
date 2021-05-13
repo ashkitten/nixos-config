@@ -63,15 +63,15 @@
     beets = {
       enable = true;
       package = pkgs.beets.override {
+        enableFetchart = true;
         # lastgenre plugin
         enableLastfm = true;
-        enableBandcamp = true;
         enableReplaygain = true;
       };
       settings = {
-        directory = "~/nextcloud/music/library";
-        library = "~/nextcloud/music/library.db";
-        plugins = "lastgenre bandcamp replaygain";
+        directory = "~/nextcloud/media/music/library";
+        library = "~/nextcloud/media/music/library.db";
+        plugins = "fetchart replaygain lastgenre";
       };
     };
 
