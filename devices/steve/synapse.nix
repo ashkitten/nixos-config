@@ -29,6 +29,11 @@
         resources = [];
       }
     ];
+
+    extraConfig = ''
+      experimental_features:
+        spaces_enabled: true
+    '';
   };
 
   services.prometheus.scrapeConfigs = [
