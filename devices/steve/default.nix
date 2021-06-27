@@ -8,6 +8,7 @@
     ./nextcloud.nix
     ./synapse.nix
     ./syncplay.nix
+    ./unifiedpush.nix
     ./znapzend.nix
   ];
 
