@@ -109,7 +109,7 @@
       ];
     };
 
-    users.ash.extraGroups = [ "libvirtd" "vboxusers" "docker" ];
+    users.ash.extraGroups = [ "libvirtd" "vboxusers" ];
   };
 
   home-manager.users.ash.wayland.windowManager.sway = {
