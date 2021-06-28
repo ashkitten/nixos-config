@@ -102,7 +102,10 @@
     xserver.enable = true;
 
     # steamvr doesn't work in wayland yet
-    xserver.desktopManager.xfce.enable = true;
+    xserver.windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+    };
 
     udev = {
       packages = [ pkgs.yubikey-personalization ];
