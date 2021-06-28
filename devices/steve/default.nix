@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./conduit.nix
     ./grafana.nix
     ./hardware-configuration.nix
     ./jellyfin.nix
