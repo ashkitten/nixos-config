@@ -114,13 +114,11 @@
 
   home-manager.users.ash.wayland.windowManager.sway = {
     config.output = {
-      DP-2 = { pos = "0 0"; mode = "2560x1440@143.912Hz"; };
-      DP-3 = { pos = "2560 180"; mode = "1920x1080@75Hz"; };
+      DP-2 = { pos = "0 0"; mode = "5120x1440@119.970Hz"; };
     };
 
     extraConfig = ''
-      workspace 1 output DP-3
-      workspace 2 output DP-2
+      workspace 1 output DP-2
       output DP-1 disable
     '';
   };
