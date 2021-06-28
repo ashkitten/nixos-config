@@ -12,7 +12,7 @@
 
     listeners = [
       {
-        bind_address = "localhost";
+        bind_address = "127.0.0.1";
         port = 8448;
         type = "http";
         tls = false;
@@ -22,7 +22,7 @@
         ];
       }
       {
-        bind_address = "localhost";
+        bind_address = "127.0.0.1";
         port = 9000;
         type = "metrics";
         tls = false;
@@ -82,7 +82,7 @@
         '';
 
         "/_matrix" = {
-          proxyPass = "http://localhost:8448";
+          proxyPass = "http://127.0.0.1:8448";
         };
       };
     };
