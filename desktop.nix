@@ -161,6 +161,14 @@
       };
       pulse.enable = true;
       jack.enable = true;
+      config = {
+        jack = {
+          "jack.properties" = {
+            "jack.short-name" = true;
+            "jack.merge-monitor" = true;
+          };
+        };
+      };
     };
   };
 
