@@ -7,6 +7,7 @@
 
   boot = {
     cleanTmpDir = true;
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   };
 
   console = {
