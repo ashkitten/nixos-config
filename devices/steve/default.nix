@@ -72,6 +72,14 @@
 
       clientMaxBodySize = "100m";
 
+      appendConfig = ''
+        worker_processes auto;
+      '';
+
+      eventsConfig = ''
+        worker_connections 1024;
+      '';
+
       virtualHosts = {
         "glowing-bear" = {
           default = true;
