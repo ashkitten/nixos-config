@@ -84,6 +84,7 @@
       enable = true;
       extraPackages = with pkgs; [ swaylock swayidle xwayland ];
     };
+    wireshark.enable = true;
   };
 
   sound.enable = true;
@@ -183,7 +184,7 @@
     isNormalUser = true;
     createHome = false;
     uid = 1000;
-    extraGroups = [ "wheel" "disk" "systemd-journal" "dialout" "networkmanager" "video" ];
+    extraGroups = [ "wheel" "disk" "systemd-journal" "dialout" "networkmanager" "video" "wireshark" ];
     shell = pkgs.zsh;
   };
 
