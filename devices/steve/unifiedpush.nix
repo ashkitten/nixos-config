@@ -14,11 +14,14 @@
     locations = {
       "/proxy/10.100.0.4:51515/" = {
         proxyPass = "http://10.100.0.4:51515/";
-        extraConfig = ''
-          client_max_body_size 50M;
-        '';
       };
     };
+
+    extraConfig = ''
+      allow 132.226.42.65; # matrix.gateway.unifiedpush.org
+      deny all;
+      client_max_body_size 50M;
+    '';
   };
 
   security.acme.certs."kity.wtf".extraDomainNames = [ "push.kity.wtf" ];
