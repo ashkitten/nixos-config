@@ -4,6 +4,7 @@
   imports = [
     ../../desktop.nix
     ./hardware-configuration.nix
+    ../../ups.nix
   ];
 
   boot = {
@@ -76,17 +77,6 @@
       }
     '';
   };
-
-  # TODO: debug why this is broken
-  #power.ups = {
-  #  enable = true;
-  #  ups = {
-  #    tripplite = {
-  #      driver = "usbhid-ups";
-  #      port = "/dev/ttyS0";
-  #    };
-  #  };
-  #};
 
   environment.systemPackages = with pkgs; [
     virtmanager
