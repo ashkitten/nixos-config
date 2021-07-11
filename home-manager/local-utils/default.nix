@@ -1,10 +1,10 @@
-{ stdenv, makeWrapper, pkgs }:
+{ stdenv, lib, makeWrapper, pkgs }:
 
 stdenv.mkDerivation rec {
   name = "local-utils";
   src = ./bin;
   buildInputs = [ makeWrapper ];
-  wrapperPath = with pkgs; stdenv.lib.makeBinPath [
+  wrapperPath = with pkgs; lib.makeBinPath [
     ffmpeg
     grim
     libnotify
@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     xsecurelock
     zsh
   ];
-  wrapperLibPath = with pkgs; stdenv.lib.makeLibraryPath [
+  wrapperLibPath = with pkgs; lib.makeLibraryPath [
     libudev
   ];
   installPhase = ''

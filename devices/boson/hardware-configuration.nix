@@ -8,6 +8,7 @@
     initrd.supportedFilesystems = [ ];
     kernelModules = [ "kvm-amd" "zfs" ];
     extraModulePackages = [ ];
+    kernelParams = [ "resume=UUID=b68651fb-9d82-43fc-b6e9-020ff5d4981d" "resume_offset=24" ];
   };
 
   fileSystems = {

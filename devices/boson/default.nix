@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./conduit.nix
     ../../desktop.nix
     ./hardware-configuration.nix
     ../../ups.nix
@@ -85,10 +86,11 @@
   virtualisation = {
     libvirtd.enable = true;
     spiceUSBRedirection.enable = true;
-    virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
-    };
+    # disable for now (linux 5.10 unsupported)
+    #virtualbox.host = {
+    #  enable = true;
+    #  enableExtensionPack = true;
+    #};
   };
 
   users = {

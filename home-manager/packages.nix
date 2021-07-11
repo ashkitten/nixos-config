@@ -8,28 +8,16 @@
   home.packages = with pkgs; [
     (callPackage ./local-utils {})
     (callPackage ../packages/BeatSyncConsole {})
-    (callPackage ../packages/Beataroni {})
+    #(callPackage ../packages/Beataroni {})
     (callPackage ../packages/ffmt {})
-    (callPackage ../packages/g933-utils {})
+    #(callPackage ../packages/g933-utils {})
     (callPackage ../packages/imgoverlay {})
 
     (pass-wayland.withExtensions (ext: with ext; [ pass-otp ]))
 
-    (let
-      firefox-patched-unwrapped = firefox-unwrapped.overrideAttrs (old: {
-        postFixup = ''
-          sed -i 's/reserved="true"/               /g' $out/lib/firefox/browser/omni.ja
-        '';
-      });
-    in
-      wrapFirefox firefox-patched-unwrapped {
-        browserName = "firefox";
-        pname = "firefox";
-        desktopName = "Firefox";
-        forceWayland = true;
-      }
-    )
-
+    (dwarf-fortress-packages.dwarf-fortress-full.override {
+      theme = "spacefox";
+    })
 
     arduino
     aria2
@@ -39,12 +27,15 @@
     blender
     calc
     calibre
+    carla
+    cura
     direnv
     dolphinEmuMaster
     exa
     feh
     ffmpeg-full
     file
+    firefox
     gist
     glimpse
     gnome3.dconf
@@ -58,6 +49,7 @@
     imagemagick
     inetutils
     inkscape
+    jellyfin-media-player
     jq
     kitty
     krita
@@ -65,7 +57,7 @@
     lm_sensors
     lsof
     ltunify
-    lutris-unwrapped
+    lutris
     mgba
     mpv
     mumble
@@ -75,14 +67,15 @@
     nix-top
     pavucontrol
     pciutils
-    prusa-slicer
     python3Packages.binwalk
     qbittorrent
+    qjackctl
     ranger
     retroarchBare
     ripgrep
-    rofi
+    rnnoise-plugin
     rsync
+    slurp
     ssb-patchwork
     steam
     steam-run

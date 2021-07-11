@@ -117,7 +117,7 @@ let asmsyntax="nasm"
 " Colorscheme
 packadd! onedark-vim
 colorscheme onedark
-highlight Normal guibg=1e2127 ctermbg=None
+highlight Normal guibg=None ctermbg=None
 if $TERM == 'linux'
     colorscheme vividchalk
     set laststatus=0

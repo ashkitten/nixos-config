@@ -12,12 +12,12 @@ let
 in
   stdenv.mkDerivation rec {
     pname = "ffmt";
-    version = "0.9.6.1";
+    version = "0.9.7";
 
     src = fetchgit {
       url = "https://github.com/fosspill/FFXIV_Modding_Tool";
       rev = "v${version}";
-      sha256 = "1rpr1l3d3d8bbgimf7jdrx0r42igfr2qvrw5g032546wpxis0h9i";
+      sha256 = "1fs91bz6glvxwgm7aa90rim5zajddf9j38gzin5azgfi9xfc2rvk";
       fetchSubmodules = true;
     };
 

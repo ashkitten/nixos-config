@@ -13,12 +13,12 @@ let
 in
   stdenv.mkDerivation rec {
     pname = "Beataroni";
-    version = "1.0-git";
+    version = "1.2.0";
 
     src = fetchgit {
       url = "https://github.com/geefr/beatsaber-linux-goodies";
-      rev = "28af979eafe0a3f69e4d1d3308af3663a07f533b";
-      sha256 = "0dxms77ip1lki8gv0jfac4lvbayjx0fvm0s4jqlg72mqdn637a99";
+      rev = version;
+      sha256 = "0bibklfr41l7xgszzbac68h9x5sibx6blgjciz5nqc4qm20ns8qg";
       fetchSubmodules = true;
     };
 

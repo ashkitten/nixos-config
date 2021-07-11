@@ -1,8 +1,8 @@
 { fetchNuGet }: [
   (fetchNuGet {
     name = "BeatSaberModdingTools.Tasks";
-    version = "1.2.1";
-    sha256 = "1jszkf7g6pa333c5c735nyyvjz78qrb6a3ayk9m2r9sj21977cg5";
+    version = "1.3.2";
+    sha256 = "11x9i07jc8w5i5pcpdj80dn8pyjrkv4wq8ynkdcsnzrbvdc0zm86";
   })
   (fetchNuGet {
     name = "CommandLineParser";

@@ -10,5 +10,5 @@ rustPlatform.buildRustPackage {
   };
   nativeBuildInputs = [ pkgconfig ];
   buildInputs = [ libudev ];
-  cargoSha256 = "091bdj90md7yhca8kcil970c1mgx1iap5lcmcqwg0miadbvwjzqy";
+  cargoSha256 = "03x859n9m0dr96wx2kq16iizibq51anzl4mgyfkh5qvjbshhms1g";
 }

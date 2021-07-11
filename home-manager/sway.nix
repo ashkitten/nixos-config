@@ -34,7 +34,10 @@ in
         terminal = "kitty";
         menu = "rofi -show drun";
 
-        fonts = [ "Terminus (TTF) 10.5" ];
+        fonts = {
+          names = [ "Terminus (TTF)" ];
+          size = 10.5;
+        };
 
         keybindings = {
           "${mod}+r" = "reload";
@@ -54,6 +57,9 @@ in
 
           "${mod}+f" = "fullscreen toggle";
           "${mod}+s" = "sticky toggle";
+
+          "${mod}+b" = "border none";
+          "${mod}+Shift+b" = "border pixel 1";
 
           "${mod}+Shift+q" = "kill";
 
@@ -103,7 +109,10 @@ in
             statusCommand = "${pkgs.python3}/bin/python3 ${./swaybar.py}";
             trayOutput = "*";
 
-            fonts = [ "Terminus (TTF) 10.5" ];
+            fonts = {
+              names = [ "Terminus (TTF)" ];
+              size = 10.5;
+            };
 
             colors = {
               separator =  "#666666";
@@ -123,7 +132,7 @@ in
 
         startup = [
           # set wallpaper
-          { command = ''swaybg -i "$(find ~/.wallpapers/ -type f | shuf -n1)"''; }
+          { command = ''${pkgs.swaybg}/bin/swaybg -m fill -i "$(find ~/.wallpapers/ -type f | shuf -n1)"''; }
 
           # don't do this stuff in a nested sway
           {
@@ -142,23 +151,27 @@ in
           }
         ];
 
-        window.commands = [
-          # steam non-main windows
-          { criteria = { class = "^Steam$"; title = "^(?!Steam$)"; }; command = "floating enable"; }
-          # blender user preferences
-          { criteria = { class = "^Blender$"; title = "^Blender Preferences$"; }; command = "floating enable"; }
-          # open-in-browser extension
-          { criteria = { app_id = "^firefox$"; title = "^Extension: \\(Open in Browser\\)"; }; command = "floating enable"; }
-          # firefox picture-in-picture
-          { criteria = { app_id = "^firefox$"; title = "^Picture-in-Picture$"; }; command = "floating enable"; }
-          # nextcloud desktop popup should be floating next to the cursor
-          # this affects the regular window too but i don't know how i could differentiate them
-          { criteria = { app_id = "^com.nextcloud.desktopclient.nextcloud$"; }; command = "floating enable; move position cursor"; }
-        ];
+        window = {
+          commands = [
+            # steam non-main windows
+            { criteria = { class = "^Steam$"; title = "^(?!Steam$)"; }; command = "floating enable"; }
+            # blender user preferences
+            { criteria = { class = "^Blender$"; title = "^Blender Preferences$"; }; command = "floating enable"; }
+            # open-in-browser extension
+            { criteria = { app_id = "^firefox$"; title = "^Extension: \\(Open in Browser\\)"; }; command = "floating enable"; }
+            # firefox picture-in-picture
+            { criteria = { app_id = "^firefox$"; title = "^Picture-in-Picture$"; }; command = "floating enable, sticky enable"; }
+            # nextcloud desktop popup should be floating next to the cursor
+            # this affects the regular window too but i don't know how i could differentiate them
+            { criteria = { app_id = "^com.nextcloud.desktopclient.nextcloud$"; }; command = "floating enable; move position cursor"; }
+          ];
+        };
       };
 
       extraConfig = ''
         titlebar_padding 3 1
+        default_border pixel 1
+        default_floating_border pixel 1
       '';
 
       extraSessionCommands = ''

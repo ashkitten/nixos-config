@@ -87,4 +87,10 @@
       ${builtins.readFile ./functions.zsh}
     '';
   };
+
+  programs.mcfly = {
+    enable = true;
+    enableZshIntegration = true;
+    keyScheme = "vim";
+  };
 }

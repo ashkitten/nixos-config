@@ -8,8 +8,7 @@ function v {
     wl-paste > ${1:-/dev/stdout}
 }
 
-ssh_real=$(which ssh)
 function ssh {
     [[ $TERM = "xterm-kitty" ]] && TERM=xterm-256color
-    $ssh_real $@
+    command ssh $@
 }

@@ -206,16 +206,18 @@
 
   nix.trustedUsers = [ "ash" ];
 
-  security.sudo.extraConfig = ''
-    Defaults!${pkgs.neovim}/bin/nvim env_keep+="HOME PATH"
-    Defaults!${pkgs.git}/bin/git env_keep+="HOME"
-  '';
+  security = {
+    sudo.extraConfig = ''
+      Defaults!${pkgs.neovim}/bin/nvim env_keep+="HOME PATH"
+      Defaults!${pkgs.git}/bin/git env_keep+="HOME"
+    '';
 
-  security.wrappers = {
-    # for ffxiv ACT parsing
-    "wine64" = {
-      source = "${pkgs.wineStaging}/bin/wine64";
-      capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
+    wrappers = {
+      # # for ffxiv ACT parsing
+      # "wine64" = {
+      #   source = "${pkgs.wineStaging}/bin/wine64";
+      #   capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
+      # };
     };
 
     rtkit.enable = true;
@@ -226,6 +228,9 @@
   };
 
   nixpkgs.overlays = [
+    (self: super: {
+    })
+
     (import ./external/nixpkgs-wayland)
 
     (self: super: {

@@ -12,12 +12,12 @@ let
 in
   stdenv.mkDerivation rec {
     pname = "BeatSyncConsole";
-    version = "0.8.1-git";
+    version = "0.9.1";
 
     src = fetchgit {
       url = "https://github.com/Zingabopp/BeatSync";
-      rev = "af5507547a80534916b0dde576f2ff02e4e5487d";
-      sha256 = "1y5cxj727axq0pngwwm24qmd7w6pvklm9cw6ngmmfy1194m831nl";
+      rev = version;
+      sha256 = "0l4k2p9c0mypig4ilyqavjjyiqvv5bprg7gr8x5cb4xkl2025yh4";
       fetchSubmodules = true;
     };
 

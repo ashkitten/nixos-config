@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./conduit.nix
     ./grafana.nix
     ./hardware-configuration.nix
     ./jellyfin.nix
@@ -117,6 +116,17 @@
             };
           };
         };
+
+        "rocks.kity.wtf" = {
+          forceSSL = true;
+          useACMEHost ="kity.wtf";
+
+          locations = {
+            "/" = {
+              proxyPass = "http://10.100.0.2";
+            };
+          };
+        };
       };
     };
   };
@@ -127,6 +137,7 @@
         webroot = "/var/lib/acme/acme-challenge";
         extraDomainNames = [
           "stuff.kity.wtf"
+          "rocks.kity.wtf"
         ];
         group = "nginx";
       };

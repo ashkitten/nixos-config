@@ -3,5 +3,5 @@
 rustPlatform.buildRustPackage {
   name = "initbeep";
   src = ./.;
-  cargoSha256 = "12lmwf62dxvw7kka0ssr653zqarsa88hs2ljr9qyj613vkhvdll9";
+  cargoSha256 = "1ab493n9pw39j3ahhnnljz987amxflx7agy9j7s6qkpf27kiwpz6";
 }
