@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./email.nix
     ./grafana.nix
     ./hardware-configuration.nix
     ./jellyfin.nix
