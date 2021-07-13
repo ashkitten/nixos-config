@@ -43,6 +43,7 @@
     gnupg
     google-chrome
     gptfdisk
+    helix
     hexd
     htop
     hwinfo
