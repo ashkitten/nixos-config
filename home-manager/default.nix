@@ -82,7 +82,8 @@
     mpv = {
       enable = true;
       config = {
-        ytdl-raw-options = "write-auto-sub=,sub-lang=en";
+        ytdl-raw-options = "write-auto-sub=,write-sub=,sub-lang=en";
+        sub-auto = "fuzzy";
         sid = 1;
       };
     };
