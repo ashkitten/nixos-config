@@ -225,6 +225,7 @@
 
   nixpkgs.config = {
     wine.build = "wineWow";
+    mumble.speechdSupport = true;
   };
 
   nixpkgs.overlays = [
