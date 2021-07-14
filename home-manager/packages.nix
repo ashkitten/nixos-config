@@ -36,8 +36,8 @@
     ffmpeg-full
     file
     firefox
+    gimp
     gist
-    glimpse
     gnome3.dconf
     gnome3.defaultIconTheme
     gnupg
