@@ -61,6 +61,7 @@
     lutris
     mgba
     mpv
+    multimc
     mumble
     nextcloud-client
     nix-index
