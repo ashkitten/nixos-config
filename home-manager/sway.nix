@@ -185,7 +185,7 @@ in
     xdg.configFile."xdg-desktop-portal-wlr/config".text = ''
       [screencast]
       output=
-      chooser_cmd="${pkgs.slurp}/bin/slurp -f %o -o"
+      chooser_cmd=${pkgs.slurp}/bin/slurp -f %o -o
       chooser_type=simple
     '';
 

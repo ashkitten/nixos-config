@@ -229,24 +229,6 @@
   };
 
   nixpkgs.overlays = [
-    (self: super: {
-    })
-
     (import ./external/nixpkgs-wayland)
-
-    (self: super: {
-      xdg-desktop-portal-wlr = super.xdg-desktop-portal-wlr.overrideAttrs (old: {
-        src = super.fetchFromGitHub {
-          owner = "columbarius";
-          repo = "xdg-desktop-portal-wlr";
-          rev = "730f3897bbbd5611a6b6ef2bb291002a804007d4";
-          sha256 = "1c2a0sl3mpy9d19y0m6x0h3rbp73dg08502f4hysx97jrz6bzywh";
-        };
-
-        buildInputs = with super; old.buildInputs ++ [
-          iniparser
-        ];
-      });
-    })
   ];
 }
