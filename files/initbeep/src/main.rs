@@ -248,7 +248,7 @@ const TONES: [(i32, u64); 236] = [
 ];
 
 fn main() {
-    let tty = fs::File::open("/dev/tty00").unwrap();
+    let tty = fs::File::open("/dev/tty0").unwrap();
 
     for (frequency, duration) in &TONES {
         unsafe {
