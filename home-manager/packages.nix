@@ -57,6 +57,7 @@
     libnotify
     lm_sensors
     lsof
+    lsp-plugins
     ltunify
     lutris
     mgba
