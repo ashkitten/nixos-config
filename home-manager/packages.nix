@@ -31,6 +31,7 @@
     cura
     direnv
     dolphinEmuMaster
+    easyeffects
     exa
     feh
     ffmpeg-full
