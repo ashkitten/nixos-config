@@ -63,6 +63,7 @@
         emoji = [ "Twitter Color Emoji" ];
         serif = [ "Liberation Serif" "Twitter Color Emoji" ];
         sansSerif = [ "Liberation Sans" "Twitter Color Emoji" ];
+        monospace = [ "Liberation Mono" "Twitter Color Emoji" ]
       };
       useEmbeddedBitmaps = true;
     };
