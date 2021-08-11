@@ -59,7 +59,11 @@
     ];
 
     fontconfig = {
-      defaultFonts.emoji = [ "Twitter Color Emoji" ];
+      defaultFonts = {
+        emoji = [ "Twitter Color Emoji" ];
+        serif = [ "Liberation Serif" "Twitter Color Emoji" ];
+        sansSerif = [ "Liberation Sans" "Twitter Color Emoji" ];
+      };
       useEmbeddedBitmaps = true;
     };
   };
