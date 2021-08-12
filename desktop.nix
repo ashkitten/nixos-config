@@ -175,6 +175,8 @@
         };
       };
     };
+
+    ipfs.enable = true;
   };
 
   systemd.services = {
