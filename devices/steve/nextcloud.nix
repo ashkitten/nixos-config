@@ -4,7 +4,7 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud21;
+      package = pkgs.nextcloud22;
       hostName = "cloud.kity.wtf";
       maxUploadSize = "50G";
       https = true;
