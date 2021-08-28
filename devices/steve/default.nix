@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../external/secrets/steve
     ./email.nix
     ./grafana.nix
     ./hardware-configuration.nix
