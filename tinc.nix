@@ -42,6 +42,10 @@
         Ed25519PublicKey = uPXwJS7rSM0fqdnlnnPd4ZsBA/Vk4P5pjtuP9TgdkmP
         Subnet = 10.100.0.4/32
       '';
+      cotyledon = ''
+        Ed25519PublicKey = 3sTDFLbHBOg+1Q3H7FwjNFxwJGqwwPvR+4UqLh0y2kN
+        Subnet = 10.100.0.5/32
+      '';
     };
   };
 

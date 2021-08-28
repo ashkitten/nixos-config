@@ -50,5 +50,10 @@ in
       };
 
       # 10.100.0.4 reserved for mclargehuge
+
+      cotyledon = {
+        host = "root@10.100.0.5";
+        configuration = ./devices/cotyledon;
+      };
     };
   }
