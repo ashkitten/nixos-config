@@ -60,8 +60,11 @@
 
     obs-studio = {
       enable = true;
-      package = pkgs.obs-studio.override { ffmpeg = pkgs.ffmpeg-full; };
-      plugins = with pkgs; [ obs-wlrobs ];
+      package = pkgs.wrapOBS {
+        plugins = with pkgs.obs-studio-plugins; [
+          wlrobs
+        ];
+      };
     };
 
     beets = {
