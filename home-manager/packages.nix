@@ -9,7 +9,6 @@
     (callPackage ./local-utils {})
     (callPackage ../packages/BeatSyncConsole {})
     #(callPackage ../packages/Beataroni {})
-    (callPackage ../packages/ffmt {})
     #(callPackage ../packages/g933-utils {})
     (callPackage ../packages/imgoverlay {})
 
