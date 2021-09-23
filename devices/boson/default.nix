@@ -95,6 +95,7 @@
 
   users = {
     groups.nut.gid = 84;
+    groups.znapzend = {};
 
     users.nut = {
       isSystemUser = true;
@@ -109,6 +110,7 @@
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIANROgXWkBhhJc4VjmbyIabhpQEb/zzqqcOXJQgt7qIY"
       ];
+      group = "znapzend";
     };
 
     users.ash.extraGroups = [ "libvirtd" "vboxusers" ];

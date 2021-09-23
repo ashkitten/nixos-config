@@ -75,9 +75,13 @@
     ];
   };
 
-  users.users."matrix-media-repo" = {
-    isSystemUser = true;
-    home = "/var/lib/matrix-media-repo";
-    createHome = true;
+  users = {
+    users."matrix-media-repo" = {
+      isSystemUser = true;
+      home = "/var/lib/matrix-media-repo";
+      group = "matrix-media-repo";
+      createHome = true;
+    };
+    groups."matrix-media-repo" = {};
   };
 }
