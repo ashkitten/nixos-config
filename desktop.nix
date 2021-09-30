@@ -144,6 +144,9 @@
 
         # Sony DualSense (Bluetooth)
         KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0005:054C:0CE6.*", MODE="0666"
+
+        # XP-PEN devices
+        SUBSYSTEM=="usb", ATTRS{idVendor}=="28bd", MODE="0666"
       '';
     };
 
