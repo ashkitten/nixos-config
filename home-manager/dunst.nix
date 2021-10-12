@@ -6,8 +6,10 @@
     settings = {
       global = {
         follow = "keyboard";
-        geometry = "800x5-20+20";
-        shrink = "yes";
+        width = "(0, 800)";
+        height = 400;
+        origin = "top-right";
+        offset = "20x20";
         padding = 8;
         horizontal_padding = 8;
         frame_width = 2;
@@ -15,7 +17,6 @@
         font = "Source Code Pro 10";
         markup = "no";
         format = "<b>%s</b> <i>(%a)</i> <b>%p</b>\\n%b";
-        word_wrap = "yes";
         icon_position = "left";
         max_icon_size = 50;
         history_length = 100;
