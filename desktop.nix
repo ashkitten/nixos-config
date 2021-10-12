@@ -239,6 +239,6 @@
   };
 
   nixpkgs.overlays = [
-    (import ./external/nixpkgs-wayland)
+    (import ./external/nixpkgs-wayland/overlay.nix)
   ];
 }
