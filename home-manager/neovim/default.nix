@@ -18,12 +18,13 @@
       vim-polyglot
       vim-tmux-navigator
 
-      (pkgs.vimUtils.buildVimPluginFrom2Nix {
-        name = "firenvim";
+      (pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+        pname = "firenvim";
+        version = "0.2.5";
         src = pkgs.fetchFromGitHub {
           owner = "glacambre";
           repo = "firenvim";
-          rev = "v0.2.5";
+          rev = "v${version}";
           sha256 = "001mv3q7azc5llb6iadiy9s1xpw9a23cipnqcqf0jd94pmy8f6fk";
         };
       })
