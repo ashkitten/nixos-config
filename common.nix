@@ -46,6 +46,10 @@
         enabledCollectors = [ "zfs" ];
       };
     };
+
+    nginx.appendHttpConfig = ''
+      add_header X-Clacks-Overhead "GNU Natalie Nguyen";
+    '';
   };
 
   security.acme = {
