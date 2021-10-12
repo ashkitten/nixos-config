@@ -87,10 +87,10 @@
     libvirtd.enable = true;
     spiceUSBRedirection.enable = true;
     # disable for now (linux 5.10 unsupported)
-    #virtualbox.host = {
-    #  enable = true;
-    #  enableExtensionPack = true;
-    #};
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
   };
 
   users = {
