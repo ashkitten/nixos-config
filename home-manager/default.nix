@@ -74,11 +74,12 @@
         # lastgenre plugin
         enableLastfm = true;
         enableReplaygain = true;
+        enableAcoustid = true;
       };
       settings = {
         directory = "~/nextcloud/media/music/library";
         library = "~/nextcloud/media/music/library.db";
-        plugins = "fetchart replaygain lastgenre";
+        plugins = "fetchart replaygain lastgenre chroma";
       };
     };
 
