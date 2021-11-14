@@ -15,6 +15,16 @@
       '';
     };
 
+    kernelPatches = [
+      ({
+        name = "support-tp-link-ub500";
+        patch = pkgs.fetchpatch {
+          url = "https://patchwork.kernel.org/series/555513/mbox/";
+          sha256 = "0xpklkq4wy08xq9kmf96cbcbq1yaz1k9a1z3hnc58m3cz02gm0rp";
+        };
+      })
+    ];
+
     kernelModules = [ "v4l2loopback" ];
 
     blacklistedKernelModules = [ "hid_steam" ];
