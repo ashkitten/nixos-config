@@ -6,17 +6,22 @@
 
     plugins = with pkgs.vimPlugins; [
       colorizer
-      deoplete-nvim
       editorconfig-vim
       goyo-vim
       lightline-vim
       neomake
       nerdtree
       onedark-vim
-      supertab
       vim-better-whitespace
       vim-polyglot
       vim-tmux-navigator
+      nvim-lspconfig
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      nvim-cmp
+      cmp-vsnip
+      vim-vsnip
 
       (pkgs.vimUtils.buildVimPluginFrom2Nix rec {
         pname = "firenvim";
