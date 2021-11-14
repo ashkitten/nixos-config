@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ./jellyfin.nix
     ./nextcloud.nix
+    ./nitter.nix
     ./synapse.nix
     ./syncplay.nix
     ./unifiedpush.nix
