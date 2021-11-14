@@ -101,7 +101,14 @@
         };
       };
     };
+
+    "cinny.kity.wtf" = {
+      forceSSL = true;
+      useACMEHost = "kity.wtf";
+
+      root = pkgs.cinny;
+    };
   };
 
-  security.acme.certs."kity.wtf".extraDomainNames = [ "matrix.kity.wtf" "element.kity.wtf" ];
+  security.acme.certs."kity.wtf".extraDomainNames = [ "matrix.kity.wtf" "element.kity.wtf" "cinny.kity.wtf" ];
 }
