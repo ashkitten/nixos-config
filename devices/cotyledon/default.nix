@@ -3,6 +3,7 @@
 {
   imports = [
     ../../external/secrets/cotyledon
+    ./email.nix
     ./hardware-configuration.nix
     ./networking.nix
   ];
