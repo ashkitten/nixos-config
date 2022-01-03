@@ -103,7 +103,7 @@
     ".mozilla/native-messaging-hosts/radical.native.json".text = builtins.toJSON {
       name = "radical.native";
       description = "Radical Native";
-      path = "${pkgs.callPackage ../packages/radical-native { rustPlatform = pkgs.rustPackages_1_45.rustPlatform; }}/bin/radical-native";
+      path = "${pkgs.callPackage ../packages/radical-native { rustPlatform = pkgs.rustPackages.rustPlatform; }}/bin/radical-native";
       type = "stdio";
       allowed_extensions = [ "@radical-native" "@riot-webext" ];
     };

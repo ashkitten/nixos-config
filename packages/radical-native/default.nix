@@ -5,11 +5,11 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "stoically";
     repo = "radical-native";
-    rev = "c1216f85a1da9df559217e02b33c90c343348705";
-    sha256 = "1hinfa07gpfnvlk4wy0fql9q6wvnxa2dbvl9zqkkcfbzc4sl5zlm";
+    rev = "bb61bc8535fc2c9d7b7ccdafbc0d7466d0fdba4b";
+    sha256 = "0h9iyn82g887ssc88ccz9n60r4bdqj6g757g9ghg4xd147k9g4zn";
   };
 
   nativeBuildInputs = [ pkgconfig ];
   buildInputs = [ gnome3.libsecret sqlcipher ];
-  cargoSha256 = "0l8kq6mfvbpb52avlxvbqq0dpv5r41dkfp9b8jqal3x16d5k47qk";
+  cargoSha256 = "1xldddz6qnl9xv9ppvl5dcj4fds2b6294jdq8zyiai8pdabqj278";
 }
