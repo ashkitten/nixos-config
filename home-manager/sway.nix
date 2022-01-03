@@ -164,6 +164,8 @@ in
             # nextcloud desktop popup should be floating next to the cursor
             # this affects the regular window too but i don't know how i could differentiate them
             { criteria = { app_id = "^com.nextcloud.desktopclient.nextcloud$"; }; command = "floating enable; move position cursor"; }
+
+            { criteria = { app_id = "^pentablet$"; title="^pentablet$"; }; command = "border none; move position 0 0"; }
           ];
         };
       };
@@ -172,6 +174,8 @@ in
         titlebar_padding 3 1
         default_border pixel 1
         default_floating_border pixel 1
+
+        no_focus [app_id="^pentablet$" title="^pentablet$"]
       '';
 
       extraSessionCommands = ''
