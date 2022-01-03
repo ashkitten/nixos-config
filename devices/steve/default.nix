@@ -63,7 +63,10 @@
   services = {
     openssh.passwordAuthentication = false;
 
-    postgresql.enable = true;
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql_14;
+    };
 
     nginx = {
       enable = true;
