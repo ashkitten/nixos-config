@@ -1,10 +1,6 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./vscode.nix
-  ];
-
   home.packages = with pkgs; [
     (callPackage ./local-utils {})
     (callPackage ../packages/BeatSyncConsole {})
