@@ -93,7 +93,7 @@
     usbutils
     weechat
     wget
-    wine
+    wineStaging
     winetricks
     wireshark
     wl-clipboard
