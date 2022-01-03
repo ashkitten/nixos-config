@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     (callPackage ./local-utils {})
-    (callPackage ../packages/BeatSyncConsole {})
+    #(callPackage ../packages/BeatSyncConsole {})
     #(callPackage ../packages/Beataroni {})
     #(callPackage ../packages/g933-utils {})
     (callPackage ../packages/imgoverlay {})
