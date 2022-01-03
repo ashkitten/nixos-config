@@ -69,6 +69,7 @@
     nix-index
     nix-prefetch-scripts
     nix-top
+    obsidian
     pavucontrol
     pciutils
     python3Packages.binwalk
