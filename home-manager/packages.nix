@@ -7,6 +7,7 @@
     #(callPackage ../packages/Beataroni {})
     #(callPackage ../packages/g933-utils {})
     (callPackage ../packages/imgoverlay {})
+    (callPackage ../packages/poptracker {})
     obs-studio-plugins.obs-vkcapture
 
     (pass-wayland.withExtensions (ext: with ext; [ pass-otp ]))
