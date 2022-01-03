@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./conduit.nix
     ../../desktop.nix
     ./hardware-configuration.nix
     ../../ups.nix
