@@ -72,6 +72,7 @@
     obsidian
     pavucontrol
     pciutils
+    pentablet-driver
     python3Packages.binwalk
     qbittorrent
     qjackctl
