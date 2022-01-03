@@ -63,4 +63,6 @@
   };
 
   systemd.services.wiki-js.serviceConfig.User = "wikijs";
+
+  system.stateVersion = "21.11";
 }
