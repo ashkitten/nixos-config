@@ -58,6 +58,7 @@
     lsp-plugins
     ltunify
     lutris
+    matrix-synapse-tools.synadm
     mgba
     mpv
     multimc

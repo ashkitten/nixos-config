@@ -10,6 +10,8 @@
 
     max_upload_size = "100M";
 
+    enable_registration = true;
+
     listeners = [
       {
         bind_address = "127.0.0.1";
@@ -17,6 +19,15 @@
         type = "http";
         tls = false;
         x_forwarded = true;
+        resources = [
+          { compress = false; names = [ "client" "federation" ]; }
+        ];
+      }
+      {
+        bind_address = "10.100.0.1";
+        port = 8448;
+        type = "http";
+        tls = false;
         resources = [
           { compress = false; names = [ "client" "federation" ]; }
         ];
@@ -31,8 +42,7 @@
     ];
 
     extraConfig = ''
-      experimental_features:
-        spaces_enabled: true
+      registration_requires_token: true
     '';
   };
 
