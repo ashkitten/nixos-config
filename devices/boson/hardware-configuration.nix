@@ -29,5 +29,5 @@
     { device = "/swapfile"; }
   ];
 
-  nix.maxJobs = 12;
+  nix.settings.max-jobs = 12;
 }

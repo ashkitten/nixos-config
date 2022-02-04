@@ -214,7 +214,7 @@
     users.ash = ./home-manager;
   };
 
-  nix.trustedUsers = [ "ash" ];
+  nix.settings.trusted-users = [ "ash" ];
 
   security = {
     sudo.extraConfig = ''

@@ -26,6 +26,7 @@
     calibre
     carla
     cura
+    dconf
     direnv
     dolphinEmuMaster
     easyeffects
@@ -36,8 +37,7 @@
     firefox
     gimp
     gist
-    gnome3.dconf
-    gnome3.defaultIconTheme
+    gnome3.adwaita-icon-theme
     gnupg
     google-chrome
     gptfdisk
@@ -61,7 +61,6 @@
     matrix-synapse-tools.synadm
     mgba
     mpv
-    multimc
     mumble
     nextcloud-client
     nix-index
@@ -71,6 +70,7 @@
     pavucontrol
     pciutils
     pentablet-driver
+    polymc
     python3Packages.binwalk
     qbittorrent
     qjackctl

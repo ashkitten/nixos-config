@@ -1,4 +1,4 @@
-{ rustPlatform, fetchFromGitHub, pkgconfig, gnome3, sqlcipher }:
+{ rustPlatform, fetchFromGitHub, pkgconfig, libsecret, sqlcipher }:
 
 rustPlatform.buildRustPackage {
   name = "radical-native";
@@ -10,6 +10,6 @@ rustPlatform.buildRustPackage {
   };
 
   nativeBuildInputs = [ pkgconfig ];
-  buildInputs = [ gnome3.libsecret sqlcipher ];
+  buildInputs = [ libsecret sqlcipher ];
   cargoSha256 = "1xldddz6qnl9xv9ppvl5dcj4fds2b6294jdq8zyiai8pdabqj278";
 }
