@@ -85,10 +85,12 @@
     steam-run
     strace
     syncplay
+    thunderbird
     tokei
     unrar
     unzip
     usbutils
+    warzone2100
     weechat
     wget
     wineStaging
