@@ -6,6 +6,7 @@
       address = "127.0.0.1";
       https = true;
     };
+    config.tokenCount = 1;
   };
 
   services.nginx.virtualHosts."nitter.kity.wtf" = {
