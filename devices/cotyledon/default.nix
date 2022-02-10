@@ -73,5 +73,7 @@
 
   systemd.services.wiki-js.serviceConfig.User = "wikijs";
 
+  nix.gc.automatic = true;
+
   system.stateVersion = "21.11";
 }
