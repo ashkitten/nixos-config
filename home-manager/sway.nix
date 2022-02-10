@@ -168,6 +168,12 @@ in
             { criteria = { app_id = "^pentablet$"; title="^pentablet$"; }; command = "border none; move position 0 0"; }
           ];
         };
+
+        input = {
+          "*" = {
+            xkb_options = "compose:menu";
+          };
+        };
       };
 
       extraConfig = ''
