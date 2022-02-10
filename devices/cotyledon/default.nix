@@ -34,6 +34,15 @@
             proxyPass = "http://127.0.0.1:3000";
           };
         };
+
+        "discord.humandomestication.guide" = {
+          forceSSL = true;
+          enableACME = true;
+
+          locations."/".extraConfig = ''
+            return 301 https://discord.gg/aywDXava6s;
+          '';
+        };
       };
     };
 
