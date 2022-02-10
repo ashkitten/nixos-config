@@ -18,7 +18,10 @@
     };
 
     extraConfig = ''
-      allow 132.226.42.65; # matrix.gateway.unifiedpush.org
+      # matrix.gateway.unifiedpush.org
+      allow 132.226.42.65;
+      allow 2603:c020:4002:7f5e::99;
+
       deny all;
       client_max_body_size 50M;
     '';
