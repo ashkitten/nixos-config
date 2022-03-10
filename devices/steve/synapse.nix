@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./coturn.nix
+  ];
+
   services.matrix-synapse = {
     enable = true;
     server_name = "kity.wtf";
