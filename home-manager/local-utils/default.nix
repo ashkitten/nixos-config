@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
     zsh
   ];
   wrapperLibPath = with pkgs; lib.makeLibraryPath [
-    libudev
+    udev
   ];
   installPhase = ''
     mkdir -p $out/bin

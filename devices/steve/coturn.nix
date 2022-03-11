@@ -74,7 +74,7 @@
     group = "turnserver";
   };
 
-  services.matrix-synapse = with config.services.coturn; {
+  services.matrix-synapse.settings = with config.services.coturn; {
     # not sure if it's okay to add stun uris to the turn_uris but it seems to work
     # according to the webrtc spec a client MAY use a turn candidate as a stun server but at least firefox does not seem to do this
     # also, firefox doesn't seem to support stuns: uris even though element-android does, so i'm just gonna have both here ¯\_(ツ)_/¯
@@ -84,6 +84,7 @@
       "turns:${realm}:${toString tls-listening-port}?transport=udp"
       "turns:${realm}:${toString tls-listening-port}?transport=tcp"
     ];
+    # FIXME: should use extraConfigFiles to include this without putting it in the nix store
     turn_shared_secret = lib.fileContents ../../external/secrets/steve/secrets/coturn_static_auth_secret;
     turn_user_lifetime = "1h";
   };

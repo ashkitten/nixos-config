@@ -7,47 +7,36 @@
 
   services.matrix-synapse = {
     enable = true;
-    server_name = "kity.wtf";
 
-    enable_metrics = true;
-    url_preview_enabled = true;
+    settings = {
+      server_name = "kity.wtf";
 
-    max_upload_size = "100M";
+      enable_metrics = true;
+      url_preview_enabled = true;
+      max_upload_size = "100M";
+      enable_registration = true;
+      registration_requires_token = true;
 
-    enable_registration = true;
-
-    listeners = [
-      {
-        bind_address = "127.0.0.1";
-        port = 8448;
-        type = "http";
-        tls = false;
-        x_forwarded = true;
-        resources = [
-          { compress = false; names = [ "client" "federation" ]; }
-        ];
-      }
-      {
-        bind_address = "10.100.0.1";
-        port = 8448;
-        type = "http";
-        tls = false;
-        resources = [
-          { compress = false; names = [ "client" "federation" ]; }
-        ];
-      }
-      {
-        bind_address = "127.0.0.1";
-        port = 9000;
-        type = "metrics";
-        tls = false;
-        resources = [];
-      }
-    ];
-
-    extraConfig = ''
-      registration_requires_token: true
-    '';
+      listeners = [
+        {
+          bind_addresses = [ "127.0.0.1" "10.100.0.1" ];
+          port = 8448;
+          type = "http";
+          tls = false;
+          x_forwarded = true;
+          resources = [
+            { compress = false; names = [ "client" "federation" ]; }
+          ];
+        }
+        {
+          bind_addresses = [ "127.0.0.1" ];
+          port = 9000;
+          type = "metrics";
+          tls = false;
+          resources = [];
+        }
+      ];
+    };
   };
 
   services.prometheus.scrapeConfigs = [

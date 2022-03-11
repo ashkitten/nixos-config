@@ -1,5 +1,5 @@
 { qt5, fetchFromGitHub, meson, python3, python3Packages, pkgconfig, glslang, ninja
-, xlibs, vulkan-loader, vulkan-headers }:
+, xorg, vulkan-loader, vulkan-headers }:
 
 qt5.mkDerivation rec {
   pname = "imgoverlay";
@@ -15,7 +15,7 @@ qt5.mkDerivation rec {
   strictDeps = true;
 
   nativeBuildInputs = [ meson python3 python3Packages.Mako pkgconfig glslang ninja ];
-  buildInputs = [ xlibs.libX11 vulkan-loader vulkan-headers qt5.qtwebengine ];
+  buildInputs = [ xorg.libX11 vulkan-loader vulkan-headers qt5.qtwebengine ];
 
   mesonFlags = [
     "-Duse_system_vulkan=enabled"

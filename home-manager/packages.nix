@@ -93,7 +93,7 @@
     warzone2100
     weechat
     wget
-    wineStaging
+    wine-staging
     winetricks
     wireshark
     wl-clipboard

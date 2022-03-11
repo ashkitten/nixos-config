@@ -1,13 +1,13 @@
 { stdenv, lib, fetchgit, fetchurl, makeWrapper, linkFarmFromDrvs
 , dotnet-sdk_5, dotnetCorePackages, dotnetPackages
-, icu, openssl, xlibs, fontconfig
+, icu, openssl, xorg, fontconfig
 }:
 
 let
   runtimeDeps = [
     icu
     openssl
-    xlibs.libX11
+    xorg.libX11
     fontconfig
   ];
 in
