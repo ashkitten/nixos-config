@@ -66,6 +66,20 @@
         monospace = [ "Liberation Mono" "Twitter Color Emoji" ];
       };
       useEmbeddedBitmaps = true;
+
+      # try this at home!
+      #
+      # i won't provide font files because i'm just grabbing this shit from the internet
+      # (not sure if i'm allowed to redistribute)
+      #
+      # log of previous poor choices:
+      # - Hellvetica
+      localConf = ''
+        <match target="pattern">
+          <test qual="any" name="family" compare="not_eq"><string>Bad Handwriting</string></test>
+          <edit name="family" mode="assign" binding="same"><string>Bad Handwriting</string></edit>
+        </match>
+      '';
     };
   };
 
