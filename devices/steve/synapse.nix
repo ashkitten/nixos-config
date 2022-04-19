@@ -100,9 +100,16 @@
             "base_url" = "https://matrix.kity.wtf";
             "server_name" = "kity.wtf";
           };
-          showLabsSettings = true;
+          show_labs_settings = true;
         };
       };
+
+      locations."/".extraConfig = ''
+        add_header X-Frame-Options SAMEORIGIN;
+        add_header X-Content-Type-Options nosniff;
+        add_header X-XSS-Protection "1; mode=block";
+        add_header Content-Security-Policy "frame-ancestors 'none'";
+      '';
     };
 
     "cinny.kity.wtf" = {
@@ -110,6 +117,13 @@
       useACMEHost = "kity.wtf";
 
       root = pkgs.cinny;
+
+      locations."/".extraConfig = ''
+        add_header X-Frame-Options SAMEORIGIN;
+        add_header X-Content-Type-Options nosniff;
+        add_header X-XSS-Protection "1; mode=block";
+        add_header Content-Security-Policy "frame-ancestors 'none'";
+      '';
     };
   };
 
