@@ -97,6 +97,7 @@
     winetricks
     wireshark
     wl-clipboard
+    xivlauncher
     youtube-dl
     zip
     zstd
