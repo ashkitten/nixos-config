@@ -1,18 +1,18 @@
-{ stdenv, fetchFromGitHub, SDL2, SDL2_ttf, SDL2_image }:
+{ stdenv, fetchFromGitHub, SDL2, SDL2_ttf, SDL2_image, openssl }:
 
 stdenv.mkDerivation rec {
   pname = "poptracker";
-  version = "0.17.2";
+  version = "0.20.3";
 
   src = fetchFromGitHub {
     owner = "black-sliver";
     repo = "PopTracker";
     rev = "v${version}";
-    sha256 = "1lfz4mwd25bcja2h9n8zr13virhs050mxy0fs3q4xagqc6c4ihww";
+    sha256 = "sha256-yIQqSy610I2jZREZQebv5Vbh7qfL5sP8WTx3pAgxAmI=";
     fetchSubmodules = true;
   };
 
-  buildInputs = [ SDL2 SDL2_ttf SDL2_image ];
+  buildInputs = [ SDL2 SDL2_ttf SDL2_image openssl ];
 
   buildFlags = [
     "CONF=RELEASE"
