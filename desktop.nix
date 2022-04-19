@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./crimes.nix
     ./gnome-keyring.nix
   ];
 
