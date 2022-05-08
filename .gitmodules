@@ -19,3 +19,6 @@
 [submodule "external/mastodon"]
 	path = external/mastodon
 	url = git@github.com:ashkitten/mastodon.git
+[submodule "external/Jovian-NixOS"]
+	path = external/Jovian-NixOS
+	url = https://github.com/Jovian-Experiments/Jovian-NixOS.git
