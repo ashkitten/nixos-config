@@ -46,14 +46,10 @@
         Ed25519PublicKey = 3sTDFLbHBOg+1Q3H7FwjNFxwJGqwwPvR+4UqLh0y2kN
         Subnet = 10.100.0.5/32
       '';
+      gentoo = ''
+        Ed25519PublicKey = yiXRRIv3S5tzvueKj5FMy2iBqGTd+gmwdzkGglZdpBE
+        Subnet = 10.100.0.6/32
+      '';
     };
-  };
-
-  systemd.services = {
-    # restart in one step so the connection doesn't drop
-    "tinc.t0".stopIfChanged = false;
-
-    "network-link-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
-    "network-addresses-tinc.t0".wantedBy = [ "sys-subsystem-net-devices-tinc.t0.device" ];
   };
 }
