@@ -30,20 +30,20 @@
         enable = true;
         efiSupport = true;
         device = "nodev";
+        efiInstallAsRemovable = true;
 
         useOSProber = true;
 
         extraFiles = {
-          "memtest86.efi" = "${pkgs.memtest86-efi}/BOOTX64.efi";
+          "memtest.efi" = "${pkgs.memtest86plus}/memtest.efi";
         };
 
         extraEntries = ''
-          menuentry "Memtest86" {
-            chainloader /memtest86.efi
+          menuentry "memtest86+" {
+            chainloader /memtest.efi
           }
         '';
       };
-      efi.canTouchEfiVariables = true;
     };
   };
 
