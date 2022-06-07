@@ -16,6 +16,8 @@
       theme = "spacefox";
     })
 
+    (xivlauncher.override { useSteamRun = false; })
+
     arduino
     aria2
     atool
@@ -97,7 +99,6 @@
     winetricks
     wireshark
     wl-clipboard
-    xivlauncher
     youtube-dl
     zip
     zstd

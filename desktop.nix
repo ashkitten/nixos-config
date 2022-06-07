@@ -116,6 +116,7 @@
       packages = with pkgs; [
         pentablet-driver
         yubikey-personalization
+        qflipper
       ];
       extraRules = ''
         # Trinket M0
@@ -226,11 +227,25 @@
     '';
 
     wrappers = {
-      # # for ffxiv ACT parsing
-      # "wine64" = {
-      #   source = "${pkgs.wineStaging}/bin/wine64";
-      #   capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
-      # };
+      # for ffxiv ACT parsing
+      "wine" = {
+        source = "${pkgs.wine-staging}/bin/wine";
+        owner = "root";
+        group = "root";
+        capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
+      };
+      "wine64" = {
+        source = "${pkgs.wine-staging}/bin/wine64";
+        owner = "root";
+        group = "root";
+        capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
+      };
+      "wineboot" = {
+        source = "${pkgs.wine-staging}/bin/wineboot";
+        owner = "root";
+        group = "root";
+        capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
+      };
     };
 
     rtkit.enable = true;
@@ -243,5 +258,16 @@
 
   nixpkgs.overlays = [
     (import ./external/nixpkgs-wayland/overlay.nix)
+
+    (self: super: {
+      wine-staging = super.wine-staging.overrideDerivation (old: {
+        patches = old.patches ++ [
+          (pkgs.fetchpatch {
+            url = "https://github.com/ValveSoftware/wine/commit/157c6cbeb57355384b7ac53558cb96101d3ede10.patch";
+            sha256 = "sha256-Bhp+j8XrR5swR/VbPOxVb+K9Vz9brWzbpJKoTp/cQmY=";
+          })
+        ];
+      });
+    })
   ];
 }
