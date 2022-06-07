@@ -3,9 +3,11 @@
 {
   imports = [
     ../../desktop.nix
-    ./hardware-configuration.nix
     ../../ups.nix
+    ../../sdr.nix
+    ./hardware-configuration.nix
   ];
+
 
   boot = {
     kernelModules = [ "nct6775" ];
