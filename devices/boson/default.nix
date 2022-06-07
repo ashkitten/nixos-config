@@ -120,6 +120,7 @@
   home-manager.users.ash.wayland.windowManager.sway = {
     config.output = {
       DP-2 = { pos = "0 0"; mode = "5120x1440@119.970Hz"; };
+      HDMI-A-1 = { pos = "0 0"; mode = "3840x2160@60Hz"; scale = "2"; };
     };
 
     extraConfig = ''
