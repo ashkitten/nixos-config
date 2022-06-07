@@ -52,6 +52,7 @@
     inkscape
     jellyfin-media-player
     jq
+    kdenlive
     kitty
     krita
     libnotify
