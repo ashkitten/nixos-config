@@ -55,5 +55,10 @@ in
         host = "root@10.100.0.5";
         configuration = ./devices/cotyledon;
       };
+
+      gentoo = {
+        host = "root@10.100.0.6";
+        configuration = ./devices/gentoo;
+      };
     };
   }
