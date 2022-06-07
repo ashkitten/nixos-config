@@ -179,11 +179,6 @@
         };
       };
     };
-
-    ipfs = {
-      enable = true;
-      autoMigrate = true;
-    };
   };
 
   systemd.services = {
