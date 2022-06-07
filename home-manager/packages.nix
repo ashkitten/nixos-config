@@ -76,6 +76,7 @@
     polymc
     python3Packages.binwalk
     qbittorrent
+    qflipper
     qjackctl
     ranger
     retroarchBare
