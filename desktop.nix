@@ -103,14 +103,8 @@
   };
 
   services = {
-    # needed for display manager
     xserver.enable = true;
-
-    # steamvr doesn't work in wayland yet
-    xserver.windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
-    };
+    xserver.displayManager.gdm.enable = true;
 
     udev = {
       packages = with pkgs; [
