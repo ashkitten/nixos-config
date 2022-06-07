@@ -213,7 +213,10 @@
     users.ash = ./home-manager;
   };
 
-  nix.settings.trusted-users = [ "ash" ];
+  nix.settings = {
+    trusted-users = [ "ash" ];
+    experimental-features = [ "nix-command" "flakes" ];
+  };
 
   security = {
     sudo.extraConfig = ''
