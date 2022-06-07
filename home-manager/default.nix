@@ -54,7 +54,7 @@
 
     rofi = {
       enable = true;
-      package = (import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") { inherit pkgs; }).repos.kira-bruneau.rofi-wayland;
+      package = pkgs.rofi-wayland;
       theme = "android_notification";
     };
 
@@ -71,11 +71,12 @@
     beets = {
       enable = true;
       package = pkgs.beets.override {
-        enableFetchart = true;
-        # lastgenre plugin
-        enableLastfm = true;
-        enableReplaygain = true;
-        enableAcoustid = true;
+        pluginOverrides = {
+          fetchart.enable = true;
+          lastfm.enable = true;
+          replaygain.enable = true;
+          acoustid.enable = true;
+        };
       };
       settings = {
         directory = "~/nextcloud/media/music/library";
