@@ -4,7 +4,7 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud23;
+      package = pkgs.nextcloud24;
       hostName = "cloud.kity.wtf";
       maxUploadSize = "50G";
       https = true;
@@ -12,6 +12,7 @@
       config = {
         adminpassFile = toString config.secrets.files.nextcloud_adminpass.file;
       };
+      caching.redis = true;
     };
   };
 
@@ -46,6 +47,16 @@
   services.nginx.virtualHosts."cloud.kity.wtf" = {
     forceSSL = true;
     useACMEHost = "kity.wtf";
+
+    locations."/index.php/apps/uppush".extraConfig = ''
+      # for up-nextpush
+      fastcgi_connect_timeout 10m;
+      fastcgi_send_timeout    10m;
+      fastcgi_read_timeout    10m;
+      fastcgi_buffering off;
+    '';
+
+    locations."=/_matrix/push/v1/notify".proxyPass = "https://cloud.kity.wtf/index.php/apps/uppush/gateway/matrix";
   };
 
   security.acme.certs."kity.wtf".extraDomainNames = [ "cloud.kity.wtf" ];
