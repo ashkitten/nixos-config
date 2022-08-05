@@ -9,39 +9,25 @@
       maxUploadSize = "50G";
       https = true;
       autoUpdateApps.enable = true;
+      caching.redis = true;
       config = {
         adminpassFile = toString config.secrets.files.nextcloud_adminpass.file;
+        dbtype = "pgsql";
+        dbhost = "/run/postgresql";
       };
-      caching.redis = true;
     };
-  };
 
-  systemd.services = {
-    "nextcloud-aria2" =
-      let
-        sessionFile = "/var/lib/nextcloud/aria2.session";
-      in
+    postgresql = {
+      ensureUsers = [
         {
-          description = "aria2 service for nextcloud";
-
-          after = [ "network.target" ];
-          wantedBy = [ "multi-user.target" ];
-
-          preStart = ''
-            if [[ ! -e "${sessionFile}" ]]
-            then
-              touch "${sessionFile}"
-            fi
-          '';
-          script = "${pkgs.aria2}/bin/aria2c --enable-rpc --save-session=${sessionFile}";
-          reload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
-
-          serviceConfig = {
-            User = "nextcloud";
-            Group = "nginx";
-            Restart = "on-abort";
+          name = "nextcloud";
+          ensurePermissions = {
+            "DATABASE nextcloud" = "ALL PRIVILEGES";
           };
-        };
+        }
+      ];
+      ensureDatabases = [ "nextcloud" ];
+    };
   };
 
   services.nginx.virtualHosts."cloud.kity.wtf" = {
@@ -56,7 +42,15 @@
       fastcgi_buffering off;
     '';
 
-    locations."=/_matrix/push/v1/notify".proxyPass = "https://cloud.kity.wtf/index.php/apps/uppush/gateway/matrix";
+    locations."=/_matrix/push/v1/notify" = {
+      proxyPass = "https://cloud.kity.wtf/index.php/apps/uppush/gateway/matrix";
+      extraConfig = ''
+        proxy_buffering off;
+        proxy_connect_timeout 10m;
+        proxy_send_timeout    10m;
+        proxy_read_timeout    10m;
+      '';
+    };
   };
 
   security.acme.certs."kity.wtf".extraDomainNames = [ "cloud.kity.wtf" ];
