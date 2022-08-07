@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
   '';
   postFixup = ''
     find $out/bin -type f -executable | while read file; do
-      patchelf --set-interpreter ${stdenv.glibc}/lib/ld-linux-x86-64.so.2 $file 2>/dev/null || true
+      patchelf --set-interpreter ${pkgs.glibc}/lib/ld-linux-x86-64.so.2 $file 2>/dev/null || true
       wrapProgram $file --prefix PATH : "${wrapperPath}" --prefix LD_LIBRARY_PATH : "${wrapperLibPath}"
     done
   '';
