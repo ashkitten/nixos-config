@@ -1,28 +1,22 @@
-#! /usr/bin/env zsh
+#! /usr/bin/env bash
 
-local choice=$1
+case $1 in
+    monitor)
+        grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" - | wl-copy
+        ;;
 
-function {
-    local tmpfile=$1
+    window)
+        grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy
+        ;;
 
-    case $choice in
-        monitor)
-            grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" - | wl-copy
-            ;;
+    selection)
+        grim -g "$(slurp)" - | wl-copy
+        ;;
+    *)
+        false
+        ;;
+esac
 
-        window)
-            grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy
-            ;;
-
-        selection)
-            grim -g "$(slurp)" - | wl-copy
-            ;;
-        *)
-            false
-            ;;
-    esac
-
-    if [[ $? -eq 0 ]]; then
-        notify-send "Screenshot copied to clipboard"
-    fi
-} =()
+if [[ $? -eq 0 ]]; then
+    notify-send "Screenshot copied to clipboard"
+fi
