@@ -40,7 +40,7 @@
           enableACME = true;
 
           locations."/".extraConfig = ''
-            return 301 https://discord.gg/aywDXava6s;
+            return 301 https://discord.gg/WgssQ6SR4q;
           '';
         };
       };
