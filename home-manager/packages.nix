@@ -73,7 +73,7 @@
     pavucontrol
     pciutils
     pentablet-driver
-    polymc
+    prismlauncher
     python3Packages.binwalk
     qbittorrent
     qflipper
