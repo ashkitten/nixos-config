@@ -4,12 +4,13 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud24;
+      package = pkgs.nextcloud25;
       hostName = "cloud.kity.wtf";
       maxUploadSize = "50G";
       https = true;
       autoUpdateApps.enable = true;
       caching.redis = true;
+      enableBrokenCiphersForSSE = false;
       config = {
         adminpassFile = toString config.secrets.files.nextcloud_adminpass.file;
         dbtype = "pgsql";
