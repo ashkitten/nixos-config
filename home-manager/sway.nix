@@ -182,6 +182,7 @@ in
         default_floating_border pixel 1
 
         no_focus [app_id="^pentablet$" title="^pentablet$"]
+        no_focus [floating]
       '';
 
       extraSessionCommands = ''
