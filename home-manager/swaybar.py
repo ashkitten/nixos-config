@@ -65,7 +65,7 @@ def date_loop():
     global date
 
     while True:
-        date = time.strftime("%B %d, %G - %H:%M")
+        date = time.strftime("%B %d, %Y - %H:%M")
         time.sleep(1.0)
 
 if __name__ == "__main__":
