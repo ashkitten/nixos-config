@@ -3,7 +3,6 @@
 {
   imports = [
     ./dunst.nix
-    ./kakoune
     ./neovim
     ./packages.nix
     ./sway.nix
