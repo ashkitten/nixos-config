@@ -50,6 +50,10 @@
         Ed25519PublicKey = yiXRRIv3S5tzvueKj5FMy2iBqGTd+gmwdzkGglZdpBE
         Subnet = 10.100.0.6/32
       '';
+      claire = ''
+        Ed25519PublicKey = dHGLpxfciozvbOzt5tM4dbGLYJ8q85Oz3JkZ2p5gI9J
+        Subnet = 10.100.0.7/32
+      '';
     };
   };
 }

@@ -8,7 +8,7 @@ let
 in
   import ./external/nixus {} {
     defaults = { name, lib, ... }: {
-      enabled = if nodes == [] then true else lib.elem name nodes;
+      enable = if nodes == [] then true else lib.elem name nodes;
 
       nixpkgs = ./external/nixpkgs;
 

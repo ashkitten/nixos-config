@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     (callPackage ./local-utils {})
     #(callPackage ../packages/BeatSyncConsole {})
-    #(callPackage ../packages/Beataroni {})
     #(callPackage ../packages/g933-utils {})
     (callPackage ../packages/imgoverlay {})
     (callPackage ../packages/poptracker {})
@@ -17,16 +16,19 @@
     })
 
     (xivlauncher.override { useSteamRun = false; })
+    
+    (steam.override { extraLibraries = pkgs: with pkgs; [ gnutls ]; })
 
     arduino
     aria2
     atool
-    audacity
+    # beataroni
     bind
     blender
     calc
     calibre
     carla
+    chrysalis
     cura
     dconf
     direnv
@@ -36,10 +38,10 @@
     feh
     ffmpeg-full
     file
-    firefox
     gimp
     gist
-    gnome3.adwaita-icon-theme
+    github-cli
+    gnome.adwaita-icon-theme
     gnupg
     google-chrome
     gptfdisk
@@ -61,6 +63,7 @@
     lsp-plugins
     ltunify
     lutris
+    manix
     matrix-synapse-tools.synadm
     mgba
     mpv
@@ -70,6 +73,7 @@
     nix-prefetch-scripts
     nix-top
     obsidian
+    osu-lazer
     pavucontrol
     pciutils
     pentablet-driver
@@ -81,14 +85,16 @@
     ranger
     retroarchBare
     ripgrep
+    rnix-lsp
+    rnix-lsp
     rnnoise-plugin
     rsync
     slurp
     ssb-patchwork
-    steam
     steam-run
     strace
     syncplay
+    tenacity
     thunderbird
     tokei
     unrar

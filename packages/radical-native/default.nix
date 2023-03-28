@@ -1,4 +1,4 @@
-{ rustPlatform, fetchFromGitHub, pkgconfig, libsecret, sqlcipher }:
+{ rustPlatform, fetchFromGitHub, pkg-config, libsecret, sqlcipher }:
 
 rustPlatform.buildRustPackage {
   name = "radical-native";
@@ -9,7 +9,7 @@ rustPlatform.buildRustPackage {
     sha256 = "0h9iyn82g887ssc88ccz9n60r4bdqj6g757g9ghg4xd147k9g4zn";
   };
 
-  nativeBuildInputs = [ pkgconfig ];
+  nativeBuildInputs = [ pkg-config ];
   buildInputs = [ libsecret sqlcipher ];
   cargoSha256 = "1xldddz6qnl9xv9ppvl5dcj4fds2b6294jdq8zyiai8pdabqj278";
 }

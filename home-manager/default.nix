@@ -3,6 +3,7 @@
 {
   imports = [
     ./dunst.nix
+    ./firefox.nix
     ./neovim
     ./packages.nix
     ./sway.nix
@@ -58,12 +59,11 @@
 
     obs-studio = {
       enable = true;
-      package = pkgs.wrapOBS {
-        plugins = with pkgs.obs-studio-plugins; [
-          wlrobs
-          obs-vkcapture
-        ];
-      };
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        obs-vkcapture
+        obs-livesplit-one
+      ];
     };
 
     beets = {
@@ -96,17 +96,37 @@
       enable = true;
       nix-direnv.enable = true;
     };
+  
+    gpg = {
+      enable = true;
+      scdaemonSettings.disable-ccid = true;
+    };
+  };
+  
+  services = {
+    gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+    };
   };
 
-  home.file = {
-    ".mozilla/native-messaging-hosts/radical.native.json".text = builtins.toJSON {
-      name = "radical.native";
-      description = "Radical Native";
-      path = "${pkgs.callPackage ../packages/radical-native { rustPlatform = pkgs.rustPackages.rustPlatform; }}/bin/radical-native";
-      type = "stdio";
-      allowed_extensions = [ "@radical-native" "@riot-webext" ];
+  home = {
+    sessionVariables = {
+      VISUAL = "hx";
+      EDITOR = "hx";
+      PAGER = "less";
     };
 
-    ".local/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json".source = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json";
+    file = {
+      ".mozilla/native-messaging-hosts/radical.native.json".text = builtins.toJSON {
+        name = "radical.native";
+        description = "Radical Native";
+        path = "${pkgs.callPackage ../packages/radical-native { rustPlatform = pkgs.rustPackages.rustPlatform; }}/bin/radical-native";
+        type = "stdio";
+        allowed_extensions = [ "@radical-native" "@riot-webext" ];
+      };
+
+      ".local/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json".source = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json";
+    };
   };
 }

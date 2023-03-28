@@ -27,4 +27,5 @@
   boot.blacklistedKernelModules = [ "dvb_usb_rtl28xxu" ];
 
   system.stateVersion = "19.09";
+  home-manager.users.ash.home.stateVersion = "22.05";
 }

@@ -29,30 +29,32 @@
       ];
       ensureDatabases = [ "nextcloud" ];
     };
-  };
 
-  services.nginx.virtualHosts."cloud.kity.wtf" = {
-    forceSSL = true;
-    useACMEHost = "kity.wtf";
+    nginx.virtualHosts."cloud.kity.wtf" = {
+      forceSSL = true;
+      useACMEHost = "kity.wtf";
 
-    locations."/index.php/apps/uppush".extraConfig = ''
-      # for up-nextpush
-      fastcgi_connect_timeout 10m;
-      fastcgi_send_timeout    10m;
-      fastcgi_read_timeout    10m;
-      fastcgi_buffering off;
-    '';
-
-    locations."=/_matrix/push/v1/notify" = {
-      proxyPass = "https://cloud.kity.wtf/index.php/apps/uppush/gateway/matrix";
-      extraConfig = ''
-        proxy_buffering off;
-        proxy_connect_timeout 10m;
-        proxy_send_timeout    10m;
-        proxy_read_timeout    10m;
+      locations."/index.php/apps/uppush".extraConfig = ''
+        # for up-nextpush
+        fastcgi_connect_timeout 10m;
+        fastcgi_send_timeout    10m;
+        fastcgi_read_timeout    10m;
+        fastcgi_buffering off;
       '';
+
+      locations."=/_matrix/push/v1/notify" = {
+        proxyPass = "https://cloud.kity.wtf/index.php/apps/uppush/gateway/matrix";
+        extraConfig = ''
+          proxy_buffering off;
+          proxy_connect_timeout 10m;
+          proxy_send_timeout    10m;
+          proxy_read_timeout    10m;
+        '';
+      };
     };
   };
+
+  environment.systemPackages = with pkgs; [ nodejs ];
 
   security.acme.certs."kity.wtf".extraDomainNames = [ "cloud.kity.wtf" ];
 }

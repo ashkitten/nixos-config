@@ -15,13 +15,14 @@
     useXkbConfig = true;
   };
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_TIME = "en_DK.UTF-8";
+    };
+  };
 
   time.timeZone = "America/New_York";
-
-  environment.variables = {
-    LC_TIME = "en_DK.UTF-8";
-  };
 
   hardware = {
     # just update both
@@ -56,6 +57,10 @@
     acceptTerms = true;
     defaults.email = "example@thisismyactual.email";
   };
+  
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDDZ9/PV++mSSGXeRbS/Pd4Df81cv/7Ds8WlQGmI2yth cardno:12 286 835"
+  ];
 
   nixpkgs.config.allowUnfree = true;
 

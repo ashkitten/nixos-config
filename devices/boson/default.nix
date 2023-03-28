@@ -14,18 +14,15 @@
 
     kernelParams = [
       "zfs.zfs_vdev_scheduler=none"
+      "amd_pstate=passive"
     ];
+    
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   networking = {
     hostName = "boson";
     hostId = "f31db09b";
-
-    firewall.enable = false;
-
-    hosts = {
-      "127.0.0.1" = [ "home.kity.wtf" ];
-    };
 
     # nat for containers
     nat = {
@@ -40,48 +37,9 @@
 
   services.ratbagd.enable = true;
 
-  services.nginx = {
-    enable = true;
-
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
-
-    virtualHosts = {
-      "home.kity.wtf" = {
-        forceSSL = true;
-        enableACME = true;
-
-        locations = {
-          "/" = {
-            root = "/var/lib/stuff";
-            tryFiles = "$uri =404";
-          };
-        };
-      };
-    };
-
-    appendConfig = ''
-      rtmp {
-        server {
-          listen 1935;
-          chunk_size 4096;
-
-          allow publish 127.0.0.1;
-          deny publish all;
-
-          application kity {
-            live on;
-            record off;
-          }
-        }
-      }
-    '';
-  };
-
   environment.systemPackages = with pkgs; [
-    virtmanager
+    virt-manager
+    monado
   ];
 
   virtualisation = {
@@ -118,15 +76,18 @@
 
   home-manager.users.ash.wayland.windowManager.sway = {
     config.output = {
-      DP-2 = { pos = "0 0"; mode = "5120x1440@119.970Hz"; };
-      HDMI-A-1 = { pos = "0 0"; mode = "3840x2160@60Hz"; scale = "2"; };
+      DP-2 = { mode = "5120x1440@119.970Hz"; adaptive_sync = "on"; };
     };
 
     extraConfig = ''
-      workspace 1 output DP-2
-      output DP-1 disable
+      workspace 1 output DP-1
     '';
   };
+  
+  nixpkgs.overlays = [
+    # (import ../../external/nixpkgs-wayland/overlay.nix)
+  ];
 
   system.stateVersion = "19.09";
+  home-manager.users.ash.home.stateVersion = "22.05";
 }

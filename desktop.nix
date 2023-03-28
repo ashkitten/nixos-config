@@ -14,7 +14,7 @@
         ( exec -a @initbeep ${pkgs.callPackage ./files/initbeep {}}/bin/initbeep ) &
       '';
     };
-
+    
     kernelModules = [ "v4l2loopback" ];
 
     blacklistedKernelModules = [ "hid_steam" ];
@@ -72,13 +72,9 @@
   programs = {
     adb.enable = true;
     ccache.enable = true;
-    gnupg.agent = {
-      enable = true;
-      pinentryFlavor = "qt";
-    };
+    ssh.startAgent = true;
     light.enable = true;
     mosh.enable = true;
-    ssh.startAgent = true;
     zsh = {
       enable = true;
       promptInit = "
@@ -96,6 +92,8 @@
 
   hardware = {
     opengl.driSupport32Bit = true;
+    opengl.package = (pkgs.mesa.override { galliumDrivers = [ "radeonsi" "zink" "swrast" ]; }).drivers;
+    opengl.package32  = (pkgs.pkgsi686Linux.mesa.override { galliumDrivers = [ "radeonsi" "zink" "swrast" ]; }).drivers;
     bluetooth.enable = true;
 
     # udev rules for steam hardware
@@ -103,6 +101,7 @@
   };
 
   services = {
+    pcscd.enable = true;
     xserver.enable = true;
     xserver.displayManager.gdm.enable = true;
 
@@ -111,6 +110,7 @@
         pentablet-driver
         yubikey-personalization
         qflipper
+        chrysalis
       ];
       extraRules = ''
         # Trinket M0
@@ -245,21 +245,17 @@
 
   nixpkgs.config = {
     wine.build = "wineWow";
-    mumble.speechdSupport = true;
+    # mumble.speechdSupport = true;
   };
 
   nixpkgs.overlays = [
-    (import ./external/nixpkgs-wayland/overlay.nix)
-
     (self: super: {
-      wine-staging = super.wine-staging.overrideDerivation (old: {
-        patches = old.patches ++ [
-          (pkgs.fetchpatch {
-            url = "https://github.com/ValveSoftware/wine/commit/157c6cbeb57355384b7ac53558cb96101d3ede10.patch";
-            sha256 = "sha256-Bhp+j8XrR5swR/VbPOxVb+K9Vz9brWzbpJKoTp/cQmY=";
-          })
-        ];
-      });
+      easyeffects = super.easyeffects.override {
+        speexdsp = super.speexdsp.overrideAttrs (old: {
+          # disable fftw, https://github.com/NixOS/nixpkgs/issues/189481
+          configureFlags = [];
+        });
+      };
     })
   ];
 }

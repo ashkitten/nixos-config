@@ -7,8 +7,9 @@
     ../../external/Jovian-NixOS/modules
   ];
 
+  #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_jovian;
-  
+
   networking = {
     hostName = "gentoo";
     hostId = "9e023b2a";
@@ -20,6 +21,13 @@
     HandlePowerKey=ignore
     HandlePowerKeyLongPress=suspend
   '';
+  
+  services.xserver.desktopManager.plasma5.enable = true;
+  hardware.pulseaudio.enable = false;
+  # xdg.portal.extraPortals = with pkgs; lib.mkForce [
+  #   xdg-desktop-portal-gtk
+  #   xdg-desktop-portal-wlr
+  # ];
 
   home-manager.users.ash.wayland.windowManager.sway = {
     config = {
@@ -38,4 +46,5 @@
   };
   
   system.stateVersion = "22.05";
+  home-manager.users.ash.home.stateVersion = "22.05";
 }

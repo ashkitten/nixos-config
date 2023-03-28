@@ -23,6 +23,7 @@
     "/home/ash" = { device = "tank/home/ash"; fsType = "zfs"; options = [ "nofail" ]; };
     "/home/ash/Projects" = { device = "tank/home/ash/projects"; fsType = "zfs"; options = [ "nofail" ]; };
     "/home/ash/nextcloud" = { device = "tank/home/ash/nextcloud"; fsType = "zfs"; options = [ "nofail" ]; };
+    "/home/ash/steam" = { device = "tank/home/ash/steam"; fsType = "zfs"; options = [ "nofail" ]; };
   };
 
   swapDevices = [

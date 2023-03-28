@@ -6,12 +6,6 @@
 
     defaultKeymap = "viins";
 
-    sessionVariables = {
-      VISUAL = "nvim";
-      EDITOR = "nvim";
-      PAGER = "less";
-    };
-
     shellAliases = {
       ls = "exa -g";
       exa = "exa -F";
@@ -72,7 +66,6 @@
       setopt hist_find_no_dups
       setopt hist_verify
 
-      setopt extended_glob
       setopt no_match
       setopt notify
       setopt no_beep
