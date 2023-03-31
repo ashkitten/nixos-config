@@ -164,14 +164,6 @@
       };
       pulse.enable = true;
       jack.enable = true;
-      config = {
-        jack = {
-          "jack.properties" = {
-            "jack.short-name" = true;
-            "jack.merge-monitor" = true;
-          };
-        };
-      };
     };
   };
 
@@ -246,6 +238,7 @@
   nixpkgs.config = {
     wine.build = "wineWow";
     # mumble.speechdSupport = true;
+    permittedInsecurePackages = [ "qtwebkit-5.212.0-alpha4" ];
   };
 
   nixpkgs.overlays = [
