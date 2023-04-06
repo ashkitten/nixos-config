@@ -56,6 +56,7 @@
       twitter-color-emoji
       corefonts
       aileron
+      atkinson-hyperlegible
     ];
 
     fontconfig = {
@@ -86,14 +87,22 @@
       extraPackages = with pkgs; [ swaylock swayidle xwayland ];
     };
     wireshark.enable = true;
+
+    gamescope.enable = true;
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+    };
   };
 
   sound.enable = true;
 
   hardware = {
-    opengl.driSupport32Bit = true;
-    opengl.package = (pkgs.mesa.override { galliumDrivers = [ "radeonsi" "zink" "swrast" ]; }).drivers;
-    opengl.package32  = (pkgs.pkgsi686Linux.mesa.override { galliumDrivers = [ "radeonsi" "zink" "swrast" ]; }).drivers;
+    opengl = {
+      driSupport32Bit = true;
+      package = (pkgs.mesa.override { galliumDrivers = [ "radeonsi" "zink" "swrast" ]; }).drivers;
+      package32  = (pkgs.pkgsi686Linux.mesa.override { galliumDrivers = [ "radeonsi" "zink" "swrast" ]; }).drivers;
+    };
     bluetooth.enable = true;
 
     # udev rules for steam hardware
@@ -251,4 +260,14 @@
       };
     })
   ];
+
+  specialisation.hdr.configuration = {
+    system.nixos.tags = [ "hdr" ];
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_testing_hdr;
+    environment.variables = {
+      DXVK_HDR = "1";
+      ENABLE_GAMESCOPE_WSI = "1";
+    };
+    programs.gamescope.args = lib.mkForce [ "--rt" "--hdr-enabled" ];
+  };
 }
