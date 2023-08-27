@@ -27,7 +27,7 @@ in
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
-      systemdIntegration = false;
+      systemd.enable = true;
       config = {
         modifier = mod;
 
@@ -188,8 +188,6 @@ in
       extraSessionCommands = ''
         export MOZ_ENABLE_WAYLAND="1";
         export MOZ_USE_XINPUT2="1";
-        export XDG_SESSION_TYPE="wayland";
-        export XDG_CURRENT_DESKTOP="sway";
       '';
     };
 

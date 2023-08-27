@@ -21,6 +21,6 @@
       };
     };
 
-    certificateScheme = 3;
+    certificateScheme = "acme-nginx";
   };
 }

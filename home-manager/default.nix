@@ -108,6 +108,11 @@
       enable = true;
       enableSshSupport = true;
     };
+
+    kdeconnect = {
+      enable = true;
+      indicator = true;
+    };
   };
 
   home = {

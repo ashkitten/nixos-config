@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
     ./coturn.nix
   ];
 
-  services.matrix-synapse = {
+services.matrix-synapse = {
     enable = true;
 
     settings = {
@@ -16,6 +16,21 @@
       max_upload_size = "100M";
       enable_registration = true;
       registration_requires_token = true;
+      trusted_key_servers = lib.mkForce [
+        {
+          server_name = "matrix.org";
+          verify_keys = {
+            "ed25519:auto" = "Noi6WqcDj0QmPxCNQqgezwTlBKrfqehY1u2FyWP9uYw";
+            "ed25519:a_RXGa" = "l8Hft5qXKn1vfHrg3p4+W8gELQVo8N13JkluMfmn2sQ";
+          };
+        }
+        {
+          server_name = "nyrina.link";
+          verify_keys = {
+            "ed25519:oHl6VZ" = "XTek8L9rdvEakMnQQ0q6V/1m66JCjUVO1iqfIGHPf0c";
+          };
+        }
+      ];
 
       listeners = [
         {
@@ -36,6 +51,15 @@
           resources = [];
         }
       ];
+    };
+
+    sliding-sync = {
+      enable = true;
+      createDatabase = true;
+      environmentFile = toString config.secrets.files.sliding_sync_environment_file.file;
+      settings = {
+        SYNCV3_SERVER = "https://matrix.kity.wtf";
+      };
     };
   };
 
@@ -65,6 +89,7 @@
           let
             client = {
               "m.homeserver" =  { "base_url" = "https://matrix.kity.wtf"; };
+              "org.matrix.msc3575.proxy" = { "url" = "https://matrix.kity.wtf"; };
             };
           # ACAO required to allow riot-web on any URL to request this json file
           in ''
@@ -86,6 +111,10 @@
 
         "/_matrix" = {
           proxyPass = "http://127.0.0.1:8448";
+        };
+
+        "~ ^/(client/|_matrix/client/unstable/org.matrix.msc3575/sync)" = {
+          proxyPass = "http://${config.services.matrix-synapse.sliding-sync.settings.SYNCV3_BINDADDR}";
         };
       };
     };

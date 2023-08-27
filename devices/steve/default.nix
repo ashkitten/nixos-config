@@ -57,6 +57,7 @@
     ripgrep
     tmux
     weechat
+    tcpdump
   ];
 
   services = {

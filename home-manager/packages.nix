@@ -5,7 +5,7 @@
     (callPackage ./local-utils {})
     #(callPackage ../packages/BeatSyncConsole {})
     #(callPackage ../packages/g933-utils {})
-    (callPackage ../packages/imgoverlay {})
+    # (callPackage ../packages/imgoverlay {})
     (callPackage ../packages/poptracker {})
     obs-studio-plugins.obs-vkcapture
 
@@ -17,7 +17,23 @@
 
     (xivlauncher.override { useSteamRun = false; })
     
-    (steam.override { extraLibraries = pkgs: with pkgs; [ gnutls ]; })
+    (steam.override {
+      extraLibraries = pkgs: with pkgs; [
+        gnutls
+
+        # https://github.com/NixOS/nixpkgs/issues/162562#issuecomment-1523177264
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
+      ];
+    })
 
     arduino
     aria2
@@ -34,6 +50,7 @@
     direnv
     dolphinEmuMaster
     easyeffects
+    eww-wayland
     exa
     feh
     ffmpeg-full
@@ -49,6 +66,7 @@
     hexd
     htop
     hwinfo
+    hyprpaper
     imagemagick
     inetutils
     inkscape
@@ -82,7 +100,9 @@
     qbittorrent
     qflipper
     qjackctl
+    qsynth
     ranger
+    remmina
     retroarchBare
     ripgrep
     rnix-lsp
@@ -90,7 +110,8 @@
     rnnoise-plugin
     rsync
     slurp
-    ssb-patchwork
+    socat
+    space-station-14-launcher
     steam-run
     strace
     syncplay

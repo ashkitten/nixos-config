@@ -93,6 +93,10 @@
       enable = true;
       gamescopeSession.enable = true;
     };
+
+    hyprland.enable = true;
+
+    kdeconnect.enable = true;
   };
 
   sound.enable = true;
@@ -100,8 +104,8 @@
   hardware = {
     opengl = {
       driSupport32Bit = true;
-      package = (pkgs.mesa.override { galliumDrivers = [ "radeonsi" "zink" "swrast" ]; }).drivers;
-      package32  = (pkgs.pkgsi686Linux.mesa.override { galliumDrivers = [ "radeonsi" "zink" "swrast" ]; }).drivers;
+      # package = (pkgs.mesa.override { galliumDrivers = [ "radeonsi" "zink" "swrast" ]; }).drivers;
+      # package32  = (pkgs.pkgsi686Linux.mesa.override { galliumDrivers = [ "radeonsi" "zink" "swrast" ]; }).drivers;
     };
     bluetooth.enable = true;
 
@@ -189,9 +193,10 @@
   xdg.portal = {
     enable = true;
     gtkUsePortal = true;
-    extraPortals = with pkgs; [
+    extraPortals = with pkgs; lib.mkForce [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
+      xdg-desktop-portal-hyprland
+      # xdg-desktop-portal-wlr
     ];
   };
 
@@ -214,6 +219,8 @@
   };
 
   security = {
+    polkit.enable = true;
+
     sudo.extraConfig = ''
       Defaults!${pkgs.neovim}/bin/nvim env_keep+="HOME PATH"
       Defaults!${pkgs.git}/bin/git env_keep+="HOME"
@@ -239,6 +246,12 @@
         group = "root";
         capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
       };
+      "sunshine" = {
+        source = "${pkgs.sunshine}/bin/sunshine";
+        owner = "root";
+        group = "root";
+        capabilities = "cap_sys_admin+p";
+      };
     };
 
     rtkit.enable = true;
@@ -246,28 +259,6 @@
 
   nixpkgs.config = {
     wine.build = "wineWow";
-    # mumble.speechdSupport = true;
     permittedInsecurePackages = [ "qtwebkit-5.212.0-alpha4" ];
-  };
-
-  nixpkgs.overlays = [
-    (self: super: {
-      easyeffects = super.easyeffects.override {
-        speexdsp = super.speexdsp.overrideAttrs (old: {
-          # disable fftw, https://github.com/NixOS/nixpkgs/issues/189481
-          configureFlags = [];
-        });
-      };
-    })
-  ];
-
-  specialisation.hdr.configuration = {
-    system.nixos.tags = [ "hdr" ];
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_testing_hdr;
-    environment.variables = {
-      DXVK_HDR = "1";
-      ENABLE_GAMESCOPE_WSI = "1";
-    };
-    programs.gamescope.args = lib.mkForce [ "--rt" "--hdr-enabled" ];
   };
 }
