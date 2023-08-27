@@ -6,7 +6,7 @@
   ];
 
   boot = {
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   };
 

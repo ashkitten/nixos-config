@@ -61,7 +61,7 @@
   ];
 
   services = {
-    openssh.passwordAuthentication = false;
+    openssh.settings.PasswordAuthentication = false;
 
     postgresql = {
       enable = true;

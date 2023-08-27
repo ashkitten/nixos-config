@@ -4,7 +4,7 @@
   services = {
     grafana = {
       enable = true;
-      port = 6000;
+      settings.server.http_port = 6000;
     };
 
     prometheus = {

@@ -50,7 +50,7 @@
   networking.networkmanager.enable = true;
 
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       source-code-pro
       terminus_font_ttf
       twitter-color-emoji
@@ -192,7 +192,6 @@
 
   xdg.portal = {
     enable = true;
-    gtkUsePortal = true;
     extraPortals = with pkgs; lib.mkForce [
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland

@@ -4,30 +4,32 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud25;
+      package = pkgs.nextcloud27;
       hostName = "cloud.kity.wtf";
       maxUploadSize = "50G";
       https = true;
       autoUpdateApps.enable = true;
       caching.redis = true;
       enableBrokenCiphersForSSE = false;
+      database.createLocally = true;
+      fastcgiTimeout = 60 * 10; # 10 minutes
+
       config = {
         adminpassFile = toString config.secrets.files.nextcloud_adminpass.file;
         dbtype = "pgsql";
         dbhost = "/run/postgresql";
+        dbtableprefix = "oc_";
       };
-    };
 
-    postgresql = {
-      ensureUsers = [
-        {
-          name = "nextcloud";
-          ensurePermissions = {
-            "DATABASE nextcloud" = "ALL PRIVILEGES";
-          };
-        }
-      ];
-      ensureDatabases = [ "nextcloud" ];
+      extraOptions = {
+        default_phone_region = "US";
+      };
+
+      phpOptions = {
+        "opcache.interned_strings_buffer" = "16";
+        "opcache.jit" = "1255";
+        "opcache.jit_buffer_size" = "128M";
+      };
     };
 
     nginx.virtualHosts."cloud.kity.wtf" = {

@@ -25,6 +25,6 @@
       "authors@humandomestication.guide" = "humandomesticationguide@gmail.com";
     };
 
-    certificateScheme = 3;
+    certificateScheme = "acme-nginx";
   };
 }
