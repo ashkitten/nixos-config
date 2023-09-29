@@ -16,9 +16,9 @@
 [submodule "external/nixus"]
 	path = external/nixus
 	url = https://github.com/Infinisil/nixus.git
-[submodule "external/mastodon"]
-	path = external/mastodon
-	url = git@github.com:ashkitten/mastodon.git
 [submodule "external/Jovian-NixOS"]
 	path = external/Jovian-NixOS
 	url = https://github.com/Jovian-Experiments/Jovian-NixOS.git
+[submodule "external/nixos-mailserver"]
+	path = external/nixos-mailserver
+	url = https://gitlab.com/simple-nixos-mailserver/nixos-mailserver.git
