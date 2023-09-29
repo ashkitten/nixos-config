@@ -23,7 +23,7 @@
       options v4l2loopback exclusive_caps=1 video_nr=9 card_label="loopback"
     '';
 
-    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
     loader = {
       grub = {
@@ -45,6 +45,11 @@
         '';
       };
     };
+
+    binfmt.emulatedSystems = [
+      "wasm32-wasi"
+      "wasm64-wasi"
+    ];
   };
 
   networking.networkmanager.enable = true;
@@ -57,6 +62,7 @@
       corefonts
       aileron
       atkinson-hyperlegible
+      fira-mono
     ];
 
     fontconfig = {
@@ -111,6 +117,9 @@
 
     # udev rules for steam hardware
     steam-hardware.enable = true;
+
+    # xbox one controllers
+    xone.enable = true;
   };
 
   services = {
@@ -212,9 +221,13 @@
     users.ash = ./home-manager;
   };
 
-  nix.settings = {
-    trusted-users = [ "ash" ];
-    experimental-features = [ "nix-command" "flakes" ];
+  nix = {
+    daemonCPUSchedPolicy = "idle";
+    daemonIOSchedClass = "idle";
+    settings = {
+      trusted-users = [ "ash" ];
+      experimental-features = [ "nix-command" "flakes" ];
+    };
   };
 
   security = {

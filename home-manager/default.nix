@@ -4,15 +4,16 @@
   imports = [
     ./dunst.nix
     ./firefox.nix
+    ./kitty.nix
     ./neovim
     ./packages.nix
     ./sway.nix
     ./zsh
   ];
 
-  # make sure user has the same config and overlays as system
-  xdg.configFile."nixpkgs/config.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.config'';
-  xdg.configFile."nixpkgs/overlays.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.overlays'';
+  # # make sure user has the same config and overlays as system
+  # xdg.configFile."nixpkgs/config.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.config'';
+  # xdg.configFile."nixpkgs/overlays.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.overlays'';
 
   gtk = {
     enable = true;

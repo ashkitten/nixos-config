@@ -40,7 +40,7 @@
     atool
     # beataroni
     bind
-    blender
+    blender-hip
     calc
     calibre
     carla
@@ -51,7 +51,7 @@
     dolphinEmuMaster
     easyeffects
     eww-wayland
-    exa
+    eza
     feh
     ffmpeg-full
     file
@@ -73,7 +73,6 @@
     jellyfin-media-player
     jq
     kdenlive
-    kitty
     krita
     libnotify
     lm_sensors
@@ -121,6 +120,7 @@
     unrar
     unzip
     usbutils
+    vscode
     warzone2100
     weechat
     wget

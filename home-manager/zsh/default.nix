@@ -7,8 +7,7 @@
     defaultKeymap = "viins";
 
     shellAliases = {
-      ls = "exa -g";
-      exa = "exa -F";
+      ls = "eza -gF --hyperlink";
       icat = "kitty +icat";
     };
 
@@ -81,9 +80,9 @@
     '';
   };
 
-  programs.mcfly = {
-    enable = true;
-    enableZshIntegration = true;
-    keyScheme = "vim";
-  };
+  # programs.mcfly = {
+  #   enable = true;
+  #   enableZshIntegration = true;
+  #   keyScheme = "vim";
+  # };
 }

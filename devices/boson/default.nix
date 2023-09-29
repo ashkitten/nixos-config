@@ -42,21 +42,21 @@
     # monado
   ];
 
-  virtualisation = {
-    libvirtd.enable = true;
-    spiceUSBRedirection.enable = true;
-    virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
-    };
-    vmware.host = {
-      enable = true;
-      extraConfig = ''
-        mks.gl.allowUnsupportedDrivers = "TRUE"
-        mks.vk.allowUnsupportedDevices = "TRUE"
-      '';
-    };
-  };
+  # virtualisation = {
+  #   libvirtd.enable = true;
+  #   spiceUSBRedirection.enable = true;
+  #   virtualbox.host = {
+  #     enable = true;
+  #     enableExtensionPack = true;
+  #   };
+  #   vmware.host = {
+  #     enable = true;
+  #     extraConfig = ''
+  #       mks.gl.allowUnsupportedDrivers = "TRUE"
+  #       mks.vk.allowUnsupportedDevices = "TRUE"
+  #     '';
+  #   };
+  # };
 
   users = {
     groups.nut.gid = 84;
