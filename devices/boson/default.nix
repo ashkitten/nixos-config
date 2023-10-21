@@ -42,8 +42,8 @@
     # monado
   ];
 
-  # virtualisation = {
-  #   libvirtd.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
   #   spiceUSBRedirection.enable = true;
   #   virtualbox.host = {
   #     enable = true;
@@ -56,7 +56,7 @@
   #       mks.vk.allowUnsupportedDevices = "TRUE"
   #     '';
   #   };
-  # };
+  };
 
   users = {
     groups.nut.gid = 84;
