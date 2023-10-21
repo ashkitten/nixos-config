@@ -155,6 +155,7 @@
     createHome = false;
     uid = 1000;
     extraGroups = [ "wheel" "systemd-journal" ];
+    linger = true;
   };
 
   nix.gc.automatic = true;

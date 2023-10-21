@@ -214,6 +214,7 @@
     uid = 1000;
     extraGroups = [ "wheel" "disk" "systemd-journal" "dialout" "networkmanager" "video" "wireshark" ];
     shell = pkgs.zsh;
+    linger = true;
   };
 
   home-manager = {
