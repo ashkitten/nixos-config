@@ -11,7 +11,7 @@
     font = {
       package = pkgs.fira-mono;
       name = "Fira Mono";
-      size = 20;
+      size = 10.5;
     };
 
     settings = {
