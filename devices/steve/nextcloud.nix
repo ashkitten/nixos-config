@@ -10,7 +10,6 @@
       https = true;
       autoUpdateApps.enable = true;
       caching.redis = true;
-      enableBrokenCiphersForSSE = false;
       database.createLocally = true;
       fastcgiTimeout = 60 * 10; # 10 minutes
 
