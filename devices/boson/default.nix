@@ -28,14 +28,37 @@
     nat = {
       enable = true;
       internalInterfaces = [ "ve-+" ];
-      externalInterface = "enp3s0f0";
+      externalInterface = "enp5s0";
     };
     networkmanager.unmanaged = [ "interface-name:ve-*" ];
 
     interfaces."tinc.t0".ipv4.addresses = [ { address = "10.100.0.2"; prefixLength = 24; } ];
+
+    firewall.interfaces."enp5s0".allowedUDPPorts = [ 7100 ];
+    firewall.interfaces."enp5s0".allowedTCPPorts = [ 7100 ];
   };
 
   services.ratbagd.enable = true;
+
+  services.icecream = {
+    scheduler = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    daemon = {
+      enable = true;
+      openFirewall = true;
+      openBroadcast = true;
+      nice = 19;
+      extraArgs = [ "-vvv" ];
+    };
+  };
+
+  systemd.services.iceccd-daemon.serviceConfig = {
+    CPUSchedulingPolicy = "idle";
+    IOSchedulingClass = "idle";
+  };
 
   environment.systemPackages = with pkgs; [
     virt-manager

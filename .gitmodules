@@ -22,3 +22,9 @@
 [submodule "external/nixos-mailserver"]
 	path = external/nixos-mailserver
 	url = https://gitlab.com/simple-nixos-mailserver/nixos-mailserver.git
+[submodule "external/lix"]
+	path = external/lix
+	url = git@git.lix.systems:lix-project/lix
+[submodule "external/nixos-module"]
+	path = external/lix-module
+	url = git@git.lix.systems:lix-project/nixos-module

@@ -2,7 +2,9 @@
 
 {
   imports = [
-    ./gnome-keyring.nix
+    (import ./external/lix-module/module.nix { lix = ./external/lix })
+    #./gnome-keyring.nix
+    # ./external/kde2nix/nixos.nix
   ];
 
   boot = {
@@ -14,6 +16,16 @@
         ( exec -a @initbeep ${pkgs.callPackage ./files/initbeep {}}/bin/initbeep ) &
       '';
     };
+
+    # kernelPatches = [
+    #   {
+    #     name = "amd-hdr";
+    #     patch = pkgs.fetchpatch {
+    #       url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/5a45f714daba82a11feae0c8fad436d4b5832a0d/6.5/0001-amd-hdr.patch";
+    #       sha256 = "sha256-/G48qHCYrsk6PQp5IaTBgfo4XjLcoJxa/LkTr2si2/4=";
+    #     };
+    #   }
+    # ];
     
     kernelModules = [ "v4l2loopback" ];
 
@@ -88,16 +100,31 @@
         ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
       ";
     };
+
     sway = {
       enable = true;
       extraPackages = with pkgs; [ swaylock swayidle xwayland ];
     };
+
     wireshark.enable = true;
 
     gamescope.enable = true;
+
     steam = {
       enable = true;
-      gamescopeSession.enable = true;
+      gamescopeSession = {
+        enable = true;
+
+        env = {
+          DXVK_HDR = "1";
+          ENABLE_GAMESCOPE_WSI = "1";
+        };
+
+        args = [
+          "--hdr-enabled"
+          "--hdr-itm-enable"
+        ];
+      };
     };
 
     hyprland.enable = true;
@@ -122,10 +149,31 @@
     xone.enable = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    # for hdr
+    gamescope-wsi
+
+    # kvantum theme engine for kde
+    libsForQt5.qtstyleplugin-kvantum
+    qt6Packages.qtstyleplugin-kvantum
+
+    # https://github.com/NixOS/nixpkgs/issues/280826
+    pcscliteWithPolkit.out
+  ];
+
+  environment.variables.QT_LOGGING_RULES = "kwin_*.debug=true";
+
   services = {
     pcscd.enable = true;
-    xserver.enable = true;
-    xserver.displayManager.gdm.enable = true;
+    xserver = {
+      enable = true;
+      displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
+      # desktopManager.plasma5.enable = true;
+      desktopManager.plasma6.enable = true;
+    };
 
     udev = {
       packages = with pkgs; [
@@ -187,7 +235,13 @@
       pulse.enable = true;
       jack.enable = true;
     };
+
+    # monado.enable = true;
+
+    dbus.implementation = "broker";
   };
+
+  # systemd.user.services.monado.environment.LH_DRIVER = "steamvr";
 
   systemd.services = {
     lock = {
@@ -201,7 +255,11 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; lib.mkForce [
+
+    # apparently resolves bugs involving programs opening inside FHS envs and such
+    xdgOpenUsePortal = true;
+
+    extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
       # xdg-desktop-portal-wlr
@@ -233,45 +291,6 @@
 
   security = {
     polkit.enable = true;
-
-    sudo.extraConfig = ''
-      Defaults!${pkgs.neovim}/bin/nvim env_keep+="HOME PATH"
-      Defaults!${pkgs.git}/bin/git env_keep+="HOME"
-    '';
-
-    wrappers = {
-      # for ffxiv ACT parsing
-      "wine" = {
-        source = "${pkgs.wine-staging}/bin/wine";
-        owner = "root";
-        group = "root";
-        capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
-      };
-      "wine64" = {
-        source = "${pkgs.wine-staging}/bin/wine64";
-        owner = "root";
-        group = "root";
-        capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
-      };
-      "wineboot" = {
-        source = "${pkgs.wine-staging}/bin/wineboot";
-        owner = "root";
-        group = "root";
-        capabilities = "cap_net_raw,cap_net_admin,cap_sys_ptrace+eip";
-      };
-      "sunshine" = {
-        source = "${pkgs.sunshine}/bin/sunshine";
-        owner = "root";
-        group = "root";
-        capabilities = "cap_sys_admin+p";
-      };
-    };
-
     rtkit.enable = true;
-  };
-
-  nixpkgs.config = {
-    wine.build = "wineWow";
-    permittedInsecurePackages = [ "qtwebkit-5.212.0-alpha4" ];
   };
 }

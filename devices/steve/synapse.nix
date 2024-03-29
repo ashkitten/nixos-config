@@ -52,14 +52,14 @@ services.matrix-synapse = {
         }
       ];
     };
+  };
 
-    sliding-sync = {
-      enable = true;
-      createDatabase = true;
-      environmentFile = toString config.secrets.files.sliding_sync_environment_file.file;
-      settings = {
-        SYNCV3_SERVER = "https://matrix.kity.wtf";
-      };
+  services.matrix-sliding-sync = {
+    enable = true;
+    createDatabase = true;
+    environmentFile = toString config.secrets.files.sliding_sync_environment_file.file;
+    settings = {
+      SYNCV3_SERVER = "https://matrix.kity.wtf";
     };
   };
 

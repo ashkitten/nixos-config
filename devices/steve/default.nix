@@ -19,7 +19,7 @@
 
     loader.grub = {
       enable = true;
-      device = "/dev/sda";
+      device = "/dev/disk/by-id/wwn-0x5000cca24bc13fbb";
       extraConfig = ''
         serial --unit=0 --speed=9600
         terminal_input serial

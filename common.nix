@@ -11,7 +11,8 @@
   };
 
   console = {
-    font = "Lat2-Terminus12";
+    earlySetup = true;
+    # font = "Lat2-Terminus12";
     useXkbConfig = true;
   };
 
@@ -51,6 +52,22 @@
     nginx.appendHttpConfig = ''
       add_header X-Clacks-Overhead "GNU Natalie Nguyen";
     '';
+
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      publish = {
+        enable = true;
+        hinfo = true;
+        domain = true;
+        addresses = true;
+      };
+    };
+
+    clamav = {
+      daemon.enable = true;
+      updater.enable = true;
+    };
   };
 
   security.acme = {
@@ -63,7 +80,12 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA9COf2nf4uFGq7WGcVYFpaeTn6cXyg5v99mMb3H4ZnH"
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-25.9.0"
+    ];
+  };
 
   nix.settings.cores = 0;
 }

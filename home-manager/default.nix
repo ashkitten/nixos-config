@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./dunst.nix
+    # ./dunst.nix
     ./firefox.nix
     ./kitty.nix
     ./neovim
@@ -15,17 +15,17 @@
   # xdg.configFile."nixpkgs/config.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.config'';
   # xdg.configFile."nixpkgs/overlays.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.overlays'';
 
-  gtk = {
-    enable = true;
-    theme = {
-      package = pkgs.arc-theme;
-      name = "Arc-Dark";
-    };
-    iconTheme = {
-      package = pkgs.numix-icon-theme;
-      name = "Numix";
-    };
-  };
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     package = pkgs.arc-theme;
+  #     name = "Arc-Dark";
+  #   };
+  #   iconTheme = {
+  #     package = pkgs.numix-icon-theme;
+  #     name = "Numix";
+  #   };
+  # };
 
   programs = {
     browserpass.enable = true;
@@ -36,6 +36,10 @@
       userEmail = "example@thisismyactual.email";
       aliases = {
         l = "log --abbrev-commit --pretty=oneline -n 10";
+        cp-branch = ''
+          branch "cherry-pick-$1" "$2"
+          cherry-pick $1
+        '';
       };
       extraConfig = {
         transfer.fsckobjects = true;
@@ -80,7 +84,12 @@
       settings = {
         directory = "~/nextcloud/media/music/library";
         library = "~/nextcloud/media/music/library.db";
-        plugins = "fetchart replaygain lastgenre chroma";
+        plugins = "fetchart replaygain lastgenre chroma edit scrub acousticbrainz mbsync";
+        lastgenre = {
+          canonical = true;
+          fallback = "";
+          prefer_specific = true;
+        };
       };
     };
 
@@ -102,12 +111,22 @@
       enable = true;
       scdaemonSettings.disable-ccid = true;
     };
+
+    # nushell = {
+    #   enable = true;
+    #   package = pkgs.nushellFull;
+    # };
+
+    # starship = {
+    #   enable = true;
+    # };
   };
   
   services = {
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
+      pinentryPackage = pkgs.pinentry-qt;
     };
 
     kdeconnect = {

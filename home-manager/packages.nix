@@ -35,6 +35,15 @@
       ];
     })
 
+    (protonmail-bridge.overrideAttrs (old: {
+      postPatch = ''
+        substituteInPlace pkg/keychain/helper_linux.go \
+          --replace-fail 'isUsable(newPassHelper(""))' 'false' \
+          --replace-fail 'isUsable(newSecretServiceHelper(""))' 'false'
+      '';
+    }))
+
+    anytype
     arduino
     aria2
     atool
@@ -45,7 +54,7 @@
     calibre
     carla
     chrysalis
-    cura
+    # cura
     dconf
     direnv
     dolphinEmuMaster
@@ -55,12 +64,12 @@
     feh
     ffmpeg-full
     file
+    ghidra
     gimp
     gist
     github-cli
     gnome.adwaita-icon-theme
     gnupg
-    google-chrome
     gptfdisk
     helix
     hexd
@@ -73,8 +82,11 @@
     jellyfin-media-player
     jq
     kdenlive
+    kdePackages.neochat
+    kdePackages.elisa
     krita
     libnotify
+    libreoffice
     lm_sensors
     lsof
     lsp-plugins
@@ -86,31 +98,35 @@
     mpv
     mumble
     nextcloud-client
+    nheko
     nix-index
     nix-prefetch-scripts
     nix-top
     obsidian
+    # opencomposite
+    # opencomposite-helper
     osu-lazer
     pavucontrol
     pciutils
     pentablet-driver
     prismlauncher
+    protontricks
     python3Packages.binwalk
     qbittorrent
     qflipper
     qjackctl
     qsynth
+    r2modman
     ranger
     remmina
     retroarchBare
     ripgrep
-    rnix-lsp
-    rnix-lsp
     rnnoise-plugin
     rsync
     slurp
     socat
     space-station-14-launcher
+    speedcrunch
     steam-run
     strace
     syncplay
@@ -124,7 +140,7 @@
     warzone2100
     weechat
     wget
-    wine-staging
+    winePackages.waylandFull
     winetricks
     wireshark
     wl-clipboard

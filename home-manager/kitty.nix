@@ -63,6 +63,8 @@
       color15 = "#cfd0c2";
 
       kitty_mod = "ctrl+shift";
+
+      scrollback_pager_history_size = 4 * 1024; # in MB
     };
 
     keybindings = {
@@ -80,7 +82,10 @@
       "kitty_mod+page_down" = "scroll_page_down";
       "kitty_mod+home"      = "scroll_home";
       "kitty_mod+end"       = "scroll_end";
-      "kitty_mod+enter"     = "show_scrollback";
+      "kitty_mod+enter"     = "show_last_command_output";
+      "kitty_mod+alt+enter" = "show_scrollback";
+
+      "kitty_mod+n" = "new_os_window_with_cwd";
 
       "kitty_mod+e" = "kitten hints";
       "kitty_mod+p>f" = "kitten hints --type path --program -";

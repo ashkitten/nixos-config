@@ -4,7 +4,7 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud27;
+      package = pkgs.nextcloud28;
       hostName = "cloud.kity.wtf";
       maxUploadSize = "50G";
       https = true;
@@ -20,7 +20,7 @@
         dbtableprefix = "oc_";
       };
 
-      extraOptions = {
+      settings = {
         default_phone_region = "US";
       };
 
