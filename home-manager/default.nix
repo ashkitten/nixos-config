@@ -79,12 +79,13 @@
           lastfm.enable = true;
           replaygain.enable = true;
           acoustid.enable = true;
+          lyrics.enable = true;
         };
       };
       settings = {
         directory = "~/nextcloud/media/music/library";
         library = "~/nextcloud/media/music/library.db";
-        plugins = "fetchart replaygain lastgenre chroma edit scrub acousticbrainz mbsync";
+        plugins = "fetchart replaygain lastgenre chroma edit scrub acousticbrainz mbsync lyrics";
         lastgenre = {
           canonical = true;
           fallback = "";

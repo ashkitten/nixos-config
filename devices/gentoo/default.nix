@@ -22,7 +22,6 @@
     HandlePowerKeyLongPress=suspend
   '';
   
-  services.xserver.desktopManager.plasma5.enable = true;
   hardware.pulseaudio.enable = false;
   # xdg.portal.extraPortals = with pkgs; lib.mkForce [
   #   xdg-desktop-portal-gtk

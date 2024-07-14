@@ -2,7 +2,7 @@
 
 {
   imports = [
-    (import ./external/lix-module/module.nix { lix = ./external/lix })
+    # (import ./external/lix-module/module.nix { lix = ./external/lix; })
     #./gnome-keyring.nix
     # ./external/kde2nix/nixos.nix
   ];
@@ -147,6 +147,8 @@
 
     # xbox one controllers
     xone.enable = true;
+
+    hackrf.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -165,15 +167,12 @@
 
   services = {
     pcscd.enable = true;
-    xserver = {
+
+    displayManager.sddm = {
       enable = true;
-      displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
-      };
-      # desktopManager.plasma5.enable = true;
-      desktopManager.plasma6.enable = true;
+      wayland.enable = true;
     };
+    desktopManager.plasma6.enable = true;
 
     udev = {
       packages = with pkgs; [
@@ -262,6 +261,7 @@
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
+      kdePackages.xdg-desktop-portal-kde
       # xdg-desktop-portal-wlr
     ];
   };

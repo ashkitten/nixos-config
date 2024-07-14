@@ -52,6 +52,7 @@
       openBroadcast = true;
       nice = 19;
       extraArgs = [ "-vvv" ];
+      user = "icecream";
     };
   };
 
@@ -84,12 +85,18 @@
   users = {
     groups.nut.gid = 84;
     groups.znapzend = {};
+    groups.icecream = {};
 
     users.nut = {
       isSystemUser = true;
       uid = 84;
       home = "/var/lib/nut";
       group = "nut";
+    };
+
+    users.icecream = {
+      isSystemUser = true;
+      group = "icecream";
     };
 
     users.znapzend = {

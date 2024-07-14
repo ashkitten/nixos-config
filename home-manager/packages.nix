@@ -100,6 +100,7 @@
     nextcloud-client
     nheko
     nix-index
+    nix-output-monitor
     nix-prefetch-scripts
     nix-top
     obsidian
@@ -123,6 +124,7 @@
     ripgrep
     rnnoise-plugin
     rsync
+    signal-desktop
     slurp
     socat
     space-station-14-launcher
