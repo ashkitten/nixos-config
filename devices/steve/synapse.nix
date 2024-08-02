@@ -152,6 +152,18 @@ services.matrix-synapse = {
         add_header X-Content-Type-Options nosniff;
         add_header X-XSS-Protection "1; mode=block";
         add_header Content-Security-Policy "frame-ancestors 'none'";
+
+        # from https://github.com/cinnyapp/cinny/blob/dev/docker-nginx.conf
+    		rewrite ^/config.json$ /config.json break;
+        rewrite ^/manifest.json$ /manifest.json break;
+
+        rewrite ^.*/olm.wasm$ /olm.wasm break;
+        rewrite ^/pdf.worker.min.js$ /pdf.worker.min.js break;
+
+        rewrite ^/public/(.*)$ /public/$1 break;
+        rewrite ^/assets/(.*)$ /assets/$1 break;
+
+        rewrite ^(.+)$ /index.html break;
       '';
     };
   };
