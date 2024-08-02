@@ -4,30 +4,32 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud28;
+      package = pkgs.nextcloud29;
       hostName = "cloud.kity.wtf";
       maxUploadSize = "50G";
       https = true;
       autoUpdateApps.enable = true;
-      caching.redis = true;
       database.createLocally = true;
       fastcgiTimeout = 60 * 10; # 10 minutes
+      configureRedis = true;
 
       config = {
         adminpassFile = toString config.secrets.files.nextcloud_adminpass.file;
         dbtype = "pgsql";
         dbhost = "/run/postgresql";
-        dbtableprefix = "oc_";
       };
 
       settings = {
+        dbtableprefix = "oc_";
         default_phone_region = "US";
       };
 
       phpOptions = {
-        "opcache.interned_strings_buffer" = "16";
         "opcache.jit" = "1255";
         "opcache.jit_buffer_size" = "128M";
+        "opcache.max_accelerated_files" = "1000000";
+        "opcache.memory_consumption" = "2048";
+        "opcache.interned_strings_buffer" = "128";
       };
     };
 
@@ -46,10 +48,10 @@
       locations."=/_matrix/push/v1/notify" = {
         proxyPass = "https://cloud.kity.wtf/index.php/apps/uppush/gateway/matrix";
         extraConfig = ''
-          proxy_buffering off;
           proxy_connect_timeout 10m;
           proxy_send_timeout    10m;
           proxy_read_timeout    10m;
+          proxy_buffering off;
         '';
       };
     };

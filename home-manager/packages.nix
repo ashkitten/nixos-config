@@ -146,7 +146,7 @@
     winetricks
     wireshark
     wl-clipboard
-    youtube-dl
+    yt-dlp
     zip
     zstd
   ];

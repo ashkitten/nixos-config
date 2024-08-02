@@ -132,8 +132,6 @@
     kdeconnect.enable = true;
   };
 
-  sound.enable = true;
-
   hardware = {
     opengl = {
       driSupport32Bit = true;
