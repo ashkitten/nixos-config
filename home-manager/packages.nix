@@ -68,7 +68,7 @@
     gimp
     gist
     github-cli
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
     gnupg
     gptfdisk
     helix
@@ -112,7 +112,7 @@
     pentablet-driver
     prismlauncher
     protontricks
-    python3Packages.binwalk
+    binwalk
     qbittorrent
     qflipper
     qjackctl
