@@ -4,7 +4,7 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud29;
+      package = pkgs.nextcloud30;
       hostName = "cloud.kity.wtf";
       maxUploadSize = "50G";
       https = true;
@@ -22,14 +22,18 @@
       settings = {
         dbtableprefix = "oc_";
         default_phone_region = "US";
+        log_type = "file";
+        overwriteprotocol = "https";
+        "memories.exiftool" = "${pkgs.exiftool}/bin/exiftool";
+        # "memories.vod.ffmpeg" = "${pkgs.ffmpeg}/bin/ffmpeg";
+        # "memories.vod.ffprobe" = "${pkgs.ffmpeg}/bin/ffprobe";
       };
 
       phpOptions = {
+        "opcache.enable_cli" = "1";
         "opcache.jit" = "1255";
         "opcache.jit_buffer_size" = "128M";
-        "opcache.max_accelerated_files" = "1000000";
-        "opcache.memory_consumption" = "2048";
-        "opcache.interned_strings_buffer" = "128";
+        "opcache.interned_strings_buffer" = "16";
       };
     };
 

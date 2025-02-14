@@ -54,14 +54,14 @@ services.matrix-synapse = {
     };
   };
 
-  services.matrix-sliding-sync = {
-    enable = true;
-    createDatabase = true;
-    environmentFile = toString config.secrets.files.sliding_sync_environment_file.file;
-    settings = {
-      SYNCV3_SERVER = "https://matrix.kity.wtf";
-    };
-  };
+  # services.matrix-sliding-sync = {
+  #   enable = true;
+  #   createDatabase = true;
+  #   environmentFile = toString config.secrets.files.sliding_sync_environment_file.file;
+  #   settings = {
+  #     SYNCV3_SERVER = "https://matrix.kity.wtf";
+  #   };
+  # };
 
   services.prometheus.scrapeConfigs = [
     {
@@ -113,9 +113,9 @@ services.matrix-synapse = {
           proxyPass = "http://127.0.0.1:8448";
         };
 
-        "~ ^/(client/|_matrix/client/unstable/org.matrix.msc3575/sync)" = {
-          proxyPass = "http://${config.services.matrix-sliding-sync.settings.SYNCV3_BINDADDR}";
-        };
+        # "~ ^/(client/|_matrix/client/unstable/org.matrix.msc3575/sync)" = {
+        #   proxypass = "http://${config.services.matrix-sliding-sync.settings.syncv3_bindaddr}";
+        # };
       };
     };
 
@@ -158,6 +158,7 @@ services.matrix-synapse = {
         rewrite ^/manifest.json$ /manifest.json break;
 
         rewrite ^.*/olm.wasm$ /olm.wasm break;
+        rewrite ^/sw.js$ /sw.js break;
         rewrite ^/pdf.worker.min.js$ /pdf.worker.min.js break;
 
         rewrite ^/public/(.*)$ /public/$1 break;

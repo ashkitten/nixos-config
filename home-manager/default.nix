@@ -78,14 +78,14 @@
           fetchart.enable = true;
           lastfm.enable = true;
           replaygain.enable = true;
-          acoustid.enable = true;
           lyrics.enable = true;
+          beetcamp = { enable = true; propagatedBuildInputs = [ pkgs.beetsPackages.beetcamp ]; };
         };
       };
       settings = {
         directory = "~/nextcloud/media/music/library";
         library = "~/nextcloud/media/music/library.db";
-        plugins = "fetchart replaygain lastgenre chroma edit scrub acousticbrainz mbsync lyrics";
+        plugins = "fetchart replaygain lastgenre chroma edit scrub mbsync lyrics bandcamp";
         lastgenre = {
           canonical = true;
           fallback = "";
@@ -132,6 +132,7 @@
 
     kdeconnect = {
       enable = true;
+      package = pkgs.kdePackages.kdeconnect-kde;
       indicator = true;
     };
   };

@@ -57,7 +57,7 @@
     # cura
     dconf
     direnv
-    dolphinEmuMaster
+    dolphin-emu-beta
     easyeffects
     eww-wayland
     eza
