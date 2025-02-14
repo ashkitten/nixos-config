@@ -145,14 +145,6 @@
     };
 
     file = {
-      ".mozilla/native-messaging-hosts/radical.native.json".text = builtins.toJSON {
-        name = "radical.native";
-        description = "Radical Native";
-        path = "${pkgs.callPackage ../packages/radical-native { rustPlatform = pkgs.rustPackages.rustPlatform; }}/bin/radical-native";
-        type = "stdio";
-        allowed_extensions = [ "@radical-native" "@riot-webext" ];
-      };
-
       ".local/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json".source = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json";
     };
   };
