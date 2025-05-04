@@ -18,7 +18,7 @@
 
   services.xserver.xkbVariant = "dvorak";
   home-manager.users.ash.wayland.windowManager.sway.config.input = {
-    "*" = { xkb_layout = "dvorak"; };
+    "*" = { xkb_variant = "dvorak"; };
   };
 
   # sdr stuff

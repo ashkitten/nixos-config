@@ -3,10 +3,15 @@
 {
   imports = [
     ./coturn.nix
+    ./draupnir.nix
   ];
 
 services.matrix-synapse = {
     enable = true;
+
+    plugins = with config.services.matrix-synapse.package.plugins; [
+      synapse-http-antispam
+    ];
 
     settings = {
       server_name = "kity.wtf";
@@ -51,6 +56,29 @@ services.matrix-synapse = {
           resources = [];
         }
       ];
+
+      modules = [
+        {
+          module = "synapse_http_antispam.HTTPAntispam";
+          config = {
+            base_url = "http://localhost:8080/api/1/spam_check";
+            authorization = "very secret auth string";
+            enabled_callbacks = [
+              "check_event_for_spam"
+              "user_may_invite"
+              "user_may_join_room"
+            ];
+            fail_open = {
+              check_event_for_spam = true;
+              user_may_invite = true;
+              user_may_join_room = true;
+            };
+            async = {
+              check_event_for_spam = true;
+            };
+          };
+        }
+      ];
     };
   };
 
@@ -66,6 +94,7 @@ services.matrix-synapse = {
   services.prometheus.scrapeConfigs = [
     {
       job_name = "synapse";
+      metrics_path = "/_synapse/metrics";
       static_configs = [
         { targets = [ "127.0.0.1:9000" ]; }
       ];
@@ -105,17 +134,13 @@ services.matrix-synapse = {
       useACMEHost = "kity.wtf";
 
       locations = {
-        "/".extraConfig = ''
-            return 404;
-        '';
+        "/" = {
+          return = "404";
+        };
 
         "/_matrix" = {
           proxyPass = "http://127.0.0.1:8448";
         };
-
-        # "~ ^/(client/|_matrix/client/unstable/org.matrix.msc3575/sync)" = {
-        #   proxypass = "http://${config.services.matrix-sliding-sync.settings.syncv3_bindaddr}";
-        # };
       };
     };
 

@@ -81,7 +81,7 @@
     inkscape
     jellyfin-media-player
     jq
-    kdenlive
+    kdePackages.kdenlive
     kdePackages.neochat
     kdePackages.elisa
     krita
