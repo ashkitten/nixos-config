@@ -78,6 +78,7 @@
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDDZ9/PV++mSSGXeRbS/Pd4Df81cv/7Ds8WlQGmI2yth cardno:12 286 835"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA9COf2nf4uFGq7WGcVYFpaeTn6cXyg5v99mMb3H4ZnH"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGfEjFxICM8XxLy46DBGKFpb8qGelsGpNWBV8e0R0CpD"
   ];
 
   nixpkgs.config = {

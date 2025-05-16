@@ -63,7 +63,4 @@
       proxy_pass http://127.0.0.1:8448$request_uri;
     '';
   };
-
-  # remove once CI checks pass on https://github.com/NixOS/nixpkgs/pull/400194
-  documentation.nixos.enable = lib.mkForce false;
 }
