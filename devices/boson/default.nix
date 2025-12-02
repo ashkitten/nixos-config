@@ -56,6 +56,8 @@
     };
   };
 
+  services.qemuGuest.enable = true;
+
   systemd.services.iceccd-daemon.serviceConfig = {
     CPUSchedulingPolicy = "idle";
     IOSchedulingClass = "idle";
