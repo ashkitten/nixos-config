@@ -143,6 +143,7 @@
         extraDomainNames = [
           "stuff.kity.wtf"
           "rocks.kity.wtf"
+          "mail.kity.wtf"
         ];
         group = "nginx";
       };

@@ -58,7 +58,6 @@
 
     rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
       theme = "android_notification";
     };
 
@@ -73,13 +72,13 @@
 
     beets = {
       enable = true;
-      package = pkgs.beets.override {
+      package = pkgs.python3.pkgs.beets.override {
         pluginOverrides = {
           fetchart.enable = true;
           lastfm.enable = true;
           replaygain.enable = true;
           lyrics.enable = true;
-          beetcamp = { enable = true; propagatedBuildInputs = [ pkgs.beetsPackages.beetcamp ]; };
+          beetcamp = { enable = true; propagatedBuildInputs = [ pkgs.python3.pkgs.beetcamp ]; };
         };
       };
       settings = {

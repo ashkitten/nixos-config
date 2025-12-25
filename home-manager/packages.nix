@@ -57,9 +57,9 @@
     # cura
     dconf
     direnv
-    dolphin-emu-beta
+    dolphin-emu
     easyeffects
-    eww-wayland
+    eww
     eza
     feh
     ffmpeg-full
@@ -93,7 +93,6 @@
     ltunify
     lutris
     manix
-    matrix-synapse-tools.synadm
     mgba
     mpv
     mumble
@@ -109,18 +108,17 @@
     osu-lazer
     pavucontrol
     pciutils
-    pentablet-driver
     prismlauncher
     protontricks
     binwalk
     qbittorrent
-    qflipper
+    qFlipper
     qjackctl
     qsynth
     r2modman
     ranger
     remmina
-    retroarchBare
+    retroarch-bare
     ripgrep
     rnnoise-plugin
     rsync
@@ -131,6 +129,7 @@
     speedcrunch
     steam-run
     strace
+    synadm
     syncplay
     tenacity
     thunderbird
@@ -146,6 +145,7 @@
     winetricks
     wireshark
     wl-clipboard
+    xp-pen-g430-driver
     yt-dlp
     zip
     zstd

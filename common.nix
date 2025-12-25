@@ -84,8 +84,9 @@
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
+      "qtwebengine-5.15.19"
       # "electron-25.9.0"
-      "cinny-unwrapped-4.2.3"
+      # "cinny-unwrapped-4.2.3"
       "olm-3.2.16"
     ];
   };

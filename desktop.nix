@@ -174,9 +174,9 @@
 
     udev = {
       packages = with pkgs; [
-        pentablet-driver
+        xp-pen-g430-driver
         yubikey-personalization
-        qflipper
+        qFlipper
         chrysalis
       ];
       extraRules = ''

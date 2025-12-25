@@ -6,7 +6,7 @@
     package = pkgs.firefox.override {
       nativeMessagingHosts = with pkgs; [
         tridactyl-native
-        plasma5Packages.plasma-browser-integration
+        kdePackages.plasma-browser-integration
       ];
     };
   };

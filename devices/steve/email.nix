@@ -21,7 +21,7 @@
       };
     };
 
-    certificateScheme = "acme-nginx";
+    x509.useACMEHost = config.mailserver.fqdn;
 
     stateVersion = 3;
   };
