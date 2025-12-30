@@ -21,7 +21,7 @@
       };
     };
 
-    x509.useACMEHost = config.mailserver.fqdn;
+    x509.useACMEHost = "kity.wtf";
 
     stateVersion = 3;
   };

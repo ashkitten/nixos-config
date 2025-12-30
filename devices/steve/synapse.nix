@@ -64,17 +64,12 @@ services.matrix-synapse = {
             base_url = "http://localhost:8080/api/1/spam_check";
             authorization = "very secret auth string";
             enabled_callbacks = [
-              "check_event_for_spam"
               "user_may_invite"
               "user_may_join_room"
             ];
             fail_open = {
-              check_event_for_spam = true;
               user_may_invite = true;
               user_may_join_room = true;
-            };
-            async = {
-              check_event_for_spam = true;
             };
           };
         }
