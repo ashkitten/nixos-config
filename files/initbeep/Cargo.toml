@@ -5,7 +5,7 @@ authors = ["ash lea <ashlea@protonmail.com>"]
 edition = "2018"
 
 [dependencies]
-nix = "0.13.0"
+nix = "0.20.2"
 libc = "0.2.54"
 
 [profile.release]
