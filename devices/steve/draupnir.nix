@@ -4,10 +4,10 @@
 {
   services.draupnir = {
     enable = true;
-    homeserverUrl = "https://matrix.kity.wtf";
-    accessTokenFile = toString config.secrets.files.draupnir_access_token.file;
+    secrets.accessToken = toString config.secrets.files.draupnir_access_token.file;
 
     settings = {
+      homeserverUrl = "https://matrix.kity.wtf";
       rawHomeserverUrl = "https://matrix.kity.wtf";
 
       managementRoom = "#draupnir-management:kity.wtf";
