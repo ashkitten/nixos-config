@@ -4,7 +4,6 @@
   imports = [
     # (import ./external/lix-module/module.nix { lix = ./external/lix; })
     #./gnome-keyring.nix
-    # ./external/kde2nix/nixos.nix
   ];
 
   boot = {
@@ -16,16 +15,6 @@
         ( exec -a @initbeep ${pkgs.callPackage ./files/initbeep {}}/bin/initbeep ) &
       '';
     };
-
-    # kernelPatches = [
-    #   {
-    #     name = "amd-hdr";
-    #     patch = pkgs.fetchpatch {
-    #       url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/5a45f714daba82a11feae0c8fad436d4b5832a0d/6.5/0001-amd-hdr.patch";
-    #       sha256 = "sha256-/G48qHCYrsk6PQp5IaTBgfo4XjLcoJxa/LkTr2si2/4=";
-    #     };
-    #   }
-    # ];
     
     kernelModules = [ "v4l2loopback" ];
 
@@ -89,21 +78,13 @@
   };
 
   programs = {
-    adb.enable = true;
-    ccache.enable = true;
     ssh.startAgent = true;
-    light.enable = true;
-    mosh.enable = true;
+
     zsh = {
       enable = true;
       promptInit = "
         ${pkgs.any-nix-shell}/bin/any-nix-shell zsh | source /dev/stdin
       ";
-    };
-
-    sway = {
-      enable = true;
-      extraPackages = with pkgs; [ swaylock swayidle xwayland ];
     };
 
     wireshark.enable = true;
@@ -127,8 +108,6 @@
       };
     };
 
-    hyprland.enable = true;
-
     kdeconnect.enable = true;
   };
 
@@ -142,11 +121,6 @@
 
     # udev rules for steam hardware
     steam-hardware.enable = true;
-
-    # xbox one controllers
-    xone.enable = true;
-
-    hackrf.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -174,7 +148,6 @@
 
     udev = {
       packages = with pkgs; [
-        xp-pen-g430-driver
         yubikey-personalization
         qFlipper
         chrysalis
@@ -232,13 +205,7 @@
       pulse.enable = true;
       jack.enable = true;
     };
-
-    # monado.enable = true;
-
-    dbus.implementation = "broker";
   };
-
-  # systemd.user.services.monado.environment.LH_DRIVER = "steamvr";
 
   systemd.services = {
     lock = {
@@ -258,9 +225,7 @@
 
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
       kdePackages.xdg-desktop-portal-kde
-      # xdg-desktop-portal-wlr
     ];
   };
 

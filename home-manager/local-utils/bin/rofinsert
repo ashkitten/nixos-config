@@ -1,9 +1,0 @@
-#! /usr/bin/env zsh
-
-# Get list of passwords
-prefix=${PASSWORD_STORE_DIR-"$HOME/.password-store"}
-password_files=($prefix/**/*.gpg)
-password_files=(${password_files[@]#$prefix/})
-password_files=(${password_files[@]%.gpg})
-password_file=$(printf '%s\n' ${password_files[@]} | rofi -dmenu -p password -i)
-pass show $password_file | awk 'NR==1 {print $1}' | wl-copy -o

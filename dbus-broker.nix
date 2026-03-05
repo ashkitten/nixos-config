@@ -2,7 +2,10 @@
 
 {
   services = {
-    dbus.enable = false;
+    dbus = {
+      enable = false;
+      implementation = "broker";
+    };
     dbus-broker.enable = true;
   };
 

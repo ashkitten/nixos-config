@@ -3,37 +3,11 @@
 {
   home.packages = with pkgs; [
     (callPackage ./local-utils {})
-    #(callPackage ../packages/BeatSyncConsole {})
-    #(callPackage ../packages/g933-utils {})
-    # (callPackage ../packages/imgoverlay {})
-    (callPackage ../packages/poptracker {})
     obs-studio-plugins.obs-vkcapture
 
     (pass-wayland.withExtensions (ext: with ext; [ pass-otp ]))
 
-    (dwarf-fortress-packages.dwarf-fortress-full.override {
-      theme = "spacefox";
-    })
-
     (xivlauncher.override { useSteamRun = false; })
-    
-    (steam.override {
-      extraLibraries = pkgs: with pkgs; [
-        gnutls
-
-        # https://github.com/NixOS/nixpkgs/issues/162562#issuecomment-1523177264
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXinerama
-        xorg.libXScrnSaver
-        libpng
-        libpulseaudio
-        libvorbis
-        stdenv.cc.cc.lib
-        libkrb5
-        keyutils
-      ];
-    })
 
     (protonmail-bridge.overrideAttrs (old: {
       postPatch = ''
@@ -44,17 +18,14 @@
     }))
 
     anytype
-    arduino
     aria2
     atool
-    # beataroni
     bind
-    blender-hip
+    blender
     calc
     calibre
     carla
     chrysalis
-    # cura
     dconf
     direnv
     dolphin-emu
@@ -75,7 +46,6 @@
     hexd
     htop
     hwinfo
-    hyprpaper
     imagemagick
     inetutils
     inkscape
@@ -103,8 +73,6 @@
     nix-prefetch-scripts
     nix-top
     obsidian
-    # opencomposite
-    # opencomposite-helper
     osu-lazer
     pavucontrol
     pciutils
@@ -127,10 +95,10 @@
     socat
     space-station-14-launcher
     speedcrunch
+    steam
     steam-run
     strace
     synadm
-    syncplay
     tenacity
     thunderbird
     tokei
@@ -145,7 +113,6 @@
     winetricks
     wireshark
     wl-clipboard
-    xp-pen-g430-driver
     yt-dlp
     zip
     zstd

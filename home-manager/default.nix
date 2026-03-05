@@ -2,30 +2,15 @@
 
 {
   imports = [
-    # ./dunst.nix
     ./firefox.nix
     ./kitty.nix
-    ./neovim
     ./packages.nix
-    ./sway.nix
     ./zsh
   ];
 
   # # make sure user has the same config and overlays as system
   # xdg.configFile."nixpkgs/config.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.config'';
   # xdg.configFile."nixpkgs/overlays.nix".text = ''(import <nixpkgs/nixos> {}).config.nixpkgs.overlays'';
-
-  # gtk = {
-  #   enable = true;
-  #   theme = {
-  #     package = pkgs.arc-theme;
-  #     name = "Arc-Dark";
-  #   };
-  #   iconTheme = {
-  #     package = pkgs.numix-icon-theme;
-  #     name = "Numix";
-  #   };
-  # };
 
   programs = {
     browserpass.enable = true;
@@ -54,11 +39,6 @@
     tmux = {
       enable = true;
       extraConfig = builtins.readFile ./dotfiles/.tmux.conf;
-    };
-
-    rofi = {
-      enable = true;
-      theme = "android_notification";
     };
 
     obs-studio = {
@@ -93,15 +73,6 @@
       };
     };
 
-    mpv = {
-      enable = true;
-      config = {
-        ytdl-raw-options = "write-auto-sub=,write-sub=,sub-lang=en";
-        sub-auto = "fuzzy";
-        sid = 1;
-      };
-    };
-
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -111,15 +82,6 @@
       enable = true;
       scdaemonSettings.disable-ccid = true;
     };
-
-    # nushell = {
-    #   enable = true;
-    #   package = pkgs.nushellFull;
-    # };
-
-    # starship = {
-    #   enable = true;
-    # };
   };
   
   services = {
@@ -141,10 +103,6 @@
       VISUAL = "hx";
       EDITOR = "hx";
       PAGER = "less";
-    };
-
-    file = {
-      ".local/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json".source = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json";
     };
   };
 }

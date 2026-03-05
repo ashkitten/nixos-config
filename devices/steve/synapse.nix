@@ -176,10 +176,6 @@ services.matrix-synapse = {
         "federation_sender"
       ];
 
-      outbound_federation_restricted_to = [
-        "federation_sender"
-      ];
-
       # stream_writers = {
       #   events = [ "client" ];
       #   typing = [ "client" ];
@@ -211,15 +207,6 @@ services.matrix-synapse = {
   };
 
   services.synapse-auto-compressor.enable = true;
-
-  # services.matrix-sliding-sync = {
-  #   enable = true;
-  #   createDatabase = true;
-  #   environmentFile = toString config.secrets.files.sliding_sync_environment_file.file;
-  #   settings = {
-  #     SYNCV3_SERVER = "https://matrix.kity.wtf";
-  #   };
-  # };
 
   services.prometheus.scrapeConfigs = [
     {
