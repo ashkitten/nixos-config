@@ -8,10 +8,109 @@
 
 services.matrix-synapse = {
     enable = true;
+    withJemalloc = true;
+    configureRedisLocally = true; # needed for workers
 
     plugins = with config.services.matrix-synapse.package.plugins; [
       synapse-http-antispam
     ];
+
+    workers = {
+      "federation_sender" = {
+        worker_listeners = [
+          {
+            bind_addresses = [ "127.0.0.1" ];
+            port = 9001;
+            type = "metrics";
+            tls = false;
+            resources = [];
+          }
+          {
+            bind_addresses = [ "127.0.0.1" ];
+            path = "/run/matrix-synapse/federation_sender_replication.sock";
+            type = "http";
+            resources = [
+              { names = [ "replication" ]; }
+            ];
+          }
+        ];
+      };
+
+      "federation_receiver" = {
+        worker_listeners = [
+          {
+            bind_addresses = [ "127.0.0.1" ];
+            port = 8084;
+            type = "http";
+            tls = false;
+            x_forwarded = true;
+            resources = [
+              { names = [ "federation" ]; }
+            ];
+          }
+          {
+            bind_addresses = [ "127.0.0.1" ];
+            port = 9002;
+            type = "metrics";
+            tls = false;
+            resources = [];
+          }
+        ];
+      };
+
+      "client" = {
+        worker_listeners = [
+          {
+            bind_addresses = [ "127.0.0.1" ];
+            path = "/run/matrix-synapse/client_replication.sock";
+            type = "http";
+            resources = [
+              { names = [ "replication" ]; }
+            ];
+          }
+          {
+            bind_addresses = [ "127.0.0.1" "10.100.0.1" ];
+            port = 8085;
+            type = "http";
+            tls = false;
+            x_forwarded = true;
+            resources = [
+              { names = [ "client" ]; }
+            ];
+          }
+          {
+            bind_addresses = [ "127.0.0.1" ];
+            port = 9003;
+            type = "metrics";
+            tls = false;
+            resources = [];
+          }
+        ];
+      };
+
+      # "media" = {
+      #   worker_app = "synapse.app.media_repository";
+      #   worker_listeners = [
+      #     {
+      #       bind_addresses = [ "127.0.0.1" ];
+      #       port = 8083;
+      #       type = "http";
+      #       tls = false;
+      #       x_forwarded = true;
+      #       resources = [
+      #         { names = [ "media" ]; }
+      #       ];
+      #     }
+      #     {
+      #       bind_addresses = [ "127.0.0.1" ];
+      #       port = 9004;
+      #       type = "metrics";
+      #       tls = false;
+      #       resources = [];
+      #     }
+      #   ];
+      # };
+    };
 
     settings = {
       server_name = "kity.wtf";
@@ -21,6 +120,9 @@ services.matrix-synapse = {
       max_upload_size = "100M";
       enable_registration = true;
       registration_requires_token = true;
+
+      # enable_media_repo = false;
+
       trusted_key_servers = lib.mkForce [
         {
           server_name = "matrix.org";
@@ -39,13 +141,20 @@ services.matrix-synapse = {
 
       listeners = [
         {
+          path = "/run/matrix-synapse/main_replication.sock";
+          type = "http";
+          resources = [
+            { names = [ "replication" ]; }
+          ];
+        }
+        {
           bind_addresses = [ "127.0.0.1" "10.100.0.1" ];
           port = 8448;
           type = "http";
           tls = false;
           x_forwarded = true;
           resources = [
-            { compress = false; names = [ "client" "federation" ]; }
+            { names = [ "federation" "client" ]; }
           ];
         }
         {
@@ -56,6 +165,30 @@ services.matrix-synapse = {
           resources = [];
         }
       ];
+
+      instance_map = {
+        main.path = "/run/matrix-synapse/main_replication.sock";
+        client.path = "/run/matrix-synapse/client_replication.sock";
+        federation_sender.path = "/run/matrix-synapse/federation_sender_replication.sock";
+      };
+
+      federation_sender_instances = [
+        "federation_sender"
+      ];
+
+      outbound_federation_restricted_to = [
+        "federation_sender"
+      ];
+
+      # stream_writers = {
+      #   events = [ "client" ];
+      #   typing = [ "client" ];
+      #   to_device = [ "client" ];
+      #   account_data = [ "client" ];
+      #   receipts = [ "client" ];
+      #   presence = [ "client" ];
+      #   device_lists = [ "client" ];
+      # };
 
       modules = [
         {
@@ -77,6 +210,8 @@ services.matrix-synapse = {
     };
   };
 
+  services.synapse-auto-compressor.enable = true;
+
   # services.matrix-sliding-sync = {
   #   enable = true;
   #   createDatabase = true;
@@ -91,7 +226,46 @@ services.matrix-synapse = {
       job_name = "synapse";
       metrics_path = "/_synapse/metrics";
       static_configs = [
-        { targets = [ "127.0.0.1:9000" ]; }
+        {
+          targets = [ "127.0.0.1:9000" ];
+          labels = {
+            instance = "kity.wtf";
+            job = "master";
+            index = "1";
+          };
+        }
+        {
+          targets = [ "127.0.0.1:9001" ];
+          labels = {
+            instance = "kity.wtf";
+            job = "federation_sender";
+            index = "1";
+          };
+        }
+        {
+          targets = [ "127.0.0.1:9002" ];
+          labels = {
+            instance = "kity.wtf";
+            job = "federation_receiver";
+            index = "1";
+          };
+        }
+        {
+          targets = [ "127.0.0.1:9003" ];
+          labels = {
+            instance = "kity.wtf";
+            job = "client";
+            index = "1";
+          };
+        }
+        # {
+        #   targets = [ "127.0.0.1:9004" ];
+        #   labels = {
+        #     instance = "kity.wtf";
+        #     job = "media";
+        #     index = "1";
+        #   };
+        # }
       ];
     }
   ];
@@ -135,6 +309,18 @@ services.matrix-synapse = {
 
         "/_matrix" = {
           proxyPass = "http://127.0.0.1:8448";
+        };
+
+        # "/_matrix/(media|(client|federation)/v1/media)" = {
+        #   proxyPass = "http://127.0.0.1:8083";
+        # };
+
+        "/_matrix/federation/v\d/(version|event|state|state_ids|backfill|get_missing_events|publicRooms|query|make_join|make_leave|send_join|send_leave|make_knock|send_knock|invite|event_auth|timestamp_to_event|exchange_third_party_invite|user/devices|hierarchy)" = {
+          proxyPass = "http://127.0.0.1:8084";
+        };
+
+        "/_matrix/client/((r0|v3)/sync|(api/v1|r0|v3)/events|(api/v1|r0|v3)/initialSync|(api/v1|r0|v3)/rooms/[/]+/initialSync)" = {
+          proxyPass = "http://127.0.0.1:8085";
         };
       };
     };

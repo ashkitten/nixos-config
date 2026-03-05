@@ -65,6 +65,14 @@
     postgresql = {
       enable = true;
       package = pkgs.postgresql_14;
+      enableJIT = true;
+      settings = {
+        max_connections = 200; # default is 100
+        shared_buffers = "8GB"; # like a quarter of ram
+        effective_cache_size = "16GB"; # half of ram
+        work_mem = "16MB"; # default is 4MB
+        autovacuum = true;
+      };
     };
 
     nginx = {
